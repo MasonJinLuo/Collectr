@@ -34,9 +34,9 @@ module.exports = function(sequelize, DataTypes){
 					}
 				});
 
-				Post.belongsTo(models.catagory, {
+				Post.belongsTo(models.Category, {
 					foreignKey:{
-						name: 'catagory_id', 
+						name: 'category_id', 
 						allowNull: false
 					}
 				});
