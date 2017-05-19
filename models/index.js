@@ -6,7 +6,7 @@ var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
 var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + '/../config/config.json')[env];
-var db        = {};
+var collectrdb        = {};
 
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
@@ -21,16 +21,16 @@ fs
   })
   .forEach(function(file) {
     var model = sequelize['import'](path.join(__dirname, file));
-    db[model.name] = model;
+    collectrdb[model.name] = model;
   });
 
-Object.keys(db).forEach(function(modelName) {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+Object.keys(collectrdb).forEach(function(modelName) {
+  if (collectrdb[modelName].associate) {
+    collectrdb[modelName].associate(collectrdb);
   }
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+collectrdb.sequelize = sequelize;
+collectrdb.Sequelize = Sequelize;
 
-module.exports = db;
+module.exports = collectrdb;

@@ -15,9 +15,9 @@ module.exports = function(sequelize, DataTypes){
 			validate: {
         	len: [8]
       		}
-      	}
+      	},
 
-      		image: {
+      	image: {
 			type: DataTypes.STRING,
 			allowNull: false,
 			validate: {
