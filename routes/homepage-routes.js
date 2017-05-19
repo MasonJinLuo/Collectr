@@ -1,9 +1,9 @@
-var db = require('../models');
+var collectrdb = require('../models');
 
 module.exports = function(app) {
 
     // app.get('/api/posts', function(req, res) {
-    //     db.Posts.findAll({
+    //     collectrdb.Posts.findAll({
 
     //     }).then(function(response) {
     //         res.json(response);
