@@ -6,13 +6,14 @@ module.exports = function(sequelize, DataTypes){
 			associate: function(models){
 				PostTags.belongsTo(models.post, {
 					foreignKey:{
-
+						name: 'post_id', 
 						allowNull: false
 					}
 				});
 
 				PostTags.belongsTo(models.Tags, {
 					foreignKey:{
+						name: 'tag_id', 
 						allowNull: false
 					}
 				});
