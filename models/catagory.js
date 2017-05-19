@@ -4,17 +4,17 @@ module.exports = function(sequelize, DataTypes){
 			type: DataTypes.STRING,
 			allowNull: false
 		}
-	},
-	{
-		classMethod:{
-			associate: function(models){
-				Catagory.hasMany(models.post, {
-					foreignKey:{
-						allowNull: false
-					}
-				});
-			}
-		}
-	});
+	}
+	// {
+	// 	classMethod:{
+	// 		associate: function(models){
+	// 			Catagory.hasMany(models.post, {
+	// 				foreignKey:{
+	// 					allowNull: false
+	// 				}
+	// 			});
+	// 		}
+	// 	}
+	// });
 	return Catagory;
 };

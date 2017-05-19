@@ -17,9 +17,9 @@ module.exports = function(sequelize, DataTypes){
       		}
       	}
 
-      		image: {
+      		image_path: {
 			type: DataTypes.STRING,
-			allowNull: false,
+			allowNull: true,
 			validate: {
         	len: [1]
       		}
@@ -27,7 +27,7 @@ module.exports = function(sequelize, DataTypes){
 
 		description: {
 			type: DataTypes.TEXT,
-			allowNull: false,
+			allowNull: true,
 			validate: {
         	len: [1]
       		}
