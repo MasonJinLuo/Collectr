@@ -14,20 +14,19 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.DATE,
             field: 'updatedAt',
             defaultValue: sequelize.literal('NOW()')
+        },
+    }, {
+        classMethod: {
+            associate: function(models) {
+                this.hasMany(models.Post, {
+                    foreignKey: {
+                        foreignKey: 'category_id',
+                        onDelete: "cascade"
+                    }
+                });
+            }
         }
     });
-
-    // {
-    //  classMethod:{
-    //      associate: function(models){
-    //          category.hasMany(models.post, {
-    //              foreignKey:{
-    //                  allowNull: false
-    //              }
-    //          });
-    //      }
-    //  }
-    // });
 
     return Category;
 };

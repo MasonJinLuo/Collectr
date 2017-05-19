@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Post = sequelize.define("post", {
+    var Post = sequelize.define("Post", {
             img_path: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
         {
             classMethods: {
                 associate: function(models) {
-                    Post.belongsTo(models.user, {
+                    this.belongsTo(models.User, {
                         foreignKey: {
                             name: 'owner_id',
                             allowNull: false
@@ -39,14 +39,14 @@ module.exports = function(sequelize, DataTypes) {
                     });
 
 
-                    Post.belongsTo(models.user, {
+                    this.belongsTo(models.User, {
                         foreignKey: {
                             name: 'user_id',
                             allowNull: false
                         }
                     });
 
-                    Post.belongsTo(models.Category, {
+                    this.belongsTo(models.Category, {
                         foreignKey: {
                             name: 'category_id',
                             allowNull: false

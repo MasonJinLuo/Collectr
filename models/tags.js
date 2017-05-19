@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     // {
     // 	classMethod:{
     // 		associate: function(models){
-    // 			Tags.hasMany(models.PostTags, {
+    // 			this.hasMany(models.PostTags, {
     // 				foreignKey:{
     // 					allowNull: false
     // 				}

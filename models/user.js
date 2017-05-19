@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var User = sequelize.define("user", {
+    var User = sequelize.define("User", {
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -43,12 +43,13 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.DATE,
             field: 'updatedAt',
             defaultValue: sequelize.literal('NOW()')
-        }
+        },
     }, {
         classMethods: {
             associate: function(models) {
 
-                User.hasMany(models.post, {
+                this.hasMany(models.Post, {
+                    foreignKey: 'user_id',
                     onDelete: "cascade"
                 });
             }

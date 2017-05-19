@@ -4,14 +4,14 @@ module.exports = function(sequelize, DataTypes){
 	{
 		classMethods:{
 			associate: function(models){
-				PostTags.belongsTo(models.post, {
+				this.belongsTo(models.Post, {
 					foreignKey:{
 						name: 'post_id', 
 						allowNull: false
 					}
 				});
 
-				PostTags.belongsTo(models.Tags, {
+				this.belongsTo(models.Tags, {
 					foreignKey:{
 						name: 'tag_id', 
 						allowNull: false
