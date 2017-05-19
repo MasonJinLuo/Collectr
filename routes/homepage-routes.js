@@ -9,7 +9,6 @@ module.exports = function(app) {
             res.json(response);
         });
     });
-
     app.get('/api/categories', function(req, res) {
 
     });
