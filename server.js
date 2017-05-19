@@ -13,7 +13,7 @@ var app = express();
 var PORT = process.env.PORT || 8080;
 
 // Requiring our models for syncing
-var collectrdb = require("./models/collectr.js");
+var collectrdb = require("./models");
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.json());
