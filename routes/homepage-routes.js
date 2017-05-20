@@ -50,6 +50,24 @@ module.exports = function(app) {
         });
     });
 
+    //post new 
+    // app.post('/api/posts', function(req, res) {
+    //     db.Post.create(req.body).then(function(response) {
+    //         res.json(response);
+    //     });
+    // });
+
+    // //update existing post
+    // app.put('/api/posts/:id', function(req, res) {
+    //     db.Post.update(req.body, {
+    //         where: {
+    //             id: req.params.id
+    //         }
+    //     }).then(function(response) {
+    //         res.json(response);
+    //     })
+    // });
+
     //get all categories, including post information
     //DOES NOT WORK WHEN I INCLUDE DB.POST. **Unhandled rejection Error: Post is not associated to Category!**
     app.get('/api/categories', function(req, res) {
