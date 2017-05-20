@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     {
-    	classMethod:{
+    	classMethods:{
     		associate: function(models){
     			this.hasMany(models.Post2Tag, {
     				foreignKey:{
