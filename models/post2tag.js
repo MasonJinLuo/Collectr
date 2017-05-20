@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes){
-	var PostTags = sequelize.define("PostTags", {
+	var PostTags = sequelize.define("post2tag", {
 	},
 	{
 		classMethods:{
