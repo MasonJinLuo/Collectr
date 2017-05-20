@@ -17,7 +17,11 @@ module.exports = function(sequelize, DataTypes){
       		}
       	},
 
+<<<<<<< HEAD
       		image_path: {
+=======
+      	image: {
+>>>>>>> loginAPI
 			type: DataTypes.STRING,
 			allowNull: true,
 			validate: {
