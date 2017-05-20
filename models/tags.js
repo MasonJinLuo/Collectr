@@ -1,12 +1,12 @@
 module.exports = function(sequelize, DataTypes) {
 
     var Tags = sequelize.define("Tags", {
-        tag_id: { 
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false 
-        },
+        // tag_id: { 
+        //     type: DataTypes.INTEGER,
+        //     primaryKey: true,
+        //     autoIncrement: true,
+        //     allowNull: false 
+        // },
         name: {
             type: DataTypes.STRING,
             allowNull: false, //not sure if we will allow null for this? are we requiring them to must have tags?

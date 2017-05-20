@@ -1,11 +1,11 @@
 module.exports = function(sequelize, DataTypes){
 	var Post2Tags = sequelize.define("Post2tag", {
-		post2tag_id: { 
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false 
-        },
+		// post2tag_id: { 
+  //           type: DataTypes.INTEGER,
+  //           primaryKey: true,
+  //           autoIncrement: true,
+  //           allowNull: false 
+  //       },
 		tag_id: { 
             type: DataTypes.INTEGER,
             allowNull: false
