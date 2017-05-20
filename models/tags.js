@@ -10,18 +10,18 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
 
-    // {
-    // 	classMethod:{
-    // 		associate: function(models){
-    // 			this.hasMany(models.PostTags, {
-    // 				foreignKey:{
-    // 					allowNull: false
-    // 				}
-    // 			});
+    {
+    	classMethod:{
+    		associate: function(models){
+    			this.hasMany(models.Post2Tag, {
+    				foreignKey:{
+    					allowNull: false
+    				}
+    			});
 
-    // 		}
-    // 	}
-    // });
+    		}
+    	}
+    });
 
     return Tags;
 

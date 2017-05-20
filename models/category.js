@@ -15,7 +15,8 @@ module.exports = function(sequelize, DataTypes) {
             field: 'updatedAt',
             defaultValue: sequelize.literal('NOW()')
         },
-    }, {
+    }, 
+    {
         classMethod: {
             associate: function(models) {
                 this.hasMany(models.Post, {
