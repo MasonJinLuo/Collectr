@@ -2,13 +2,13 @@ var db = require("../models");
 
 module.exports = function(app) {
 	app.get("/api/users", function(req, res) {
-		db.user.findAll({}).then(function(dbUser) {
+		db.User.findAll({}).then(function(dbUser) {
 			res.json(dbUser)
 		});
 	});
 
 	app.get("/api/users/:id", function(req, res) {
-		db.user.findOne({
+		db.User.findOne({
 			where: {
 				id: req.params.id
 			}
@@ -18,13 +18,13 @@ module.exports = function(app) {
 	});
 
 	app.post("/api/users", function(req, res) {
-		db.user.create(req.body).then(function(dbUser) {
+		db.User.create(req.body).then(function(dbUser) {
 			res.json(dbUser);
 		});
 	});
 
 	app.delete("api/users/:id", function(req, res) {
-		db.user.destroy({
+		db.User.destroy({
 			where: {
 				id: req.params.id
 			}
