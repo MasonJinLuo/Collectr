@@ -68,7 +68,7 @@ body {
     position: absolute;
     margin-right: -250px;
 
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 /* Sidebar Styles */
@@ -134,6 +134,13 @@ body {
   border-radius: 100%;
   background-color: #00CCCC;
   margin: 10px;
+  -webkit-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.4);
+  box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.4);
+}
+
+#wrapper.toggled .menu-btn-div {
+    ;
 }
 
 /*Home Page Hero*/
@@ -143,6 +150,10 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  -webkit-box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.22);
+  -moz-box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.22);
+  box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.22);
 }
 
 .hero {
@@ -154,8 +165,10 @@ body {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 1.0);
 }
 
-.hero h1 {
+.hero-logo {
   margin: 0;
+  margin-top: 20px;
+  font-family: 'Capriola', sans-serif;
 }
 
 .search-wrapper {
@@ -188,12 +201,18 @@ body {
 
 .gallery-img-div {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
+  align-content: center;
+  overflow-x: scroll;
 
   min-height: 250px;
   width: 100%;
 
   background-color: #F2F2F2;
+  -webkit-box-shadow: 0px 8px 10px -4px rgba(0,0,0,0.22);
+  -moz-box-shadow: 0px 8px 10px -4px rgba(0,0,0,0.22);
+  box-shadow: 0px 8px 10px -4px rgba(0,0,0,0.22);
 }
 
 .item-img-div {
@@ -210,6 +229,9 @@ body {
 @media(min-width:768px) {
   .menu-btn-div {
     color: #ffffff;
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
   }
 
     #wrapper {
