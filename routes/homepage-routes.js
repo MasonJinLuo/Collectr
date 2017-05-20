@@ -57,7 +57,7 @@ module.exports = function(app) {
         });
     });
 
-    //update existing post
+    // update existing post
     app.put('/api/posts/:id', function(req, res) {
         db.Post.update(req.body, {
             where: {
@@ -68,7 +68,7 @@ module.exports = function(app) {
         })
     });
 
-    //delete existing post
+    // delete existing post
     app.delete('/api/posts/:id', function(req, res) {
         db.Post.destroy({
             where: {
