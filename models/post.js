@@ -1,11 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
     var Post = sequelize.define("Post", {
-        post_id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false
-        },
+        // post_id: {
+        //     type: DataTypes.INTEGER,
+        //     primaryKey: true,
+        //     autoIncrement: true,
+        //     allowNull: false
+        // },
         img_path: {
             type: DataTypes.STRING,
             allowNull: false,
