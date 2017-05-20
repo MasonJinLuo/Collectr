@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
 
-    var Category = sequelize.define("Category", {
+    var Category = sequelize.define("category", {
         name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -15,7 +15,8 @@ module.exports = function(sequelize, DataTypes) {
             field: 'updatedAt',
             defaultValue: sequelize.literal('NOW()')
         },
-    }, {
+    }, 
+    {
         classMethod: {
             associate: function(models) {
                 this.hasMany(models.Post, {

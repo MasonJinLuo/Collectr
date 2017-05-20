@@ -27,6 +27,7 @@ app.use(express.static("./public"));
 // Routes =============================================================
 
 require("./routes/homepage-routes.js")(app);
+require("./routes/login-api-routes.js")(app);
 // require("./routes/post-api-routes.js")(app);
 // require("./routes/author-api-routes.js")(app);
 
