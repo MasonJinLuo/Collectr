@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Post = sequelize.define("Post", {
+    var Post = sequelize.define("post", {
             img_path: {
                 type: DataTypes.STRING,
                 allowNull: false,
