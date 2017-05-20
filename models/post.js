@@ -1,5 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
     var Post = sequelize.define("Post", {
+            post_id: { 
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+                allowNull: false 
+            },
             img_path: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -14,20 +20,17 @@ module.exports = function(sequelize, DataTypes) {
                     len: [1]
                 }
             },
-
             createdAt: {
                 type: DataTypes.DATE,
                 field: 'createdAt',
                 defaultValue: sequelize.literal('NOW()')
             },
-
             updatedAt: {
                 type: DataTypes.DATE,
                 field: 'updatedAt',
                 defaultValue: sequelize.literal('NOW()')
             }
         },
-
         {
             classMethods: {
                 associate: function(models) {

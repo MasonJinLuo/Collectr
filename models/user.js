@@ -1,6 +1,12 @@
 module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define("User", {
-        email: {
+        user_id: { 
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false 
+        },
+        email_address: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
@@ -8,7 +14,6 @@ module.exports = function(sequelize, DataTypes) {
                 len: [1]
             }
         },
-
         password: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -16,7 +21,6 @@ module.exports = function(sequelize, DataTypes) {
                 len: [8]
             }
         },
-
         image_path: {
             type: DataTypes.STRING,
             allowNull: true,
@@ -24,15 +28,13 @@ module.exports = function(sequelize, DataTypes) {
                 len: [1]
             }
         },
-
-        description: {
+        personal_bio: {
             type: DataTypes.TEXT,
             allowNull: true,
             validate: {
                 len: [1]
             }
         },
-
         createdAt: {
             type: DataTypes.DATE,
             field: 'createdAt',
