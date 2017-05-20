@@ -20,6 +20,21 @@ module.exports = function(sequelize, DataTypes) {
                     len: [1]
                 }
             },
+<<<<<<< HEAD
+=======
+
+            //Stacy: Added columns for tracking up and down votes on a post
+            upVote: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0
+            },
+
+            downVote: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0
+            },
+
+>>>>>>> 30488fdecfa5a10dfafa1515fdd65dee83303436
             createdAt: {
                 type: DataTypes.DATE,
                 field: 'createdAt',
