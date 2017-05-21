@@ -1,26 +1,17 @@
+//Stacy
+
 var db = require('../models');
 
 module.exports = function(app) {
 
-    //get all posts, including user and category information
+    //get all posts in a certain category, including user and category information
+    //highest upVote rated is listed first
     //THIS WORKS
-    app.get('/api/posts', function(req, res) {
+    app.get('/api/category/:categoryID', function(req, res) {
         db.Post.findAll({
             include: [db.User, db.Category],
-            order: 'id ASC'
-        }).then(function(response) {
-            res.json(response);
-        });
-    });
-
-    //get one post by ID, including user and category information
-    //THIS WORKS
-    app.get('/api/posts/:id', function(req, res) {
-        db.Post.findOne({
-            where: {
-                id: req.params.id
-            },
-            include: [db.User, db.Category]
+            order: 'upVote DESC',
+            where: { category_id: req.params.categoryID }
         }).then(function(response) {
             res.json(response);
         });
@@ -28,7 +19,7 @@ module.exports = function(app) {
 
     //get all posts by all USERS
     //THIS WORKS
-    app.get('/api/users', function(req, res) {
+    app.get('/api/users-posts', function(req, res) {
         db.User.findAll({
             include: [db.Post],
             order: 'id ASC'
@@ -39,7 +30,7 @@ module.exports = function(app) {
 
     //get all posts by single USER
     //THIS WORKS
-    app.get('/api/users/:id', function(req, res) {
+    app.get('/api/users-posts/:id', function(req, res) {
         db.User.findOne({
             where: {
                 id: req.params.id
@@ -50,45 +41,33 @@ module.exports = function(app) {
         });
     });
 
-    // post new 
-    app.post('/api/posts', function(req, res) {
-        db.Post.create(req.body).then(function(response) {
+    //get a list of all tags
+    //THIS WORKS
+    app.get('/api/tags', function(req, res) {
+        db.Tags.findAll({}).then(function(response) {
             res.json(response);
-        });
+        })
     });
 
-    // update existing post
-    app.put('/api/posts/:id', function(req, res) {
-        db.Post.update(req.body, {
-            where: {
-                id: req.params.id
-            }
+    app.get('/api/tags/post', function(req, res) {
+        db.Post2Tags.findAll({
+            include: [db.Tags, db.Post],
+            order: 'tag_id ASC'
         }).then(function(response) {
             res.json(response);
         })
     });
 
-    // delete existing post
-    app.delete('/api/posts/:id', function(req, res) {
-        db.Post.destroy({
-            where: {
-                id: req.params.id
-            }
+    //get all tags that have been associated with a single post, including post and tag information
+    //THIS WORKS
+    app.get('/api/tags/post/:postID', function(req, res) {
+        db.Post2Tags.findAll({
+            include: [db.Tags, db.Post],
+            where: { post_id: req.params.postID },
+            order: 'post_id ASC'
         }).then(function(response) {
             res.json(response);
-        });
+        })
     });
-
-    //get all categories, including post information
-    //DOES NOT WORK WHEN I INCLUDE DB.POST. **Unhandled rejection Error: Post is not associated to Category!**
-    app.get('/api/categories', function(req, res) {
-        db.Category.findAll({
-            include: [db.Post],
-            order: 'id ASC'
-        }).then(function(response) {
-            res.json(response);
-        });
-    });
-
 
 }
