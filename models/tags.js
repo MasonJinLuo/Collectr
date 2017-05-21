@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
             // },
             name: {
                 type: DataTypes.STRING,
-                allowNull: false, //not sure if we will allow null for this? are we requiring them to must have tags?
+                allowNull: false, //Mason: not sure if we will allow null for this? are we requiring them to must have tags?
                 validate: {
                     len: [1]
                 }
@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
         {
             classMethods: {
                 associate: function(models) {
-                    this.hasMany(models.Post2tag, {
+                    this.hasMany(models.Post2Tags, {
                         foreignKey: {
                             name: 'tag_id',
                             allowNull: false

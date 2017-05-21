@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Post2Tags = sequelize.define("Post2tag", {
+    var Post2Tags = sequelize.define("Post2Tags", {
         // post2tag_id: {
         //     type: DataTypes.INTEGER,
         //     primaryKey: true,
