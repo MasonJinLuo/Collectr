@@ -60,6 +60,9 @@ module.exports = function(app) {
         })
     });
 
+    //get a list of all tags and their associated post uses
+    //sorted by tag; all uses of a tag are grouped together
+    //THIS WORKS
     app.get('/api/tags/post', function(req, res) {
         db.Post2Tags.findAll({
             include: [db.Tags, db.Post],

@@ -3,98 +3,101 @@
 //Find all posts in a certain category
 //Input category id you are searching for into function as categoryID
 //Get back an array of objects (posts) from this function
+$(document).ready(function() {
 
-function getAllPostsInCategory(categoryID) {
+    function getAllPostsInCategory(categoryID) {
 
-    var itemsInCategoryArray = [];
+        var itemsInCategoryArray = [];
 
-    $.ajax({
+        $.ajax({
 
-        method: 'GET',
-        url: '/api/category/' + categoryID
+            method: 'GET',
+            url: '/api/category/' + categoryID
 
-    }).then(function(response) {
+        }).then(function(response) {
 
-        for (var i = 0; i < response.length; i++) {
+            for (var i = 0; i < response.length; i++) {
 
-            itemsInCategoryArray.push(response[i]);
-
-        }
-
-    });
-
-    return itemsInCategoryArray;
-
-};
-
-//Find all popular posts in a certain category
-//Input category id you are searching for into function as categoryID
-//Get back an array of objects (posts) from this function
-
-function getPopularPostsInCategory(categoryID) {
-
-    var popularArray = [];
-    var upVotes = 0;
-    var downVotes = 0;
-
-    $.ajax({
-
-        method: 'GET',
-        url: '/api/category/' + categoryID
-
-    }).then(function(response) {
-
-        for (var i = 0; i < response.length; i++) {
-
-            upVotes = parseInt(response[i].upVote);
-            downVotes = parseInt(response[i].downVote);
-
-            if (upVotes > downVotes) {
-
-                popularArray.push(response[i]);
+                itemsInCategoryArray.push(response[i]);
 
             }
 
-        }
+        });
 
-    });
+        return itemsInCategoryArray;
 
-    return popularArray;
+    };
 
-};
+    //Find all popular posts in a certain category
+    //Input category id you are searching for into function as categoryID
+    //Get back an array of objects (posts) from this function
 
-//Find all new posts in a certain category
-//Input category id you are searching for into function as categoryID
-//Get back an array of objects (posts) from this function
+    function getPopularPostsInCategory(categoryID) {
 
-function getNewPostsInCategory(categoryID) {
+        var popularArray = [];
+        var upVotes = 0;
+        var downVotes = 0;
 
-    var newArray = [];
-    var upVotes = 0;
-    var downVotes = 0;
+        $.ajax({
 
-    $.ajax({
+            method: 'GET',
+            url: '/api/category/' + categoryID
 
-        method: 'GET',
-        url: '/api/category/' + categoryID
+        }).then(function(response) {
 
-    }).then(function(response) {
+            for (var i = 0; i < response.length; i++) {
 
-        for (var i = 0; i < response.length; i++) {
+                upVotes = parseInt(response[i].upVote);
+                downVotes = parseInt(response[i].downVote);
 
-            upVotes = parseInt(response[i].upVote);
-            downVotes = parseInt(response[i].downVote);
+                if (upVotes > downVotes) {
 
-            if (upVotes === 0 && downVotes === 0) {
+                    popularArray.push(response[i]);
 
-                newArray.push(response[i]);
+                }
 
             }
 
-        }
+        });
 
-    });
+        return popularArray;
 
-    return newArray;
+    };
 
-};
+    //Find all new posts in a certain category
+    //Input category id you are searching for into function as categoryID
+    //Get back an array of objects (posts) from this function
+
+    function getNewPostsInCategory(categoryID) {
+
+        var newArray = [];
+        var upVotes = 0;
+        var downVotes = 0;
+
+        $.ajax({
+
+            method: 'GET',
+            url: '/api/category/' + categoryID
+
+        }).then(function(response) {
+
+            for (var i = 0; i < response.length; i++) {
+
+                upVotes = parseInt(response[i].upVote);
+                downVotes = parseInt(response[i].downVote);
+
+                if (upVotes === 0 && downVotes === 0) {
+
+                    newArray.push(response[i]);
+
+                }
+
+            }
+
+        });
+
+        return newArray;
+
+    };
+    
+});
