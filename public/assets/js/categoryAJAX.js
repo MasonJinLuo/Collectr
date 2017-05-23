@@ -4,7 +4,7 @@
 //Input category id you are searching for into function as categoryID
 //Get back an array of objects (posts) from this function
 
-function getPostsInCategory(categoryID) {
+function getAllPostsInCategory(categoryID) {
 
     var itemsInCategoryArray = [];
 
