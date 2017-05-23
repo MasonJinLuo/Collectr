@@ -3,27 +3,30 @@
 //Find all tags for a post
 //Input post id you are searching for into function as postID
 //Get back an array of tags for a post from this function
+$(document).ready(function() {
 
-function getTagsForSinglePost(postID) {
+    function getTagsForSinglePost(postID) {
 
-    var postTagsArray = [];
+        var postTagsArray = [];
 
-    $.ajax({
+        $.ajax({
 
-        method: 'GET',
-        url: '/api/tags/post/' + postID
+            method: 'GET',
+            url: '/api/tags/post/' + postID
 
-    }).then(function(response) {
+        }).then(function(response) {
 
-        for (var i = 0; i < response.length; i++) {
+            for (var i = 0; i < response.length; i++) {
 
-            postTagsArray.push(response[i].Tag.name);
+                postTagsArray.push(response[i].Tag.name);
 
-        }
+            }
 
-        console.log(postTagsArray);
+            console.log(postTagsArray);
 
-    });
+        });
 
-    return postTagsArray;
-};
+        return postTagsArray;
+    };
+    
+});
