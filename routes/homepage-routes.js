@@ -17,6 +17,17 @@ module.exports = function(app) {
         });
     });
 
+    //get all posts in all categories, including user and category information
+    //highest upVote rated is listed first
+    //THIS WORKS
+    app.get('/api/category', function(req, res) {
+        db.Post.findAll({
+            include: [db.User, db.Category],
+            order: 'upVote DESC'
+        }).then(function(response) {
+            res.json(response);
+        });
+    });
     //get all posts by all USERS
     //THIS WORKS
     app.get('/api/users-posts', function(req, res) {
