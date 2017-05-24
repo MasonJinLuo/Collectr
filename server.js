@@ -26,10 +26,14 @@ app.use(express.static("./public"));
 
 // Routes =============================================================
 
+//FOR TESTING ONLY (DELETE BEFORE DEPLOYING)--------------------------
+require("./routes/login-test-html-route.js")(app);
+// -------------------------------------------------------------------
+
 require("./routes/homepage-routes.js")(app);
 require("./routes/login-api-routes.js")(app);
-// require("./routes/post-api-routes.js")(app);
-// require("./routes/author-api-routes.js")(app);
+
+
 
 // Syncing our sequelize models and then starting our express app
 collectrdb.sequelize.sync({ force: true }).then(function() {

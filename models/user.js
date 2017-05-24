@@ -28,9 +28,6 @@ module.exports = function(sequelize, DataTypes) {
         description: {
             type: DataTypes.TEXT,
             allowNull: true,
-            validate: {
-                len: [1]
-            }
         },
 
         createdAt: {
