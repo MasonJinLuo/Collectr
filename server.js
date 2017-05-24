@@ -26,6 +26,10 @@ app.use(express.static("./public"));
 
 // Routes =============================================================
 
+//FOR TESTING ONLY (DELETE BEFORE DEPLOYING)--------------------------
+require("./routes/login-test-html-route.js")(app);
+// -------------------------------------------------------------------
+
 require("./routes/homepage-routes.js")(app);
 require("./routes/user-post-routes.js")(app);
 require("./routes/login-api-routes.js")(app);
