@@ -277,6 +277,11 @@ body {
 }
 
 /*Gallery Scroll Buttons*/
+.scroll-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
 .gallery-scroll-btn {
   position: absolute;
   display: flex;
@@ -288,7 +293,7 @@ body {
   transition: all 0.5s ease;
 }
 
-.gallery-scroll-btn:hover {
+.gallery-img-div:hover .gallery-scroll-btn {
   opacity: 1;
 }
 
@@ -338,7 +343,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', end
 }
 
 .blur-background:hover .wide-feature {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .wide-feature * {
