@@ -274,6 +274,12 @@ body {
 
 .item-img-div img {
   height: 100%;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.item-img-div img:hover {
+  filter: brightness(65%);
 }
 
 /*Gallery Scroll Buttons*/
@@ -365,7 +371,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', end
 
 #feature-pokemon:before {
 
-  background-image: url(http://www.altilici.com/i/2017/02/cute-pikachu-wallpapers-desktop-background.jpg);
+  background-image: url(http://wallpaper-gallery.net/images/all-pokemon-wallpaper/all-pokemon-wallpaper-15.jpg);
 }
 
 .blur-background:before {
