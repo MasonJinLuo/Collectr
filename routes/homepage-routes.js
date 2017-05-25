@@ -84,4 +84,9 @@ module.exports = function(app) {
         })
     });
 
+    //collecting a post from another user
+    app.post('/api/collect/:id', function(req, res) {
+
+    });
+
 }

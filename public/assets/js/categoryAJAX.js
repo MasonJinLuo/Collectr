@@ -1,4 +1,7 @@
-//Stacy
+/*
+    Author: Stacy
+
+*/
 
 //Find all posts in a certain category
 //Input category id you are searching for into function as categoryID
