@@ -1,11 +1,9 @@
-// *****************************************************************************
-// Server.js - This file is the initial starting point for the Node/Express server.
-//
-// ******************************************************************************
 // *** Dependencies
 // =============================================================
 var express = require("express");
 var bodyParser = require("body-parser");
+var exphbs = require("express-handlebars");
+var path = require("path");
 
 // Sets up the Express App
 // =============================================================
@@ -21,30 +19,29 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
+//Sets up handlebars as view engine
+app.engine("handlebars", exphbs({
+    defaultLayout: 'main',
+    partialsDir: path.join(__dirname, '/views/layouts/partials')
+}));
+app.set("view engine", "handlebars");
+
 // Static directory
 app.use(express.static("./public"));
 
 // Routes =============================================================
 
 //FOR TESTING ONLY (DELETE BEFORE DEPLOYING)--------------------------
-require("./routes/login-test-html-route.js")(app);
+// require("./routes/login-test-html-route.js")(app);
 // -------------------------------------------------------------------
 
 require("./routes/homepage-routes.js")(app);
 require("./routes/user-post-routes.js")(app);
 require("./routes/login-api-routes.js")(app);
 require("./routes/html-routes.js")(app);
-// require("./routes/author-api-routes.js")(app);
-
-// Syncing our sequelize models and then starting our express app
-// collectrdb.sequelize.sync({ force: true }).then(function() {
-//   app.listen(PORT, function() {
-//     console.log("App listening on PORT " + PORT);
-//   });
-// });
 
 collectrdb.sequelize.sync().then(function() {
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-  });
+    app.listen(PORT, function() {
+        console.log("App listening on PORT " + PORT);
+    });
 });

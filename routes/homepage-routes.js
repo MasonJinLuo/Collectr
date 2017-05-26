@@ -17,6 +17,13 @@ module.exports = function(app) {
         });
     });
 
+    //Basic homepage rendering
+    app.get('/', function(req, res) {
+        db.Post.findAll({}).then(function(response) {
+            res.render('index');
+        });
+    });
+
     //get all posts in all categories, including user and category information
     //highest upVote rated is listed first
     //THIS WORKS
