@@ -15,7 +15,8 @@
 	}
 </style>
 
-<body>
+<!-- <body> -->
+ <!-- <img src="/images/users/ac08f2fd4d2bc3b4491ad9d53294beca"/> -->
 	<div class="container">
 	<!-- Navbar -->
 	<nav class="navbar" id="head">
@@ -55,50 +56,52 @@
 									<label for="loginPassword">Password</label>
 									<input type="password" class="form-control" id="loginPassword" placeholder="Password">
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 								    <div class="checkbox">
 								        <label>
 								        <input type="checkbox"> Remember me
 								        </label>
 								      </div>
-								</div>
+								</div> -->
 							</form>
+							 <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						        <button type="submit" class="btn" id="loginSubmit">Submit</button>
+						    </div>
 					    </div>
-
-					    <div role="tabpanel" class="tab-pane" id="signUp"> 
-					    	<form> 
+					    <div role="tabpanel" class="tab-pane" id="signUp">
+					    	<form id="SignUpForm"> 
 						       	<div class="form-group">
 								    <label for="signUpEmail">Email address</label>
 								    <input type="email" class="form-control" id="signUpEmail" placeholder="Email">
 								</div>
 								<div class="form-group">
-								    <label for="signUpPassword">Password</label>
+								    <label for="signUpPassword">Password (8-15 Characters)</label>
 								    <input type="password" class="form-control" id="signUpPassword" placeholder="Password">
 								</div>
-								<div class="form-group">
+							<!-- 	<div class="form-group">
 								    <div class="checkbox">
 								        <label>
 								        	<input type="checkbox"> Remember me
 								        </label>
 								    </div>
-								</div>
+								</div> -->
 								<div class="form-group">
       								<label for="comment">About Me</label>
       									<textarea class="form-control" rows="2" id="userDescription"></textarea>
    								</div>
 									<input type="file" id="imageUpload"><br>
-									<img id="newUserImage" src="" height="200" alt="Image preview...">
+									<img id="newUserImage" src="" height="200" alt="Image preview..." name="profpic">
 							</form>
+							 <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						        <button type="submit" class="btn" id="signUpSubmit">Submit</button>
+			   				 </div>
 						</div>			  
 					</div>	       
 	    		</div>
-	    
-	    <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="submit" class="btn" id="modal-submit">Submit</button>
-	    </div>
-	</div>
-	</div>
+	    	</div>
+	    </div>	
 	</div>
 		<!-- Info Modal -->
 	<div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -122,6 +125,7 @@
     
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-	<script type="text/javascript" src="assets/js/login.js"></script>
+	<!-- <script type="text/javascript" src="assets/js/login.js"></script> -->
+	<script type="text/javascript" src="assets/js/signup.js"></script>
 </body>
 </html>
