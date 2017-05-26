@@ -1,4 +1,8 @@
-//Stacy
+/*
+    @author : Stacy
+    @date : 
+    @desc : 
+*/
 
 //Find all posts in a certain category
 //Input category id you are searching for into function as categoryID
@@ -16,12 +20,12 @@ $(document).ready(function() {
 
         }).then(function(response) {
 
-            for (var i = 0; i < response.length; i++) {
+            for (var i = 0; i < response.length; i++) { 
 
                 itemsInCategoryArray.push(response[i]);
 
             }
-
+            
         });
 
         return itemsInCategoryArray;
