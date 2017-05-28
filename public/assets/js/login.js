@@ -1,100 +1,45 @@
-//Author: Linette
-// var collectrdb = require("../models")
-
+// author mason
 $(document).ready(function() {
-  var newEmail = $("#signUpEmail");
-  var newPassword = $("#signUpPassword");
-  var newUserImage = $("#newUserImage");
-  var newUserDescription = $("#userDescription");
-  var reader  = new FileReader();
+var loginEmail = $("#loginEmail");
+var loginPassword = $("#loginPassword");
 
-  //how to get/create a path for the user's profile picture
+$(document).on("click", "#loginSubmit", handleLoginSubmit);
 
-  $(document).on("click", "#loginSubmit", handleNewUserFormSubmit);
 
-    function handleNewUserFormSubmit(event) {
-	  event.preventDefault();
-	  // Don't do anything if the email field hasn't been filled out
-	  if ($('#loginEmail').val() == "" || $("#loginPassword").val().toString() == "") { // this query was fixed by mason
-     	alert("Please enter an email address and password to sign up")
-      } else {
-        check();
-        // login()
-        //input link here
+function handleLoginSubmit (event){
+ event.preventDefault();
+
+if (!loginEmail.val().trim() || !loginPassword.val().trim()) {
+      return alert("Please enter an email address and password to sign up.")
       }
 
-      createNewUser({
-      	email: newEmail.val().trim(),
-      	password: newPassword.val().trim(),
-      	// image_path: newEmail.val().trim(),
-      	description: newUserDescription.val().trim()
-      })
-      	
-	}
+    var formData = new FormData();
+        formData.append('email', loginEmail.val().trim());
+        formData.append('password', loginPassword.val().trim());
 
-	function createNewUser(newUserData) {
-		$.post("/api/users", newUserData)
-			.then(function(data) {
-        alert("Welcome to Collectr!");
-        newEmail.val("");
-        newPassword.val("");
-        newUserDescription.val("");
-        newUserImage.attr("src", "");
-        reader.abort();
-        // $("#logInModal").attr("style", "display:none")
-        // $(".modal-open").attr("class", "")
-        // $(".modal-backdrop fade in").attr("class", "")
-      })
-	}
-
-  //New User Upload Profile Picture
-
-  var reader  = new FileReader();
-
-    $("#imageUpload").change(function() {previewFile()});
-
-     function previewFile() {
-         var preview = document.querySelector("#newUserImage");
-         var file    = document.querySelector("input[type=file]").files[0];
-         var reader  = new FileReader();
-
-         reader.onloadend = function () {
-             preview.src = reader.result;
-         }
-
-         if (file) {
-             reader.readAsDataURL(file);
-         } else {
-             preview.src = "";
-         }
-    }
-});
-
-
-// function check (){ //this function was added by mason
-
-// var loginEmail = $("#loginEmail").val().toString().toLowerCase();
-// var loginPassword = $("#loginPassword").val().toString();
-
-// collectrdb.user.findOne({
-//   where: {
-//     email: loginEmail,
-//     password: loginPassword
-//   }
-// }).then(function(response){
-//   console.log(response)
-//     //set
-//   }).catch(function (err){
-//   console.log(err)
-// });
-
-// }
-
-
-// function login() {
-//     $.get("/login", check);
-//   }
-
-function check(){
-  window.location.href = "/login";
+  loginCheck();
 }
+
+
+
+function loginCheck (){
+$.ajax({
+  url: "/api/users",
+  method: "GET"
+}).done(function(response) {
+  console.log(response)
+  for( var i=0; i < response.length; i++){
+     console.log(response[i].email);
+     console.log(response[i].password);
+    if ((loginEmail.val().trim() === response[i].email) && (loginPassword.val().trim() === response[i].password)){
+      console.log("logged on");
+      return;
+    }else{
+      console.log("username/password combination is incorrect or does not exist")
+    }
+  }
+});
+}
+
+
+});
