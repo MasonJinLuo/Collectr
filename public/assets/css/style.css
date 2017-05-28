@@ -315,8 +315,9 @@ body {
   font-size: 40px;
 }
 
-#gallery-scroll-left {
+.gallery-scroll-left {
   left: 0;
+  top: 0;
 
   background: rgba(64,64,64,0.94);
   background: -moz-linear-gradient(left, rgba(64,64,64,0.94) 0%, rgba(64,64,64,0.6) 36%, rgba(254,254,254,0) 100%);
@@ -328,7 +329,7 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#404040', endColorstr='#fefefe', GradientType=1 );
 }
 
-#gallery-scroll-right {
+.gallery-scroll-right {
   right: 0;
   top: 0;
 
