@@ -425,6 +425,18 @@ body {
   box-shadow: inset 0px 0px 78px -1px rgba(0,0,0,0.94);
 }
 
+/*Category view*/
+.category-wrapper-with-wrap {
+  overflow: auto;
+  height: auto;
+}
+
+.category-div {
+  overflow: auto;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 @media(min-width:768px) {
   .menu-btn-div {
     color: #ffffff;
