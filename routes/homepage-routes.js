@@ -18,14 +18,15 @@ module.exports = function(app) {
 
             //Only put categories with content on the homepage
             var categoryHasPosts = [];
-            for (var i = 0; i<response.length; i++){
-                console.log(response[i].name + response[i].Posts.length);
+            for (var i = 0; i < response.length; i++) {
+                console.log(response[i].name + ': ' + response[i].Posts.length);
 
-                if (response[i].Posts.length > 0){
+                if (response[i].Posts.length > 0) {
                     categoryHasPosts.push(response[i]);
                 }
             }
-            
+
+            //Future Goal: Sort by popularity and render most popular first
             res.render('index', { category: categoryHasPosts });
             // res.json(response);
         });
