@@ -11,9 +11,23 @@ module.exports = function(app) {
     app.get('/', function(req, res) {
         db.Category.findAll({
             order: 'id ASC',
-            include: [db.Post]
+            include: [{
+                model: db.Post
+            }]
         }).then(function(response) {
-            res.render('index', { category: response });
+
+            //Only put categories with content on the homepage
+            var categoryHasPosts = [];
+            for (var i = 0; i<response.length; i++){
+                console.log(response[i].name + response[i].Posts.length);
+
+                if (response[i].Posts.length > 0){
+                    categoryHasPosts.push(response[i]);
+                }
+            }
+            
+            res.render('index', { category: categoryHasPosts });
+            // res.json(response);
         });
     });
 
@@ -24,12 +38,12 @@ module.exports = function(app) {
     app.get('/:userID', function(req, res) {
         db.Category.findAll({
             include: [{
-                    model: db.Post,
-                    where: { user_id: req.params.userID }
-                }
-            ]
+                model: db.Post,
+                where: { user_id: req.params.userID }
+            }]
         }).then(function(response) {
-            res.render('index', { category: response })
+            //Future Goal: Sort by popularity and render most popular first
+            res.render('index', { category: response });
         });
     });
 
