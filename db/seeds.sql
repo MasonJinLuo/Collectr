@@ -33,11 +33,11 @@ insert into users (email, password, image_path, description) values ('Bethany@gm
 
 insert into posts (img_path, description, owner_id, user_id, category_id) values ('http://esq.h-cdn.co/assets/16/44/1478275003-straight-lace-shoes.jpg', 'Check out my post!', 4, 2, 3);
 
-insert into posts (img_path, description, owner_id, user_id, category_id) values ('https://coins.thefuntimesguide.com/files/lincoln-cent-varieties.png', 'FACEBOOK!', 1, 1, 2);
+insert into posts (img_path, description, owner_id, user_id, category_id) values ('https://coins.thefuntimesguide.com/files/lincoln-cent-varieties.png', 'It\'s a penny!', 1, 1, 2);
 
 insert into posts (img_path, description, owner_id, user_id, category_id) values ('https://m.media-amazon.com/images/G/01/6pm/landing/2017/shoes/April/Pumps._V530666631_.jpg', 'Dat orange stuff tho', 2, 3, 3);
 
-insert into posts (img_path, description, owner_id, user_id, category_id) values ('http://ichef.bbci.co.uk/wwfeatures/wm/live/1280_640/images/live/p0/2v/dp/p02vdpfn.jpg', 'CATS!', 3, 1, 1);
+insert into posts (img_path, description, owner_id, user_id, category_id) values ('http://ichef.bbci.co.uk/wwfeatures/wm/live/1280_640/images/live/p0/2v/dp/p02vdpfn.jpg', 'My Favorite Book!', 3, 1, 1);
 
 insert into posts (img_path, description, owner_id, user_id, category_id) values ('https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/10cts1879.jpg/280px-10cts1879.jpg', 'testing!', 4, 1, 2);
 

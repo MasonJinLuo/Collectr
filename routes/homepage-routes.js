@@ -29,6 +29,7 @@ module.exports = function(app) {
             //Future Goal: Sort by popularity and render most popular first
             res.render('index', { category: categoryHasPosts });
             // res.json(response);
+
         });
     });
 
