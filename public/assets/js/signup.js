@@ -14,6 +14,7 @@ $(document).ready(function() {
     function handleNewUserFormSubmit(event) {
 	  event.preventDefault();
 	  // Don't do anything if the email field hasn't been filled out
+
 	  if (!newEmail.val().trim() || !newPassword.val().trim()) {
      	return alert("Please enter an email address and password to sign up.")
       }
@@ -22,32 +23,64 @@ $(document).ready(function() {
       return alert("Please enter a password between 8-15 characters.")
       }
 
-        var photo = $("#imageUpload").get(0).files[0];
-        formData = new FormData();
+    var photo = $("#imageUpload").get(0).files[0];
+    formData = new FormData();
 
-        formData.append('photo', photo, photo.name);
-        formData.append('email', newEmail.val().trim());
-        formData.append('password', newPassword.val().trim());
-        formData.append('description', newUserDescription.val().trim());
+    formData.append('photo', photo, photo.name);
+    formData.append('email', newEmail.val().trim());
+    formData.append('password', newPassword.val().trim());
+    formData.append('description', newUserDescription.val().trim());
 
-      createNewUser(formData);
+    validateNewUser();
+
+    createNewUser(formData);
 	}
+
+  function validateNewUser() {
+    // $.ajax({
+    //   url: "/api/users",
+    //   method:"GET"
+    // }).done (function(response) {
+    //   for (var i = 0; i < response.length; i++) {
+    //     if (formData.get("email") === response[i].email) {
+    //       alert("An account with this email address already exists. Please login.")
+    //       $("#SignUpForm")[0].reset();
+    //       newUserImage.attr("src", "");
+    //       $('.nav-tabs a[href="#logIn"]').tab("show");
+    //     }
+    //   }
+    // })
+    var queryURL = "/api/users/" + formData.get("email")
+      $.ajax({
+      url: queryURL,
+      method:"GET"
+    }).done (function(response) {
+        if (formData.get("email") === response.email) {
+          alert("An account with this email address already exists. Please login.")
+          $("#SignUpForm")[0].reset();
+          newUserImage.attr("src", "");
+          $('.nav-tabs a[href="#logIn"]').tab("show");
+        }
+    })
+
+
+  }
 
 	function createNewUser(newUserData) {
   	$.ajax({
-      url: '/api/users',
-      method: 'post',
+      url: "/api/users",
+      method: "POST",
       data: newUserData,
       processData: false,
       contentType: false,
-      xhr: function () {
-      var xhr = new XMLHttpRequest();
-        // Add progress event listener to the upload.
-        xhr.upload.addEventListener('progress', function (event) {
-          // console.log((event.loaded / event.total) * 100)
-        });
-        return xhr;
-      }
+      // xhr: function () {
+      // var xhr = new XMLHttpRequest();
+      //   // Add progress event listener to the upload.
+      //   xhr.upload.addEventListener('progress', function (event) {
+      //     // console.log((event.loaded / event.total) * 100)
+      //   });
+      //   return xhr;
+      // }
     }).done(function(data) {
       alert("Welcome to Collectr!");
       $("#SignUpForm")[0].reset();

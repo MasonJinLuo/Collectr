@@ -10,10 +10,10 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get("/api/users/:id", function(req, res) {
+	app.get("/api/users/:email", function(req, res) {
 		db.User.findOne({
 			where: {
-				id: req.params.id
+				email: req.params.email
 			}
 		}).then(function(dbUser) {
 			res.json(dbUser)
