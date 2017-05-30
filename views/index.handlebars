@@ -14,7 +14,7 @@
                 <div class="category-tab">
                   <h4 id={{this.id}}>{{this.name}}</h4>
                 </div>
-                  
+
                   <!-- Gallery Horizontal Scroll buttons -->
                   <div class="gallery-scroll-wrapper">
                     <a class="gallery-scroll-btn gallery-scroll-left">
@@ -32,6 +32,12 @@
                     <div class="gallery-img-div">
                     {{#each Posts}}
                       <div class="item-img-div">
+                        <a href="#" class="collect-btn-link">
+                          <div class="collectr-btn">
+                            <img src="../../public/assets/images/collectr-logo.svg" />
+                            <span class="collectr-save">save</span>
+                          </div>
+                        </a>
                         <a href="#" id={{this.id}}>
                           <img src={{this.img_path}} />
                         </a>
@@ -39,7 +45,7 @@
                     {{/each}}
                     </div>
                   </div>
-                  
+
 
               </div>
             {{/each}}

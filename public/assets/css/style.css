@@ -282,6 +282,37 @@ body {
   filter: brightness(65%);
 }
 
+.collectr-btn {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background-color: #00CCCC;
+  height: 30px;
+  width: 28px;
+  overflow: hidden;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, width 0.2s ease-in-out;
+
+  z-index: 100;
+}
+
+.collectr-btn:hover {
+  width: 80px;
+}
+
+.collectr-save {
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 16px;
+  color: #000;
+  z-index: 150;
+}
+
+.collectr-btn img:hover {
+  filter: brightness(1) !important;
+}
+
 /*Gallery Scroll Buttons*/
 .gallery-scroll-wrapper {
   position: relative;
