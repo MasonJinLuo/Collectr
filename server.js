@@ -38,7 +38,7 @@ app.use(express.static("./public"));
 require("./routes/homepage-routes.js")(app);
 require("./routes/user-post-routes.js")(app);
 require("./routes/login-api-routes.js")(app);
-require("./routes/html-routes.js")(app);
+// require("./routes/html-routes.js")(app);
 
 collectrdb.sequelize.sync().then(function() {
     app.listen(PORT, function() {

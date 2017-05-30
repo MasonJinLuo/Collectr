@@ -4,37 +4,70 @@ var db = require('../models');
 
 module.exports = function(app) {
 
-    //get all posts in a certain category, including user and category information
-    //highest upVote rated is listed first
+    //Basic homepage rendering
+    //Feeds information into handlebars
+    //Renders content in horizontal scrolling content bars
     //THIS WORKS
-    app.get('/api/category/:categoryID', function(req, res) {
+    app.get('/', function(req, res) {
+        db.Category.findAll({
+            order: 'id ASC',
+            include: [db.Post]
+        }).then(function(response) {
+            res.render('index', { category: response });
+        });
+    });
+
+    //Specific userpage rendering
+    //Feeds user specific information into handlebars
+    //Renders content in horizontal scrolling content bars
+    //THIS WORKS
+    app.get('/:userID', function(req, res) {
+        db.Category.findAll({
+            include: [{
+                    model: db.Post,
+                    where: { user_id: req.params.userID }
+                }
+            ]
+        }).then(function(response) {
+            res.render('index', { category: response })
+        });
+    });
+
+    //get all posts, including user and category information
+    //THIS WORKS
+    app.get('/api/posts', function(req, res) {
         db.Post.findAll({
             include: [db.User, db.Category],
-            order: 'upVote DESC',
-            where: { category_id: req.params.categoryID }
+            order: 'id ASC'
         }).then(function(response) {
             res.json(response);
         });
     });
 
-    //Basic homepage rendering
-    app.get('/', function(req, res) {
-        db.Post.findAll({}).then(function(response) {
-            res.render('index');
+    //get one post by ID, including user and category information
+    //THIS WORKS
+    app.get('/api/posts/:postID', function(req, res) {
+        db.Post.findOne({
+            where: {
+                id: req.params.postID
+            },
+            include: [db.User, db.Category]
+        }).then(function(response) {
+            res.json(response);
         });
     });
 
-    //get all posts in all categories, including user and category information
-    //highest upVote rated is listed first
+    //get all categories
+    //show all posts in all categories
     //THIS WORKS
     app.get('/api/category', function(req, res) {
-        db.Post.findAll({
-            include: [db.User, db.Category],
-            order: 'upVote DESC'
+        db.Category.findAll({
+            include: [db.Post]
         }).then(function(response) {
             res.json(response);
-        });
+        })
     });
+
     //get all posts by all USERS
     //THIS WORKS
     app.get('/api/users-posts', function(req, res) {
@@ -48,10 +81,10 @@ module.exports = function(app) {
 
     //get all posts by single USER
     //THIS WORKS
-    app.get('/api/users-posts/:id', function(req, res) {
+    app.get('/api/users-posts/:userID', function(req, res) {
         db.User.findOne({
             where: {
-                id: req.params.id
+                id: req.params.userID
             },
             include: [db.Post]
         }).then(function(response) {
@@ -62,7 +95,9 @@ module.exports = function(app) {
     //get a list of all tags
     //THIS WORKS
     app.get('/api/tags', function(req, res) {
-        db.Tags.findAll({}).then(function(response) {
+        db.Tags.findAll({
+
+        }).then(function(response) {
             res.json(response);
         })
     });

@@ -21,15 +21,13 @@ module.exports = function(sequelize, DataTypes) {
             field: 'updatedAt',
             defaultValue: sequelize.literal('NOW()')
         }
-    }, 
-    {
-        classMethod: {
+    }, {
+        classMethods: {
             associate: function(models) {
+
                 this.hasMany(models.Post, {
-                    foreignKey: {
-                        foreignKey: 'category_id',
-                        onDelete: "cascade"
-                    }
+                    foreignKey: 'category_id',
+                    onDelete: "cascade"
                 });
             }
         }
