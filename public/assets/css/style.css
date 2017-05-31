@@ -511,3 +511,8 @@ body {
         margin-right: 0;
     }
 }
+
+/*Category Tab*/
+.category-tab a{
+  color: black;
+}

@@ -1,0 +1,51 @@
+<div id="wrapper">
+    {{> nav }}
+    {{> menu-btn }}
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+          {{> hero }}
+
+            <!-- Main page content -->
+              <!-- Category wrapped galleries -->
+              {{#each category}}
+              <div class="row category-gallery-wrapper category-wrapper-with-wrap animated fadeInUp">
+                <div class="category-tab">
+                  <h4>{{this.name}}</h4>
+                </div>
+                    <div class="gallery-img-div category-div">
+                      {{#each Posts}}
+                      <div class="item-img-div">
+                        <a href="#" class="collect-btn-link">
+                          <div class="collectr-btn">
+                            <img src="/assets/images/collectr-logo.svg" />
+                            <span class="collectr-save">save</span>
+                          </div>
+                        </a>
+                        <a href="#" id={{this.id}}>
+                          <img src={{this.img_path}} />
+                        </a>
+                      </div>
+                      {{/each}}
+                    </div>
+                </div>
+                {{/each}}
+                
+              <!-- Wide feature div-->
+{{!--               <a href="#">
+                <div class="row blur-background" id="feature-pokemon">
+                  <div class="wide-feature">
+                    <h3>Discover:</h3>
+                    <h1>Pokemon</h1>
+                  </div>
+                </div>
+              </a> --}}
+              <!-- Wide feature div-->
+
+            <!-- Main page content -->
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->
