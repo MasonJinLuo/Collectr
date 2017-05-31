@@ -25,22 +25,16 @@ module.exports = function(app) {
         });
     });
 
-    // update existing post
-    //WORK IN PROGRESS
-    app.put('/posts/:variable/:id/:newValue', function(req, res) {
+    // update post likes
+    //This works. Need to reload page to see changes
+    app.put('/posts/upVote/:id/:newValue', function(req, res) {
 
-        var variableToUpdate = req.params.variable;
         var postId = req.params.id;
         var newValue = req.params.newValue;
 
-        //These alerts/logs do not work
-        console.log(variableToUpdate);
-        console.log(postId);
-        console.log(newValue);
-
         db.Post.update({
 
-            variableToUpdate: newValue
+            upVote: newValue
 
         }, {
 
@@ -49,10 +43,29 @@ module.exports = function(app) {
             }
 
         }).then(function(response) {
-            //These alerts/logs do not work
-            // console.log(variableToUpdate);
-            // console.log(postId);
-            // console.log(newValue);
+            res.json(response);
+        });
+
+    });
+
+    // update post dislikes
+    //This works. Need to reload page to see changes
+    app.put('/posts/downVote/:id/:newValue', function(req, res) {
+
+        var postId = req.params.id;
+        var newValue = req.params.newValue;
+
+        db.Post.update({
+
+            downVote: newValue
+
+        }, {
+
+            where: {
+                id: postId
+            }
+
+        }).then(function(response) {
             res.json(response);
         });
 

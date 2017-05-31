@@ -15,7 +15,6 @@ $(document).ready(function() {
 
         var postID = $(this).attr('id');
         console.log('This post\'s ID is ' + postID);
-        return postID;
 
     }
 
@@ -28,15 +27,12 @@ $(document).ready(function() {
         var pathname = window.location.pathname;
 
         var updateUrl = '/posts/upVote/' + postID + '/' + updatedLikes;
+        
         $.ajax({
             method: 'PUT',
             url: updateUrl
         }).then(function(response) {
-            //These alerts/logs work
-            alert(updateUrl);
-            console.log(updateUrl);
-            console.log(postID);
-            console.log(updatedLikes);
+            console.log('Updated likes for post ' + postID);
         });
 
     }
@@ -49,14 +45,21 @@ $(document).ready(function() {
         var updatedDislikes = currentDislikes + 1;
         var pathname = window.location.pathname;
 
-        var updateUrl = '/api/posts/downVote/' + postID + '/' + updatedDislikes;
+        var updateUrl = '/posts/downVote/' + postID + '/' + updatedDislikes;
+        
+        $.ajax({
+            method: 'PUT',
+            url: updateUrl
+        }).then(function(response) {
+            console.log('Updated dislikes for post ' + postID);
+        });
 
     }
 
     function categoryPage() {
         
         var categoryID = $(this).attr('id');
-        // alert('Category ID: ' + categoryID);
+        alert('Category ID: ' + categoryID);
     }
 
 });

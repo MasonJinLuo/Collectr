@@ -37,7 +37,7 @@ module.exports = function(app) {
     //Feeds user specific information into handlebars
     //Renders content in horizontal scrolling content bars
     //THIS WORKS
-    app.get('/:userID', function(req, res) {
+    app.get('/user/:userID', function(req, res) {
         db.Category.findAll({
             include: [{
                 model: db.Post,

@@ -105,7 +105,7 @@
                     <div class="form-group">
                           <label for="likeDislike" class="form-control-label">Like/Dislike</label>
                           <button class='glyphicon glyphicon-heart' value={{this.id}} data-name={{this.upVote}} id='likeBtn'><span> {{this.upVote}}</span></button>
-                          <button class='glyphicon glyphicon-thumbs-down' value={{this.id}} data-name={{this.downVote}} id='dislikeBtn'><span> {{this.downVote}}</span></button>
+                          <button class='glyphicon glyphicon-thumbs-down' value={{this.id}} data-name={{this.downVote}} id='dislikeBtn'><span>{{this.downVote}}</span></button>
                     </div>
 
                     <div class="form-group">
@@ -115,8 +115,15 @@
 
                     <div class="form-group">
                           <label for="ownerID">Owner ID: </label>
-                          <a>
+                          <a href="/user/{{this.owner_id}}">
                             <p>{{this.owner_id}}</p>
+                          </a>
+                    </div>
+
+                    <div class="form-group">
+                          <label for="categoryID">Category ID: </label>
+                          <a href="/category/{{this.category_id}}">
+                            <p>{{this.category_id}}</p>
                           </a>
                     </div>
 
