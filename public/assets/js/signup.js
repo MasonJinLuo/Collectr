@@ -37,19 +37,6 @@ $(document).ready(function() {
 	}
 
   function validateNewUser() {
-    // $.ajax({
-    //   url: "/api/users",
-    //   method:"GET"
-    // }).done (function(response) {
-    //   for (var i = 0; i < response.length; i++) {
-    //     if (formData.get("email") === response[i].email) {
-    //       alert("An account with this email address already exists. Please login.")
-    //       $("#SignUpForm")[0].reset();
-    //       newUserImage.attr("src", "");
-    //       $('.nav-tabs a[href="#logIn"]').tab("show");
-    //     }
-    //   }
-    // })
     var queryURL = "/api/users/" + formData.get("email")
       $.ajax({
       url: queryURL,
@@ -62,8 +49,6 @@ $(document).ready(function() {
           $('.nav-tabs a[href="#logIn"]').tab("show");
         }
     })
-
-
   }
 
 	function createNewUser(newUserData) {
@@ -73,14 +58,6 @@ $(document).ready(function() {
       data: newUserData,
       processData: false,
       contentType: false,
-      // xhr: function () {
-      // var xhr = new XMLHttpRequest();
-      //   // Add progress event listener to the upload.
-      //   xhr.upload.addEventListener('progress', function (event) {
-      //     // console.log((event.loaded / event.total) * 100)
-      //   });
-      //   return xhr;
-      // }
     }).done(function(data) {
       alert("Welcome to Collectr!");
       $("#SignUpForm")[0].reset();
