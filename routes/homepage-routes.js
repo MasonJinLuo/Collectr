@@ -94,6 +94,7 @@ module.exports = function(app) {
             res.json(response);
         })
     });
+    
 
     //get all posts by all USERS
     //THIS WORKS

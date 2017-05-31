@@ -21,7 +21,6 @@ if (!loginEmail.val().trim() || !loginPassword.val().trim()) {
 }
 
 
-
 function loginCheck (){
 $.ajax({
   url: "/api/users",
