@@ -1,6 +1,7 @@
 //Author: Linette
 
 $(document).ready(function() {
+  
   var newEmail = $("#signUpEmail");
   var newPassword = $("#signUpPassword");
   var newUserImage = $("#newUserImage");

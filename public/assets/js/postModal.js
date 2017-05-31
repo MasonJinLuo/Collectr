@@ -11,7 +11,7 @@ $(document).ready(function() {
     $(document).on('click', '#dislikeBtn', updatePostDislikes);
     $(document).on('click', '.category-tab', categoryPage);
 
-    function postModal() {
+    function postModal(event) {
 
         event.preventDefault();
         var postID = $(this).attr('id');
@@ -20,7 +20,7 @@ $(document).ready(function() {
 
     }
 
-    function updatePostLikes() {
+    function updatePostLikes(event) {
 
         event.preventDefault();
 
@@ -30,7 +30,7 @@ $(document).ready(function() {
         var updatedLikes = currentLikes + 1;
         var pathname = window.location.pathname;
 
-        var updateUrl = '/api/posts/upVote/' + postID + '/' + updatedLikes;
+        var updateUrl = '/posts/upVote/' + postID + '/' + updatedLikes;
         $.ajax({
             method: 'PUT',
             url: updateUrl
@@ -44,7 +44,7 @@ $(document).ready(function() {
 
     }
 
-    function updatePostDislikes() {
+    function updatePostDislikes(event) {
 
         event.preventDefault();
 
@@ -58,7 +58,10 @@ $(document).ready(function() {
 
     }
 
-    function categoryPage() {
+    function categoryPage(event) {
+
+        event.preventDefault();
+        
         var categoryID = $(this).attr('id');
         // alert('Category ID: ' + categoryID);
     }

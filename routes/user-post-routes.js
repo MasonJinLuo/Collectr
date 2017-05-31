@@ -1,19 +1,33 @@
-//Stacy
+/*
+    @author : Stacy
+    @date : 
+    @desc : 
+*/
+
 var db = require('../models');
+var fs = require("fs");
+var multer = require('multer');
+var upload = multer({ dest: 'public/images/postImages' });
 
 module.exports = function(app) {
 
     //post new content
-    //THIS WORKS. WILL NEED TO ASSOCIATE OWNER/USER/CATEGORY (BOARD) ID WHEN COLLECTING POST CONTENT
-    app.post('/api/posts', function(req, res) {
-        db.Post.create(req.body).then(function(response) {
+    ////WORK IN PROGRESS
+    //WILL NEED TO ASSOCIATE OWNER/USER/CATEGORY (BOARD) ID WHEN COLLECTING POST CONTENT
+    app.post('/api/posts', upload.single('photo'), function(req, res) {
+
+        var post = Object.assign({}, req.body, {
+            image_path: req.file.path.replace('public/', '')
+        });
+
+        db.Post.create(post).then(function(response) {
             res.json(response);
         });
     });
 
     // update existing post
-    //THIS WORKS
-    app.put('/api/posts/:variable/:id/:newValue', function(req, res) {
+    //WORK IN PROGRESS
+    app.put('/posts/:variable/:id/:newValue', function(req, res) {
 
         var variableToUpdate = req.params.variable;
         var postId = req.params.id;
