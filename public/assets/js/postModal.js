@@ -9,6 +9,7 @@ $(document).ready(function() {
 	$(document).on('click', '.item-img-div', postModal);
 	$(document).on('click', '#likeBtn', updatePostLikes);
 	$(document).on('click', '#dislikeBtn', updatePostDislikes);
+    $(document).on('click', '.category-tab', categoryPage);
     
     function postModal() {
 
@@ -27,6 +28,11 @@ $(document).ready(function() {
     function updatePostDislikes(postID){
     	event.preventDefault();
     	
+    }
+
+    function categoryPage(){
+        var categoryID = $(this).attr('id');
+        // alert('Category ID: ' + categoryID);
     }
 
 });

@@ -12,7 +12,9 @@
             {{#each category}}
               <div class="row category-gallery-wrapper animated fadeInUp">
                 <div class="category-tab" id={{this.id}}>
-                  <h4>{{this.name}}</h4>
+                  <a href='/category/{{this.id}}'>
+                    <h4>{{this.name}}</h4>
+                  </a>
                 </div>
 
                   <!-- Gallery Horizontal Scroll buttons -->
@@ -32,7 +34,7 @@
                   <!-- Gallery Horizontal Scroll buttons -->
                     <div class="gallery-img-div">
                     {{#each Posts}}
-                      <div class="item-img-div" data-target="#openPostModal{{this.id}}" data-toggle="modal">
+                      <div class="item-img-div">
                         <a href="#" class="collect-btn-link">
                           <div class="collectr-btn">
                             <img src="/assets/images/collectr-logo.svg" />
@@ -40,7 +42,7 @@
                           </div>
                         </a>
                         <a href="#" id={{this.id}}>
-                          <img src={{this.img_path}} />
+                          <img src={{this.img_path}} data-target="#openPostModal{{this.id}}" data-toggle="modal"/>
                         </a>
                       </div>
 
@@ -71,60 +73,61 @@
     </div>
     <!-- /#page-content-wrapper -->
 </div>
+
 {{!-- Begin Clicked Post Modal --}}
 {{#each category}}
-{{#each Posts}}
-    <div class="modal fade postModal" id="openPostModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="openPostModalLabel{{this.id}}" aria-hidden="true" style="z-index: 20000;">
+  {{#each Posts}}
+      <div class="modal fade postModal" id="openPostModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="openPostModalLabel{{this.id}}" aria-hidden="true" style="z-index: 20000;">
 
-      <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document">
 
-        <div class="modal-content">
+          <div class="modal-content">
 
-            <div class="modal-header">
-                <h4 class="modal-title" id="postModalLabel">{{this.description}}</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+              <div class="modal-header">
+                  <h4 class="modal-title" id="postModalLabel">{{this.description}}</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
 
-            <div class="modal-body">
-              <form>
+              <div class="modal-body">
+                <form>
 
-                  <div class="form-group">
-                      <img class="postImage" src='{{this.img_path}}' style='width: 100%; height: auto;'>
-                  </div>
+                    <div class="form-group">
+                        <img class="postImage" src='{{this.img_path}}' style='width: 100%; height: auto;'>
+                    </div>
 
-                  <div class="form-group">
-                        <label for="likeDislike" class="form-control-label">Like/Dislike</label>
-                        <button class='glyphicon glyphicon-heart' id='likeBtn'><span> {{this.upVote}}</span></button>
-                        <button class='glyphicon glyphicon-thumbs-down' id='dislikeBtn'><span> {{this.downVote}}</span></button>
-                  </div>
+                    <div class="form-group">
+                          <label for="likeDislike" class="form-control-label">Like/Dislike</label>
+                          <button class='glyphicon glyphicon-heart' id='likeBtn'><span> {{this.upVote}}</span></button>
+                          <button class='glyphicon glyphicon-thumbs-down' id='dislikeBtn'><span> {{this.downVote}}</span></button>
+                    </div>
 
-                  <div class="form-group">
-                        <label for="collect" class="form-control-label">Collect</label>
-                        <button class='glyphicon glyphicon-pushpin' id='collectBtn'></button>
-                  </div>
+                    <div class="form-group">
+                          <label for="collect" class="form-control-label">Collect</label>
+                          <button class='glyphicon glyphicon-pushpin' id='collectBtn'></button>
+                    </div>
 
-                  <div class="form-group">
-                        <label for="ownerID">Owner ID: </label>
-                        <a>
-                          <p>{{this.owner_id}}</p>
-                        </a>
-                  </div>
+                    <div class="form-group">
+                          <label for="ownerID">Owner ID: </label>
+                          <a>
+                            <p>{{this.owner_id}}</p>
+                          </a>
+                    </div>
 
-              </form>
-            </div>
+                </form>
+              </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+
+          </div>
 
         </div>
 
-      </div>
-
-  </div>
-{{/each}}
+    </div>
+  {{/each}}
 {{/each}}
 {{!-- End Post Modal --}}
 <!-- /#wrapper -->

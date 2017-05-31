@@ -49,6 +49,18 @@ module.exports = function(app) {
         });
     });
 
+    app.get('/category/:categoryID', function(req, res) {
+        db.Category.findAll({
+            include: [{
+                model: db.Post,
+            }],
+            where: { id: req.params.categoryID }
+        }).then(function(response) {
+            // res.json(response);
+            res.render('category', { category: response });
+        });
+    });
+
     app.get('/user-groups', function(req, res) {
         db.Category.findAll({
             include: [{
