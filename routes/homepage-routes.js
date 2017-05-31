@@ -49,6 +49,17 @@ module.exports = function(app) {
         });
     });
 
+    app.get('/user-groups', function(req, res) {
+        db.Category.findAll({
+            include: [{
+                model: db.Post
+            }]
+        }).then(function(response) {
+            //Future Goal: Sort by popularity and render most popular first
+            res.render('groups', { category: response });
+        });
+    });
+
     //get all posts, including user and category information
     //THIS WORKS
     app.get('/api/posts', function(req, res) {
