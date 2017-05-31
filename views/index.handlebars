@@ -32,7 +32,7 @@
                   <!-- Gallery Horizontal Scroll buttons -->
                     <div class="gallery-img-div">
                     {{#each Posts}}
-                      <div class="item-img-div" data-target="#openPostModal{{this.id}}" data-toggle="modal">
+                      <div class="item-img-div">
                         <a href="#" class="collect-btn-link">
                           <div class="collectr-btn">
                             <img src="/assets/images/collectr-logo.svg" />
@@ -40,7 +40,7 @@
                           </div>
                         </a>
                         <a href="#" id={{this.id}}>
-                          <img src={{this.img_path}} />
+                          <img src={{this.img_path}} data-target="#openPostModal{{this.id}}" data-toggle="modal"/>
                         </a>
                       </div>
 
