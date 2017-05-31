@@ -12,7 +12,9 @@
             {{#each category}}
               <div class="row category-gallery-wrapper animated fadeInUp">
                 <div class="category-tab" id={{this.id}}>
-                  <h4>{{this.name}}</h4>
+                  <a href='/category/{{this.id}}'>
+                    <h4>{{this.name}}</h4>
+                  </a>
                 </div>
 
                   <!-- Gallery Horizontal Scroll buttons -->
