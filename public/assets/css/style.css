@@ -317,6 +317,7 @@ body {
 
 .collectr-btn img:hover {
   filter: brightness(1) !important;
+  cursor: pointer;
 }
 
 /*Gallery Scroll Buttons*/
@@ -446,13 +447,14 @@ body {
 
 /*Group View*/
 .group-users {
-  margin: auto;
+  margin: 0;
   margin-top: 20px;
   margin-bottom: 20px;
 
   display: flex;
   justify-content: space-between;
-  wrap: wrap;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .user-div {
@@ -477,8 +479,17 @@ body {
   width: auto;
 }
 
-.user-name {
+.user-name-div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.user-name {
+  color: #888;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 @media(min-width:768px) {
