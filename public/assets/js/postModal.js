@@ -11,18 +11,15 @@ $(document).ready(function() {
     $(document).on('click', '#dislikeBtn', updatePostDislikes);
     $(document).on('click', '.category-tab', categoryPage);
 
-    function postModal(event) {
+    function postModal() {
 
-        event.preventDefault();
         var postID = $(this).attr('id');
         console.log('This post\'s ID is ' + postID);
         return postID;
 
     }
 
-    function updatePostLikes(event) {
-
-        event.preventDefault();
+    function updatePostLikes() {
 
         var postID = $(this).attr('value');
         var currentLikes = parseInt($(this).attr('data-name'));
@@ -44,9 +41,7 @@ $(document).ready(function() {
 
     }
 
-    function updatePostDislikes(event) {
-
-        event.preventDefault();
+    function updatePostDislikes() {
 
         var postID = $(this).attr('value');
         var currentDislikes = parseInt($(this).attr('data-name'));
@@ -58,9 +53,7 @@ $(document).ready(function() {
 
     }
 
-    function categoryPage(event) {
-
-        event.preventDefault();
+    function categoryPage() {
         
         var categoryID = $(this).attr('id');
         // alert('Category ID: ' + categoryID);
