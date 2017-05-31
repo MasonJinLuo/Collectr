@@ -8,7 +8,7 @@
           {{> hero }}
 
             <!-- Main page content -->
-              <!-- Category wrapped galleries -->
+              <!-- Category wrapped gallery -->
               {{#each category}}
               <div class="row category-gallery-wrapper category-wrapper-with-wrap animated fadeInUp">
                 <div class="category-tab" id={{this.id}}>
@@ -34,6 +34,7 @@
                     </div>
                 </div>
               {{/each}}
+              <!-- Category wrapped gallery -->
             <!-- Main page content -->
             
         </div>
@@ -67,8 +68,8 @@
 
                     <div class="form-group">
                           <label for="likeDislike" class="form-control-label">Like/Dislike</label>
-                          <button class='glyphicon glyphicon-heart' id='likeBtn'><span> {{this.upVote}}</span></button>
-                          <button class='glyphicon glyphicon-thumbs-down' id='dislikeBtn'><span> {{this.downVote}}</span></button>
+                          <button class='glyphicon glyphicon-heart' value={{this.id}} data-name={{this.upVote}} id='likeBtn'><span> {{this.upVote}}</span></button>
+                          <button class='glyphicon glyphicon-thumbs-down' value={{this.id}} data-name={{this.downVote}} id='dislikeBtn'><span> {{this.downVote}}</span></button>
                     </div>
 
                     <div class="form-group">
@@ -97,3 +98,4 @@
     </div>
   {{/each}}
 {{/each}}
+{{!-- End Post Modal --}}

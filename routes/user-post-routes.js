@@ -13,14 +13,35 @@ module.exports = function(app) {
 
     // update existing post
     //THIS WORKS
-    app.put('/api/posts/:id', function(req, res) {
-        db.Post.update(req.body, {
+    app.put('/api/posts/:variable/:id/:newValue', function(req, res) {
+
+        var variableToUpdate = req.params.variable;
+        var postId = req.params.id;
+        var newValue = req.params.newValue;
+
+        //These alerts/logs do not work
+        console.log(variableToUpdate);
+        console.log(postId);
+        console.log(newValue);
+
+        db.Post.update({
+
+            variableToUpdate: newValue
+
+        }, {
+
             where: {
-                id: req.params.id
+                id: postId
             }
+
         }).then(function(response) {
+            //These alerts/logs do not work
+            // console.log(variableToUpdate);
+            // console.log(postId);
+            // console.log(newValue);
             res.json(response);
-        })
+        });
+
     });
 
     // delete existing post

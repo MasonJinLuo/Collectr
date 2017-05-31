@@ -61,13 +61,13 @@ module.exports = function(app) {
         });
     });
 
-    app.get('/user-groups', function(req, res) {
+    app.get('/groups', function(req, res) {
         db.Category.findAll({
             include: [{
                 model: db.Post
             }]
         }).then(function(response) {
-            //Future Goal: Sort by popularity and render most popular first
+            // res.json(response);
             res.render('groups', { category: response });
         });
     });
