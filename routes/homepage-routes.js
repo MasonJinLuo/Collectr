@@ -61,6 +61,18 @@ module.exports = function(app) {
         });
     });
 
+    app.get('/api/category/:categoryID', function(req, res) {
+        db.Category.findOne({
+            include: [{
+                model: db.Post,
+            }],
+            where: { id: req.params.categoryID }
+        }).then(function(response) {
+            res.json(response);
+            // res.render('category', { category: response });
+        });
+    });
+
     app.get('/groups', function(req, res) {
         db.Category.findAll({
             include: [{
@@ -106,7 +118,7 @@ module.exports = function(app) {
             res.json(response);
         })
     });
-    
+
 
     //get all posts by all USERS
     //THIS WORKS
@@ -138,6 +150,22 @@ module.exports = function(app) {
         db.Tags.findAll({
 
         }).then(function(response) {
+            res.json(response);
+        })
+    });
+
+    app.get('/tags/:tagName', function(req, res) {
+        db.Tags.findOne({
+            where: { name: req.params.tagName }
+        }).then(function(response) {
+            res.json(response);
+        })
+    });
+
+    app.post('/tags/:tagName', function(req, res) {
+        db.Tags.create({
+            name: req.params.tagName
+        }, {}).then(function(response) {
             res.json(response);
         })
     });
