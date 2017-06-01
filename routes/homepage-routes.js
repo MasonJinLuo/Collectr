@@ -88,7 +88,7 @@ module.exports = function(app) {
     //THIS WORKS
     app.get('/api/posts', function(req, res) {
         db.Post.findAll({
-            include: [db.User, db.Category],
+            include: [db.User, db.Category, db.Post2Tags],
             order: 'id ASC'
         }).then(function(response) {
             res.json(response);

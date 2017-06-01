@@ -1,46 +1,46 @@
 module.exports = function(sequelize, DataTypes) {
     var Post = sequelize.define("Post", {
-            // post_id: { 
-            //     type: DataTypes.INTEGER,
-            //     primaryKey: true,
-            //     autoIncrement: true,
-            //     allowNull: false 
-            // },
-            img_path: {
-                type: DataTypes.STRING,
-                allowNull: true,
-                validate: {
-                    len: [1]
-                }
-            },
-            description: {
-                type: DataTypes.TEXT,
-                allowNull: false,
-                validate: {
-                    len: [1]
-                }
-            },
-
-            //Stacy: Added columns for tracking up and down votes on a post
-            upVote: {
-                type: DataTypes.INTEGER,
-                defaultValue: 0
-            },
-
-            downVote: {
-                type: DataTypes.INTEGER,
-                defaultValue: 0
-            },
-            createdAt: {
-                type: DataTypes.DATE,
-                field: 'createdAt',
-                defaultValue: sequelize.literal('NOW()')
-            },
-            updatedAt: {
-                type: DataTypes.DATE,
-                field: 'updatedAt',
-                defaultValue: sequelize.literal('NOW()')
+        // post_id: { 
+        //     type: DataTypes.INTEGER,
+        //     primaryKey: true,
+        //     autoIncrement: true,
+        //     allowNull: false 
+        // },
+        img_path: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
             }
+        },
+        description: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+
+        //Stacy: Added columns for tracking up and down votes on a post
+        upVote: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
+
+        downVote: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            field: 'createdAt',
+            defaultValue: sequelize.literal('NOW()')
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            field: 'updatedAt',
+            defaultValue: sequelize.literal('NOW()')
+        }
     }, {
         classMethods: {
             associate: function(models) {
@@ -64,6 +64,10 @@ module.exports = function(sequelize, DataTypes) {
                         name: 'category_id',
                         allowNull: false
                     }
+                });
+                this.hasMany(models.Post2Tags, {
+                    foreignKey: 'post_id',
+                    onDelete: "cascade"
                 });
             }
         }
