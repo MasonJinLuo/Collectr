@@ -10,13 +10,28 @@ $(document).ready(function() {
     $(document).on('click', '#likeBtn', updatePostLikes);
     $(document).on('click', '#dislikeBtn', updatePostDislikes);
     $(document).on('click', '.category-tab', categoryPage);
-    $(document).on('click', '#collectBtn', collectPost);
-    $(document).on('click', '.collectr-btn', collectPost);
+    $(document).on('click', '#collectPostSubmit', collectPost);
 
-    function collectPost(){
+    function collectPost(event) {
 
-        var imagePath = $(this).attr('data-img');
-        var ownerId = $(this).attr('data-owner');
+        event.preventDefault();
+
+        var description = $('#itemCollectDescription').val().trim();
+        var tags = $('#collectItemTags').val().trim().toLowerCase();
+
+        var tagArray = tags.split(',');
+
+        for (var i = 0; i < tagArray.length; i++) {
+            tagArray[i] = tagArray[i].trim();
+        }
+
+        var owner_id = $(this).attr('data-owner');
+        var img_path = $(this).attr('data-img');
+
+        console.log(description);
+        console.log(tagArray);
+        console.log(owner_id);
+        console.log(img_path);
 
     }
 
@@ -36,7 +51,7 @@ $(document).ready(function() {
         var pathname = window.location.pathname;
 
         var updateUrl = '/posts/upVote/' + postID + '/' + updatedLikes;
-        
+
         $.ajax({
             method: 'PUT',
             url: updateUrl
@@ -55,7 +70,7 @@ $(document).ready(function() {
         var pathname = window.location.pathname;
 
         var updateUrl = '/posts/downVote/' + postID + '/' + updatedDislikes;
-        
+
         $.ajax({
             method: 'PUT',
             url: updateUrl
@@ -66,7 +81,7 @@ $(document).ready(function() {
     }
 
     function categoryPage() {
-        
+
         var categoryID = $(this).attr('id');
         // alert('Category ID: ' + categoryID);
     }

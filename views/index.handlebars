@@ -8,6 +8,7 @@
           {{> hero }}
 
             <!-- Main page content -->
+
             <!--Test Button For Adding New Posts. Can be deleted later-->
             <button class='glyphicon glyphicon-plus' id='newPostBtn' data-target="#newPostModal" data-toggle="modal"></button>
 
@@ -259,7 +260,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="ownerID">Owner: </label>
+                      <label for="ownerID">Owner</label>
                         <a>
                         {{#with User}}
                           <p>{{this.email}}</p>
@@ -272,6 +273,7 @@
 
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-success" id="collectPostSubmit" data-owner={{this.owner_id}} data-img={{this.img_path}}>Collect!</button>
               </div>
 
           </div>
