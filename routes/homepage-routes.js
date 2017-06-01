@@ -25,17 +25,17 @@ module.exports = function(app) {
         }).then(function(response) {
 
             //Only put categories with content on the homepage
-            var categoryHasPosts = [];
-            for (var i = 0; i < response.length; i++) {
-                console.log(response[i].name + ': ' + response[i].Posts.length);
+            // var categoryHasPosts = [];
+            // for (var i = 0; i < response.length; i++) {
+            //     console.log(response[i].name + ': ' + response[i].Posts.length);
 
-                if (response[i].Posts.length > 0) {
-                    categoryHasPosts.push(response[i]);
-                }
-            }
+            //     if (response[i].Posts.length > 0) {
+            //         categoryHasPosts.push(response[i]);
+            //     }
+            // }
 
             //Future Goal: Sort by popularity and render most popular first
-            res.render('index', { category: categoryHasPosts });
+            res.render('index', { category: response });
             // res.json(response);
 
         });

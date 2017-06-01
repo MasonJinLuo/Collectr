@@ -10,6 +10,15 @@ $(document).ready(function() {
     $(document).on('click', '#likeBtn', updatePostLikes);
     $(document).on('click', '#dislikeBtn', updatePostDislikes);
     $(document).on('click', '.category-tab', categoryPage);
+    $(document).on('click', '#collectBtn', collectPost);
+    $(document).on('click', '.collectr-btn', collectPost);
+
+    function collectPost(){
+
+        var imagePath = $(this).attr('data-img');
+        var ownerId = $(this).attr('data-owner');
+
+    }
 
     function postModal() {
 

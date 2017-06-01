@@ -15,6 +15,10 @@ $(document).ready(function() {
     var newPostModal = $("#newPostModal");
     var itemImageUpload = $("#itemImageUpload");
 
+    //not functioning variables yet. Need sessions info to get current user
+    var user;
+    var owner = user;
+
 
     var reader = new FileReader();
 
