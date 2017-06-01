@@ -25,6 +25,16 @@ module.exports = function(app) {
 			res.json(dbUser)
 		});
 	});
+    
+    app.get("/api/users/:id", function(req, res) {
+		db.User.findOne({
+			where: {
+				id: parseInt(req.params.id)
+			}
+		}).then(function(dbUser) {
+			res.json(dbUser)
+		});
+	});
 
 	app.post("/api/users", upload.single('photo'), function(req, res) {
         var user = Object.assign({}, req.body, {
