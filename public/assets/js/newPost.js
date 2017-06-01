@@ -9,22 +9,40 @@ $(document).ready(function() {
     var description = $("#itemDescription");
     var tags = $("#itemTags");
     var newPostImage = $("#newPostImage");
+    var category = $('#newPostCategory');
+
     var newPostForm = $("#newPostForm");
     var newPostModal = $("#newPostModal");
+    var itemImageUpload = $("#itemImageUpload");
+
+
     var reader = new FileReader();
 
     $(document).on("click", "#newPostSubmit", handleNewPostFormSubmit);
+    
+    //clears form if someone closes the modal before submitting
+    $(document).on("click", "#newPostClose", clearImage);
+    $(document).on("click", "#newPostModalCloseBtn", clearImage);
+
+    function clearImage() {
+        $("#newPostForm")[0].reset();
+        newPostImage.attr("src", "");
+    }
 
     function handleNewPostFormSubmit(event) {
 
         event.preventDefault();
 
-        var photo = $("#imageUpload").get(0).files[0];
+        var photo = itemImageUpload.get(0).files[0];
+
         formData = new FormData();
 
         formData.append('photo', photo, photo.name);
         formData.append('description', description.val().trim());
-        formData.append('tags', tags.val().trim());
+        // formData.append('tags', tags.val().trim());
+        formData.append('category_id', 1);
+        formData.append('owner_id', 1);
+        formData.append('user_id', 1);
 
         console.log(formData);
 
@@ -52,7 +70,7 @@ $(document).ready(function() {
 
     //New User Upload Profile Picture
 
-    $("#imageUpload").change(function() { previewFile() });
+    itemImageUpload.change(function() { previewFile() });
 
     function previewFile() {
         var preview = document.querySelector("#newPostImage");
