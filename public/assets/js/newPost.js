@@ -32,7 +32,7 @@ $(document).ready(function() {
     function handleNewPostFormSubmit(event) {
 
         event.preventDefault();
-        
+
         if (!description.val().trim()) {
             return alert("Please enter an item description");
         } else if (!tags.val().trim()) {
@@ -42,21 +42,88 @@ $(document).ready(function() {
         } else {
 
             var photo = itemImageUpload.get(0).files[0];
+            var tagArray = (tags.val().trim()).split(',');
+
+            for (var i = 0; i < tagArray.length; i++) {
+                tagArray[i] = tagArray[i].trim();
+            }
 
             formData = new FormData();
 
             formData.append('photo', photo, photo.name);
             formData.append('description', description.val().trim());
-            // formData.append('tags', tags.val().trim());
-            formData.append('category_id', 1);
+            formData.append('category_id', category.val());
             formData.append('owner_id', 1);
             formData.append('user_id', 1);
 
-            createNewPost(formData);
+            createNewPost(formData, tagArray);
+
+            var tagIdArray = [];
+            var oldTagNameArray = [];
+            var newTagNameArray = [];
+
+            var promises = [];
+
+            for (var i = 0; i < tagArray.length; i++) {
+
+                var tagName = tagArray[i];
+                var promise = $.ajax({
+                    url: "/tags/" + tagName,
+                    method: 'GET'
+                }).then(function(data) {
+
+                    if (data) {
+                        oldTagNameArray.push(data.name);
+                    }
+
+                });
+                promises.push(promise);
+            }
+            $.when.apply(this, promises).then(function() {
+
+                for (var i = 0; i < tagArray.length; i++) {
+                    console.log(tagArray[i]);
+                    console.log(oldTagNameArray.indexOf(tagArray[i]));
+                    if (oldTagNameArray.indexOf(tagArray[i]) == -1) {
+                        newTagNameArray.push(tagArray[i]);
+
+                    }
+                }
+                for (var i = 0; i < newTagNameArray.length; i++) {
+                    var newTagName = newTagNameArray[i];
+                    $.ajax({
+                        url: "/tags/" + newTagName,
+                        method: "POST"
+                    }).done(function(data) {
+
+                    });
+                }
+
+                var promises2 = [];
+
+                for (var i = 0; i < tagArray.length; i++) {
+
+                    var tagName = tagArray[i];
+                    var promise2 = $.ajax({
+                        url: "/tags/" + tagName,
+                        method: 'GET'
+                    }).then(function(data) {
+
+                        tagIdArray.push(data.id);
+
+                    });
+                    promises2.push(promise2);
+                }
+                $.when.apply(this, promises2).then(function() {
+                    console.log(tagIdArray);
+                });
+
+            });
+
         }
     }
 
-    function createNewPost(newPostData) {
+    function createNewPost(newPostData, tagArray) {
         $.ajax({
 
             url: "/api/posts",
@@ -66,6 +133,17 @@ $(document).ready(function() {
             contentType: false,
 
         }).done(function(data) {
+
+            var newPostId = data.id;
+
+            console.log(newPostId);
+
+            // $.ajax({
+
+
+            // }).then(function(data) {
+
+            // })
 
             alert("Post Added!");
             newPostForm[0].reset();
