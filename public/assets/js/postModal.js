@@ -59,7 +59,7 @@ $(document).ready(function() {
     function categoryPage() {
         
         var categoryID = $(this).attr('id');
-        alert('Category ID: ' + categoryID);
+        // alert('Category ID: ' + categoryID);
     }
 
 });

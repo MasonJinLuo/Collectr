@@ -56,12 +56,11 @@ $(document).ready(function() {
             formData.append('owner_id', 1);
             formData.append('user_id', 1);
 
-            createNewPost(formData, tagArray);
-
             var tagIdArray = [];
             var oldTagNameArray = [];
             var newTagNameArray = [];
 
+            //checking to see if tags are currently in database
             var promises = [];
 
             for (var i = 0; i < tagArray.length; i++) {
@@ -72,6 +71,7 @@ $(document).ready(function() {
                     method: 'GET'
                 }).then(function(data) {
 
+                    //if the tags exist they are pushed to an array
                     if (data) {
                         oldTagNameArray.push(data.name);
                     }
@@ -81,6 +81,8 @@ $(document).ready(function() {
             }
             $.when.apply(this, promises).then(function() {
 
+                //comparing original tag array to preexisting tag array
+                //push new tags to a new array
                 for (var i = 0; i < tagArray.length; i++) {
                     console.log(tagArray[i]);
                     console.log(oldTagNameArray.indexOf(tagArray[i]));
@@ -89,6 +91,8 @@ $(document).ready(function() {
 
                     }
                 }
+
+                //adding values of new tag array to tags table
                 for (var i = 0; i < newTagNameArray.length; i++) {
                     var newTagName = newTagNameArray[i];
                     $.ajax({
@@ -101,6 +105,8 @@ $(document).ready(function() {
 
                 var promises2 = [];
 
+                //get tag id values in an array for all of the tags
+                //will need tag ids to query and post Post2Tags model and associate the new post to these tags
                 for (var i = 0; i < tagArray.length; i++) {
 
                     var tagName = tagArray[i];
@@ -115,7 +121,8 @@ $(document).ready(function() {
                     promises2.push(promise2);
                 }
                 $.when.apply(this, promises2).then(function() {
-                    console.log(tagIdArray);
+                    // console.log(tagIdArray);
+                    createNewPost(formData, tagIdArray);
                 });
 
             });
@@ -123,7 +130,7 @@ $(document).ready(function() {
         }
     }
 
-    function createNewPost(newPostData, tagArray) {
+    function createNewPost(newPostData, tagIdArray) {
         $.ajax({
 
             url: "/api/posts",
@@ -137,7 +144,9 @@ $(document).ready(function() {
             var newPostId = data.id;
 
             console.log(newPostId);
+            console.log(tagIdArray);
 
+            //will use post id and each tag id query post2tags
             // $.ajax({
 
 

@@ -38,7 +38,7 @@ module.exports = function(app) {
 
     app.post("/api/users", upload.single('photo'), function(req, res) {
         var user = Object.assign({}, req.body, {
-            image_path: req.file.path.replace('public/', '')
+            image_path: req.file.path.replace('public/', '/')
         });
 
         db.User.create(user).then(function(dbUser) {
