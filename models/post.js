@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
             // },
             img_path: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: true,
                 validate: {
                     len: [1]
                 }

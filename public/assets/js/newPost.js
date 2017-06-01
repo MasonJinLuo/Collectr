@@ -9,29 +9,121 @@ $(document).ready(function() {
     var description = $("#itemDescription");
     var tags = $("#itemTags");
     var newPostImage = $("#newPostImage");
+    var category = $('#newPostCategory');
+
     var newPostForm = $("#newPostForm");
     var newPostModal = $("#newPostModal");
+    var itemImageUpload = $("#itemImageUpload");
+
+
     var reader = new FileReader();
 
     $(document).on("click", "#newPostSubmit", handleNewPostFormSubmit);
+
+    //clears form if someone closes the modal before submitting
+    $(document).on("click", "#newPostClose", clearImage);
+    $(document).on("click", "#newPostModalCloseBtn", clearImage);
+
+    function clearImage() {
+        $("#newPostForm")[0].reset();
+        newPostImage.attr("src", "");
+    }
 
     function handleNewPostFormSubmit(event) {
 
         event.preventDefault();
 
-        var photo = $("#imageUpload").get(0).files[0];
-        formData = new FormData();
+        if (!description.val().trim()) {
+            return alert("Please enter an item description");
+        } else if (!tags.val().trim()) {
+            return alert("Please enter item tags");
+        } else if (!category.val()) {
+            return alert("Please select a category");
+        } else {
 
-        formData.append('photo', photo, photo.name);
-        formData.append('description', description.val().trim());
-        formData.append('tags', tags.val().trim());
+            var photo = itemImageUpload.get(0).files[0];
+            var tagArray = (tags.val().trim()).split(',');
 
-        console.log(formData);
+            for (var i = 0; i < tagArray.length; i++) {
+                tagArray[i] = tagArray[i].trim();
+            }
 
-        createNewPost(formData);
+            formData = new FormData();
+
+            formData.append('photo', photo, photo.name);
+            formData.append('description', description.val().trim());
+            formData.append('category_id', category.val());
+            formData.append('owner_id', 1);
+            formData.append('user_id', 1);
+
+            createNewPost(formData, tagArray);
+
+            var tagIdArray = [];
+            var oldTagNameArray = [];
+            var newTagNameArray = [];
+
+            var promises = [];
+
+            for (var i = 0; i < tagArray.length; i++) {
+
+                var tagName = tagArray[i];
+                var promise = $.ajax({
+                    url: "/tags/" + tagName,
+                    method: 'GET'
+                }).then(function(data) {
+
+                    if (data) {
+                        oldTagNameArray.push(data.name);
+                    }
+
+                });
+                promises.push(promise);
+            }
+            $.when.apply(this, promises).then(function() {
+
+                for (var i = 0; i < tagArray.length; i++) {
+                    console.log(tagArray[i]);
+                    console.log(oldTagNameArray.indexOf(tagArray[i]));
+                    if (oldTagNameArray.indexOf(tagArray[i]) == -1) {
+                        newTagNameArray.push(tagArray[i]);
+
+                    }
+                }
+                for (var i = 0; i < newTagNameArray.length; i++) {
+                    var newTagName = newTagNameArray[i];
+                    $.ajax({
+                        url: "/tags/" + newTagName,
+                        method: "POST"
+                    }).done(function(data) {
+
+                    });
+                }
+
+                var promises2 = [];
+
+                for (var i = 0; i < tagArray.length; i++) {
+
+                    var tagName = tagArray[i];
+                    var promise2 = $.ajax({
+                        url: "/tags/" + tagName,
+                        method: 'GET'
+                    }).then(function(data) {
+
+                        tagIdArray.push(data.id);
+
+                    });
+                    promises2.push(promise2);
+                }
+                $.when.apply(this, promises2).then(function() {
+                    console.log(tagIdArray);
+                });
+
+            });
+
+        }
     }
 
-    function createNewPost(newPostData) {
+    function createNewPost(newPostData, tagArray) {
         $.ajax({
 
             url: "/api/posts",
@@ -41,6 +133,17 @@ $(document).ready(function() {
             contentType: false,
 
         }).done(function(data) {
+
+            var newPostId = data.id;
+
+            console.log(newPostId);
+
+            // $.ajax({
+
+
+            // }).then(function(data) {
+
+            // })
 
             alert("Post Added!");
             newPostForm[0].reset();
@@ -52,11 +155,13 @@ $(document).ready(function() {
 
     //New User Upload Profile Picture
 
-    $("#imageUpload").change(function() { previewFile() });
+    itemImageUpload.change(function() {
+        previewFile()
+    });
 
     function previewFile() {
         var preview = document.querySelector("#newPostImage");
-        var file = document.querySelector("input[type=file]").files[0];
+        var file = document.querySelector("#itemImageUpload").files[0];
         var reader = new FileReader();
 
         reader.onloadend = function() {
