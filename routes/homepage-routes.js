@@ -12,22 +12,30 @@ module.exports = function(app) {
         db.Category.findAll({
             order: 'id ASC',
             include: [{
-                model: db.Post
+                model: db.Post,
+                include: [{
+                    model: db.Post2Tags,
+                    include: [db.Tags]
+                }, {
+                    model: db.Category
+                }, {
+                    model: db.User
+                }]
             }]
         }).then(function(response) {
 
             //Only put categories with content on the homepage
-            var categoryHasPosts = [];
-            for (var i = 0; i < response.length; i++) {
-                console.log(response[i].name + ': ' + response[i].Posts.length);
+            // var categoryHasPosts = [];
+            // for (var i = 0; i < response.length; i++) {
+            //     console.log(response[i].name + ': ' + response[i].Posts.length);
 
-                if (response[i].Posts.length > 0) {
-                    categoryHasPosts.push(response[i]);
-                }
-            }
+            //     if (response[i].Posts.length > 0) {
+            //         categoryHasPosts.push(response[i]);
+            //     }
+            // }
 
             //Future Goal: Sort by popularity and render most popular first
-            res.render('index', { category: categoryHasPosts });
+            res.render('index', { category: response });
             // res.json(response);
 
         });
@@ -37,10 +45,18 @@ module.exports = function(app) {
     //Feeds user specific information into handlebars
     //Renders content in horizontal scrolling content bars
     //THIS WORKS
-    app.get('/:userID', function(req, res) {
+    app.get('/user/:userID', function(req, res) {
         db.Category.findAll({
             include: [{
                 model: db.Post,
+                include: [{
+                    model: db.Post2Tags,
+                    include: [db.Tags]
+                }, {
+                    model: db.Category
+                }, {
+                    model: db.User
+                }],
                 where: { user_id: req.params.userID }
             }]
         }).then(function(response) {
@@ -53,11 +69,31 @@ module.exports = function(app) {
         db.Category.findAll({
             include: [{
                 model: db.Post,
+                include: [{
+                    model: db.Post2Tags,
+                    include: [db.Tags]
+                }, {
+                    model: db.Category
+                }, {
+                    model: db.User
+                }]
             }],
             where: { id: req.params.categoryID }
         }).then(function(response) {
             // res.json(response);
             res.render('category', { category: response });
+        });
+    });
+
+    app.get('/api/category/:categoryID', function(req, res) {
+        db.Category.findOne({
+            include: [{
+                model: db.Post,
+            }],
+            where: { id: req.params.categoryID }
+        }).then(function(response) {
+            res.json(response);
+            // res.render('category', { category: response });
         });
     });
 
@@ -76,7 +112,14 @@ module.exports = function(app) {
     //THIS WORKS
     app.get('/api/posts', function(req, res) {
         db.Post.findAll({
-            include: [db.User, db.Category],
+            include: [{
+                model: db.User
+            }, {
+                model: db.Category
+            }, {
+                model: db.Post2Tags,
+                include: [db.Tags]
+            }],
             order: 'id ASC'
         }).then(function(response) {
             res.json(response);
@@ -106,7 +149,7 @@ module.exports = function(app) {
             res.json(response);
         })
     });
-    
+
 
     //get all posts by all USERS
     //THIS WORKS
@@ -142,6 +185,22 @@ module.exports = function(app) {
         })
     });
 
+    app.get('/tags/:tagName', function(req, res) {
+        db.Tags.findOne({
+            where: { name: req.params.tagName }
+        }).then(function(response) {
+            res.json(response);
+        })
+    });
+
+    app.post('/tags/:tagName', function(req, res) {
+        db.Tags.create({
+            name: req.params.tagName
+        }).then(function(response) {
+            res.json(response);
+        })
+    });
+
     //get a list of all tags and their associated post uses
     //sorted by tag; all uses of a tag are grouped together
     //THIS WORKS
@@ -149,6 +208,15 @@ module.exports = function(app) {
         db.Post2Tags.findAll({
             include: [db.Tags, db.Post],
             order: 'tag_id ASC'
+        }).then(function(response) {
+            res.json(response);
+        })
+    });
+
+    app.post('/post2tags/:postID/:tagID', function(req, res) {
+        db.Post2Tags.create({
+            post_id: req.params.postID,
+            tag_id: req.params.tagID
         }).then(function(response) {
             res.json(response);
         })
