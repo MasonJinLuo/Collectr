@@ -145,7 +145,7 @@
               </div>
 
               <div class="modal-body">
-                <form>
+                <form id="collectPostForm">
 
                     <div class="form-group">
                       <label for="itemCollectDescription">Item Description</label>
@@ -175,7 +175,7 @@
 
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-success" id="collectPostSubmit" data-owner={{this.owner_id}} data-img={{this.img_path}}>Collect!</button>
+                  <button type="submit" class="btn btn-success" id="collectPostSubmit" data-owner={{this.owner_id}} data-img={{this.img_path}} data-category={{this.category_id}}>Collect!</button>
               </div>
 
           </div>
