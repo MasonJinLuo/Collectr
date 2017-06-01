@@ -23,47 +23,39 @@ $(document).ready(function() {
       return alert("Please enter a password between 8-15 characters.")
       }
 
-    var photo = $("#imageUpload").get(0).files[0];
     formData = new FormData();
 
-    formData.append('photo', photo, photo.name);
+    var photo = $("#imageUpload").get(0).files[0];
+
+    if (photo) {
+        formData.append('photo', photo, photo.name);
+    }
+
     formData.append('email', newEmail.val().trim());
     formData.append('password', newPassword.val().trim());
     formData.append('description', newUserDescription.val().trim());
 
-    validateNewUser();
-
     createNewUser(formData);
 	}
 
-  function validateNewUser() {
-    var queryURL = "/api/users/" + formData.get("email")
-      $.ajax({
-      url: queryURL,
-      method:"GET"
-    }).done (function(response) {
-        if (formData.get("email") === response.email) {
-          alert("An account with this email address already exists. Please login.")
+	function createNewUser(newUserData) {
+        $.ajax({
+          url: "/api/users",
+          method: "POST",
+          data: newUserData,
+          processData: false,
+          contentType: false,
+        }).done(function(data) {
+          alert("Welcome to Collectr!");
           $("#SignUpForm")[0].reset();
           newUserImage.attr("src", "");
-          $('.nav-tabs a[href="#logIn"]').tab("show");
-        }
-    })
-  }
-
-	function createNewUser(newUserData) {
-  	$.ajax({
-      url: "/api/users",
-      method: "POST",
-      data: newUserData,
-      processData: false,
-      contentType: false,
-    }).done(function(data) {
-      alert("Welcome to Collectr!");
-      $("#SignUpForm")[0].reset();
-      newUserImage.attr("src", "");
-      $("#logInModal").modal("hide");
-    });
+          $("#logInModal").modal("hide");
+        }).catch(function(data) {
+            alert(data.responseJSON.message)
+            $("#SignUpForm")[0].reset();
+            newUserImage.attr("src", "");
+            $('.nav-tabs a[href="#logIn"]').tab("show");
+        });
 	}
 
   //New User Upload Profile Picture

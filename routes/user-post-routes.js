@@ -1,12 +1,18 @@
 //Stacy
 var db = require('../models');
+var multer  = require('multer')
+var upload = multer({ dest: 'public/images/postImages' })
 
 module.exports = function(app) {
 
     //post new content
     //THIS WORKS. WILL NEED TO ASSOCIATE OWNER/USER/CATEGORY (BOARD) ID WHEN COLLECTING POST CONTENT
-    app.post('/api/posts', function(req, res) {
-        db.Post.create(req.body).then(function(response) {
+    app.post('/api/secure/posts', upload.single('photo'), function(req, res) {
+        var post = Object.assign({}, req.body, {
+            img_path: req.file.path.replace('public/', ''),
+            owner_id: req.session.user.id
+        });
+        db.Post.create(post).then(function(response) {
             res.json(response);
         });
     });

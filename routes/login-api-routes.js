@@ -22,15 +22,28 @@ module.exports = function(app) {
 
 	app.post("/api/users", upload.single('photo'), function(req, res) {
         var user = Object.assign({}, req.body, {
-            image_path: req.file.path.replace('public/', '')
+            image_path: req.file ? req.file.path.replace('public/', '') : null
         });
 
-		db.User.create(user).then(function(dbUser) {
-			res.json(dbUser);
+        db.User.findOne({
+			where: {
+				email: user.email
+			}
+		}).then(function(dbUser) {
+		    if (dbUser) {
+                res.status(401);
+                res.json({ message: "An account with this email address already exists. Please login." });
+		    } else {
+                db.User.create(user).then(function(dbUser) {
+                    req.session.authenticated = true;
+                    req.session.user = dbUser;
+                    res.json(dbUser);
+                });
+		    }
 		});
 	});
 
-	app.delete("api/users/:id", function(req, res) {
+	app.delete("/api/users/:id", function(req, res) {
 		db.User.destroy({
 			where: {
 				id: req.params.id
@@ -38,5 +51,26 @@ module.exports = function(app) {
 		}).then(function(dbUser) {
 			res.json(dbUser);
 		});
+	});
+
+	app.post("/api/login", function(req, res) {
+		db.User.findOne({
+			where: {
+				email: req.body.email,
+				password: req.body.password
+			}
+		}).then(function(dbUser) {
+			req.session.authenticated = true;
+			req.session.user = dbUser;
+			res.json(dbUser)
+		}).catch(function(err) {
+		    res.send(401);
+		});
+	});
+
+	app.get("/api/secure/logout", function(req, res) {
+		delete req.session.authenticated;
+		delete req.session.user;
+		res.redirect('/');
 	});
 };
