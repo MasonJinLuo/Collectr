@@ -6,6 +6,7 @@ $(document).ready(function() {
     var newPassword = $("#signUpPassword");
     var newUserImage = $("#newUserImage");
     var newUserDescription = $("#userDescription");
+    var imageUpload = $("#imageUpload")
     var reader = new FileReader();
 
     //how to get/create a path for the user's profile picture
@@ -33,7 +34,7 @@ $(document).ready(function() {
             return alert("Please enter a password between 8-15 characters.")
         }
 
-        var photo = $("#imageUpload").get(0).files[0];
+        var photo = imageUpload.get(0).files[0];
         formData = new FormData();
 
         formData.append('photo', photo, photo.name);
@@ -78,11 +79,13 @@ $(document).ready(function() {
 
     //New User Upload Profile Picture
 
-    $("#imageUpload").change(function() { previewFile() });
+    imageUpload.change(function() {
+        previewFile()
+    });
 
     function previewFile() {
         var preview = document.querySelector("#newUserImage");
-        var file = document.querySelector("input[type=file]").files[0];
+        var file = document.querySelector("#imageUpload").files[0];
         var reader = new FileReader();
 
         reader.onloadend = function() {

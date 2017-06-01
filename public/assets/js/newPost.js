@@ -77,13 +77,13 @@ $(document).ready(function() {
 
     //New User Upload Profile Picture
 
-    $("#itemImageUpload").change(function() {
+    itemImageUpload.change(function() {
         previewFile()
     });
 
     function previewFile() {
         var preview = document.querySelector("#newPostImage");
-        var file = document.querySelector("input[type=file]").files[0];
+        var file = document.querySelector("#itemImageUpload").files[0];
         var reader = new FileReader();
 
         reader.onloadend = function() {
