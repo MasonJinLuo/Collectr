@@ -47,6 +47,7 @@ module.exports = function(app) {
     //THIS WORKS
     app.get('/user/:userID', function(req, res) {
         db.Category.findAll({
+            order: 'id ASC',
             include: [{
                 model: db.Post,
                 include: [{
@@ -55,13 +56,14 @@ module.exports = function(app) {
                 }, {
                     model: db.Category
                 }, {
-                    model: db.User
-                }],
-                where: { user_id: req.params.userID }
+                    model: db.User,
+                    where: { id: req.params.userID }
+                }]
             }]
         }).then(function(response) {
-            //Future Goal: Sort by popularity and render most popular first
-            res.render('index', { category: response });
+
+            res.render('dashboard', { category: response });
+            // res.json(response);
         });
     });
 

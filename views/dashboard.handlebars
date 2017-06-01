@@ -5,34 +5,36 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-
-            <!-- Main page content -->
-            <!-- User Dashboard Info-->
-            <div class="row user-dashboard">
-              <div class="user-div user-div-dashboard">
-                <img src="http://www.billboard.com/files/styles/article_main_image/public/media/jack-dorsey-twitter-headshot-2015-billboard-650.jpg" />
-              </div>
-
-              <div class="user-header-div">
-                <h1>Hey, I'm @user_name!</h1>
-                <h4>Chicago, Illinois, United States &#x95 Collectr since 2017</h4>
-                <div class="user-dashboard-interests-list">
-                  <p>
-                    Interested in:
-                  </p>
-                  <ul>
-                    <a href="#"><li>Shoes</li></a>
-                    <a href="#"><li>Hats</li></a>
-                    <a href="#"><li>Jewelry</li></a>
-                    <a href="#"><li>Stamps</li></a>
-                  </ul>
+          {{#with category.0.Posts.0.User}}
+                <!-- Main page content -->
+                <!-- User Dashboard Info-->
+                <div class="row user-dashboard">
+                  <div class="user-div user-div-dashboard">
+                    <img src={{this.image_path}} />
+                  </div>
+                  
+                  <div class="user-header-div">
+                    <h1>Hey, I'm {{this.email}}</h1>
+                    <h4>Chicago, Illinois, United States</h4>
+                    <h4>Collectr since 2017</h4>
+                    <div class="user-dashboard-interests-list">
+                      <p>
+                        Interested in:
+                      </p>
+                      <ul>
+                        <a href="#"><li>Shoes</li></a>
+                        <a href="#"><li>Hats</li></a>
+                        <a href="#"><li>Jewelry</li></a>
+                        <a href="#"><li>Stamps</li></a>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <div class="row dashboard-gallery-header">
-              <h2>@user_name's Collections</h2>
-            </div>
+                <div class="row dashboard-gallery-header">
+                  <h2>{{this.email}}'s Collections</h2>
+                </div>
+          {{/with}}
             <!-- User Dashboard Info-->
 
             <!--Test Button For Adding New Posts. Can be deleted later-->
@@ -88,17 +90,6 @@
             {{/each}}
             <!-- Horizontal galleries -->
 
-              <!-- Wide feature div-->
-              <a href="#">
-                <div class="row blur-background" id="feature-pokemon">
-                  <div class="wide-feature">
-                    <h3>Discover:</h3>
-                    <h1>Pokemon</h1>
-                  </div>
-                </div>
-              </a>
-              <!-- Wide feature div-->
-
             <!-- Main page content -->
         </div>
     </div>
@@ -116,14 +107,14 @@
           <div class="modal-content">
 
               <div class="modal-header">
-                  <h4 class="modal-title" id="postModalLabel">{{this.description}}</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>
+                  <h4 class="modal-title" id="postModalLabel">{{this.description}}</h4>
               </div>
 
               <div class="modal-body">
-                <form>
+                <form id="clickedPostForm">
 
                     <div class="form-group">
                         <img class="postImage" src='{{this.img_path}}' style='width: 100%; height: auto;'>
@@ -142,7 +133,7 @@
                             </div>
                             {{/with}}
                         {{/each}}
-
+                        
                     </div>
 
                     <div class="form-group">
@@ -157,8 +148,8 @@
                     </div>
 
                     <div class="form-group">
-                          <label for="ownerID">Owner</label>
-                          <a>
+                          <label for="userID">User</label>
+                          <a href="/user/{{this.user_id}}">
                             {{#with User}}
                             <p>{{this.email}}</p>
                             {{/with}}
@@ -207,9 +198,9 @@
               </div>
 
               <div class="modal-body">
-
-                  <form id="newPostForm">
-
+                  
+                  <form id="newPostForm"> 
+                    
                     <div class="form-group">
                       <label for="itemDescription">Item Description</label>
                       <input type="text" class="form-control" id="itemDescription" placeholder="Describe Your Item...">
@@ -236,7 +227,7 @@
                       </select>
                     </div>
                   </form>
-
+                  
                   <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-dismiss="modal" id="newPostModalCloseBtn">Close</button>
                       <button type="submit" class="btn btn-success" id="newPostSubmit">Collect!</button>
@@ -262,19 +253,19 @@
           <div class="modal-content">
 
               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="close" data-dismiss="modal" id="collectClose" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>
                   <h4 class="modal-title" id="collectModalLabel">Collect Me!</h4>
               </div>
 
               <div class="modal-body">
-                <form>
+                <form id="collectPostForm">
 
                     <div class="form-group">
                       <label for="itemCollectDescription">Item Description</label>
                       <input type="text" class="form-control" id="itemCollectDescription" placeholder="Describe Your Find...">
-                    </div>
+                    </div>                
 
                     <div class="form-group">
                         <img class="collectImage" src='{{this.img_path}}' style='width: 100%; height: auto;'>
@@ -298,8 +289,8 @@
               </div>
 
               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-success" id="collectPostSubmit" data-owner={{this.owner_id}} data-img={{this.img_path}}>Collect!</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="collectBtnModalClose">Close</button>
+                  <button type="submit" class="btn btn-success" id="collectPostSubmit" data-owner={{this.owner_id}} data-img={{this.img_path}} data-category={{this.category_id}}>Collect!</button>
               </div>
 
           </div>
