@@ -4,6 +4,10 @@ body {
     text-decoration: none !important;
  }
 
+ ul {
+  list-style: none;
+ }
+
  a {
    text-decoration: none !important;
    color: #00CCCC;
@@ -286,6 +290,7 @@ body {
 
 .item-img-div img:hover {
   filter: brightness(65%);
+  cursor: zoom-in;
 }
 
 .collectr-btn {
@@ -305,6 +310,7 @@ body {
 
 .collectr-btn:hover {
   width: 80px;
+  cursor: pointer;
 }
 
 .collectr-save {
