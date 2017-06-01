@@ -42,7 +42,7 @@ $(document).ready(function() {
         } else {
 
             var photo = itemImageUpload.get(0).files[0];
-            var tagArray = (tags.val().trim()).split(',');
+            var tagArray = (tags.val().trim().toLowerCase()).split(',');
 
             for (var i = 0; i < tagArray.length; i++) {
                 tagArray[i] = tagArray[i].trim();
@@ -98,8 +98,6 @@ $(document).ready(function() {
                     $.ajax({
                         url: "/tags/" + newTagName,
                         method: "POST"
-                    }).done(function(data) {
-
                     });
                 }
 
@@ -121,7 +119,8 @@ $(document).ready(function() {
                     promises2.push(promise2);
                 }
                 $.when.apply(this, promises2).then(function() {
-                    // console.log(tagIdArray);
+
+                    //call function to create new post passing in post formdata and array of tag ids
                     createNewPost(formData, tagIdArray);
                 });
 
@@ -146,13 +145,15 @@ $(document).ready(function() {
             console.log(newPostId);
             console.log(tagIdArray);
 
-            //will use post id and each tag id query post2tags
-            // $.ajax({
+            //will use post id and each tag id query/post post2tags
+            for (var i = 0; i < tagIdArray.length; i++) {
+                var tagID = tagIdArray[i];
+                $.ajax({
+                    url: '/post2tags/' + newPostId + '/' + tagID,
+                    method: 'POST'
 
-
-            // }).then(function(data) {
-
-            // })
+                });
+            }
 
             alert("Post Added!");
             newPostForm[0].reset();

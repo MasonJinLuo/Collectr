@@ -165,7 +165,7 @@ module.exports = function(app) {
     app.post('/tags/:tagName', function(req, res) {
         db.Tags.create({
             name: req.params.tagName
-        }, {}).then(function(response) {
+        }).then(function(response) {
             res.json(response);
         })
     });
@@ -177,6 +177,15 @@ module.exports = function(app) {
         db.Post2Tags.findAll({
             include: [db.Tags, db.Post],
             order: 'tag_id ASC'
+        }).then(function(response) {
+            res.json(response);
+        })
+    });
+
+    app.post('/post2tags/:postID/:tagID', function(req, res) {
+        db.Post2Tags.create({
+            post_id: req.params.postID,
+            tag_id: req.params.tagID
         }).then(function(response) {
             res.json(response);
         })
