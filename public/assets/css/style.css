@@ -109,8 +109,6 @@ body {
     list-style: none;
 }
 
-
-
 .sidebar-nav li {
     text-indent: 20px;
     line-height: 40px;
@@ -155,6 +153,14 @@ body {
   font-size: 20px;
 }
 
+#sidebar-user {
+  position: absolute;
+  font-size: 20px;
+  top: 75px;
+  left: 19px;
+  z-index: 5000;
+  color: #fff;
+}
 
 /*Fixed menu button*/
 .menu-btn-div {
@@ -280,6 +286,7 @@ body {
 
 .item-img-div img:hover {
   filter: brightness(65%);
+  cursor: zoom-in;
 }
 
 .collectr-btn {
@@ -299,6 +306,7 @@ body {
 
 .collectr-btn:hover {
   width: 80px;
+  cursor: pointer;
 }
 
 .collectr-save {
@@ -311,6 +319,7 @@ body {
 
 .collectr-btn img:hover {
   filter: brightness(1) !important;
+  cursor: pointer;
 }
 
 /*Gallery Scroll Buttons*/
@@ -348,6 +357,7 @@ body {
 
 .gallery-scroll-left {
   left: 0;
+  top: 0;
 
   background: rgba(64,64,64,0.94);
   background: -moz-linear-gradient(left, rgba(64,64,64,0.94) 0%, rgba(64,64,64,0.6) 36%, rgba(254,254,254,0) 100%);
@@ -437,6 +447,53 @@ body {
   justify-content: space-around;
 }
 
+/*Group View*/
+.group-users {
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.user-div {
+  height: 100px;
+  width: 100px;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #fff;
+  border-width: 5px;
+
+  -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.43);
+  -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.43);
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.43);
+}
+
+.user-div img {
+  height: 100%;
+  width: auto;
+}
+
+.user-name-div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-name {
+  color: #888;
+  font-size: 12px;
+  font-weight: 500;
+}
+
 @media(min-width:768px) {
   .menu-btn-div {
     color: #ffffff;
@@ -466,4 +523,9 @@ body {
         position: relative;
         margin-right: 0;
     }
+}
+
+/*Category Tab*/
+.category-tab a{
+  color: black;
 }
