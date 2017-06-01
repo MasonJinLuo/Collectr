@@ -16,12 +16,13 @@ if (!loginEmail.val().trim() || !loginPassword.val().trim()) {
     var formData = new FormData();
         formData.append('email', loginEmail.val().trim());
         formData.append('password', loginPassword.val().trim());
-
+      
   loginCheck();
 }
 
 
 function loginCheck (){
+
 $.ajax({
   url: "/api/users",
   method: "GET"
@@ -32,6 +33,8 @@ $.ajax({
      console.log(response[i].password);
     if ((loginEmail.val().trim() === response[i].email) && (loginPassword.val().trim() === response[i].password)){
       console.log("logged on");
+        $("#loginForm")[0].reset();
+      $("#logInModal").modal("hide");
       return;
     }else{
       console.log("username/password combination is incorrect or does not exist")

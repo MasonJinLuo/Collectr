@@ -408,10 +408,10 @@ body {
     background-image: url(../images/feature-bg-cars.jpg);
 }
 
-#feature-pokemon:before {
+/*#feature-pokemon:before {
 
   background-image: url(http://wallpaper-gallery.net/images/all-pokemon-wallpaper/all-pokemon-wallpaper-15.jpg);
-}
+} */
 
 .blur-background:before {
   width: 100%;
