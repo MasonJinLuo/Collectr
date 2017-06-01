@@ -37,7 +37,7 @@ module.exports = function(app) {
     //Feeds user specific information into handlebars
     //Renders content in horizontal scrolling content bars
     //THIS WORKS
-    app.get('/:userID', function(req, res) {
+    app.get('/user/:userID', function(req, res) {
         db.Category.findAll({
             include: [{
                 model: db.Post,
@@ -61,13 +61,13 @@ module.exports = function(app) {
         });
     });
 
-    app.get('/user-groups', function(req, res) {
+    app.get('/groups', function(req, res) {
         db.Category.findAll({
             include: [{
                 model: db.Post
             }]
         }).then(function(response) {
-            //Future Goal: Sort by popularity and render most popular first
+            // res.json(response);
             res.render('groups', { category: response });
         });
     });

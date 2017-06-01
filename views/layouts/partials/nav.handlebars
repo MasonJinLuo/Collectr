@@ -4,7 +4,7 @@
     <span id="sidebar-logo">Collectr</span>
   </a>
   <a href="#">
-    <span id="sidebar-user" class="glyphicon glyphicon-user"></span>
+    <span id="sidebar-user" class="glyphicon glyphicon-user" data-toggle="modal" data-target="#logInModal" id="logIn-button"></span>
   </a>
     <ul class="sidebar-nav">
         <li>
@@ -31,3 +31,66 @@
     </ul>
 </div>
 <!-- /#sidebar-wrapper -->
+
+<!-- Login Modal -->
+
+<div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="userPostClose"><span aria-hidden="true">&times;</span></button>
+           
+                        <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#logIn" aria-controls="logIn" role="tab" data-toggle="tab">Log In</a></li>
+                        <li role="presentation"><a href="#signUp" aria-controls="signUp" role="tab" data-toggle="tab">Sign Up</a></li>
+                    </ul>
+
+                      <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="logIn">
+                            <form>
+                                <div class="form-group">
+                                    <label for="loginEmail">Email Address</label>
+                                    <input type="email" class="form-control" id="loginEmail" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="loginPassword">Password</label>
+                                    <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                                </div>
+                            </form>
+                             <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn" id="loginSubmit">Submit</button>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="signUp">
+                            <form id="SignUpForm"> 
+                                <div class="form-group">
+                                    <label for="signUpEmail">Email Address (required)</label>
+                                    <input type="email" class="form-control" id="signUpEmail" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="signUpPassword">Password (8-15 Characters) (required)</label>
+                                    <input type="password" class="form-control" id="signUpPassword" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment">About Me</label>
+                                        <textarea class="form-control" rows="2" id="userDescription"></textarea>
+                                </div>
+                                
+                                    <label for="profilePicture">Profile Picture (required)</label>
+                                    <input type="file" id="imageUpload"><br>
+                                    <img id="newUserImage" src="" height="200" alt="Image preview..." name="profpic">
+                            </form>
+                             <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id="userModalCloseBtn">Close</button>
+                                <button type="submit" class="btn" id="signUpSubmit">Submit</button>
+                             </div>
+                        </div>            
+                    </div>         
+                </div>
+            </div>
+        </div>  
+    </div>
+<!-- /Login Modal -->

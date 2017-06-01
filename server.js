@@ -4,6 +4,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var path = require("path");
+var methodOverride = require("method-override");
 
 // Sets up the Express App
 // =============================================================
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+app.use(methodOverride("_method"));
 
 //Sets up handlebars as view engine
 app.engine("handlebars", exphbs({
@@ -31,14 +33,9 @@ app.use(express.static("./public"));
 
 // Routes =============================================================
 
-//FOR TESTING ONLY (DELETE BEFORE DEPLOYING)--------------------------
-// require("./routes/login-test-html-route.js")(app);
-// -------------------------------------------------------------------
-
 require("./routes/homepage-routes.js")(app);
 require("./routes/user-post-routes.js")(app);
 require("./routes/login-api-routes.js")(app);
-// require("./routes/html-routes.js")(app);
 
 collectrdb.sequelize.sync().then(function() {
     app.listen(PORT, function() {

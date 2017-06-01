@@ -1,7 +1,13 @@
+/*
+    @author : Linette
+    @date : 
+    @desc : 
+*/
+
 var db = require("../models");
 var fs = require("fs");
-var multer  = require('multer')
-var upload = multer({ dest: 'public/images/users' })
+var multer  = require('multer');
+var upload = multer({ dest: 'public/images/users' });
 
 module.exports = function(app) {
 	app.get("/api/users", function(req, res) {
