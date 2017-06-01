@@ -492,6 +492,50 @@ body {
   font-weight: 500;
 }
 
+/*User Dashboard*/
+.user-dashboard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.user-div-dashboard {
+  height: 200px;
+  width: 200px;
+}
+
+.user-header-div {
+  margin-left: 20px;
+}
+
+.user-dashboard-interests-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user-dashboard-interests-list ul {
+  padding-left: 10px;
+}
+
+.user-dashboard-interests-list ul li {
+  display: inline-block;
+  background: #00CCCC;
+  color: #fff;
+  padding: 4px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.dashboard-gallery-header {
+  margin: 0;
+}
+
 @media(min-width:768px) {
   .menu-btn-div {
     color: #ffffff;
