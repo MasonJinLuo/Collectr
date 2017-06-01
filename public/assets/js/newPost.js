@@ -19,7 +19,7 @@ $(document).ready(function() {
     var reader = new FileReader();
 
     $(document).on("click", "#newPostSubmit", handleNewPostFormSubmit);
-    
+
     //clears form if someone closes the modal before submitting
     $(document).on("click", "#newPostClose", clearImage);
     $(document).on("click", "#newPostModalCloseBtn", clearImage);
@@ -33,20 +33,29 @@ $(document).ready(function() {
 
         event.preventDefault();
 
-        var photo = itemImageUpload.get(0).files[0];
+        if (!description.val().trim()) {
+            return alert("Please enter an item description");
+        } else if (!tags.val().trim()) {
+            return alert("Please enter item tags");
+        } else if (!category.val()) {
+            return alert("Please select a category");
+        } else {
 
-        formData = new FormData();
+            console.log(category.val());
 
-        formData.append('photo', photo, photo.name);
-        formData.append('description', description.val().trim());
-        // formData.append('tags', tags.val().trim());
-        formData.append('category_id', 1);
-        formData.append('owner_id', 1);
-        formData.append('user_id', 1);
+            var photo = itemImageUpload.get(0).files[0];
 
-        console.log(formData);
+            formData = new FormData();
 
-        createNewPost(formData);
+            formData.append('photo', photo, photo.name);
+            formData.append('description', description.val().trim());
+            // formData.append('tags', tags.val().trim());
+            formData.append('category_id', 1);
+            formData.append('owner_id', 1);
+            formData.append('user_id', 1);
+
+            createNewPost(formData);
+        }
     }
 
     function createNewPost(newPostData) {
