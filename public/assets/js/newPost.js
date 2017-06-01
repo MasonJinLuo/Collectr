@@ -32,7 +32,7 @@ $(document).ready(function() {
     function handleNewPostFormSubmit(event) {
 
         event.preventDefault();
-
+        
         if (!description.val().trim()) {
             return alert("Please enter an item description");
         } else if (!tags.val().trim()) {
@@ -40,8 +40,6 @@ $(document).ready(function() {
         } else if (!category.val()) {
             return alert("Please select a category");
         } else {
-
-            console.log(category.val());
 
             var photo = itemImageUpload.get(0).files[0];
 
@@ -79,7 +77,9 @@ $(document).ready(function() {
 
     //New User Upload Profile Picture
 
-    itemImageUpload.change(function() { previewFile() });
+    $("#itemImageUpload").change(function() {
+        previewFile()
+    });
 
     function previewFile() {
         var preview = document.querySelector("#newPostImage");

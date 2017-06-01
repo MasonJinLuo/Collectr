@@ -17,7 +17,7 @@ module.exports = function(app) {
     app.post('/api/posts', upload.single('photo'), function(req, res) {
 
         var post = Object.assign({}, req.body, {
-            image_path: req.file.path.replace('public/', '')
+            img_path: req.file.path.replace('public/', '')
         });
 
         db.Post.create(post).then(function(response) {
