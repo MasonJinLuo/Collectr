@@ -12,7 +12,15 @@ module.exports = function(app) {
         db.Category.findAll({
             order: 'id ASC',
             include: [{
-                model: db.Post
+                model: db.Post,
+                include: [{
+                    model: db.Post2Tags,
+                    include: [db.Tags]
+                }, {
+                    model: db.Category
+                }, {
+                    model: db.User
+                }]
             }]
         }).then(function(response) {
 
@@ -41,6 +49,14 @@ module.exports = function(app) {
         db.Category.findAll({
             include: [{
                 model: db.Post,
+                include: [{
+                    model: db.Post2Tags,
+                    include: [db.Tags]
+                }, {
+                    model: db.Category
+                }, {
+                    model: db.User
+                }],
                 where: { user_id: req.params.userID }
             }]
         }).then(function(response) {
@@ -53,6 +69,14 @@ module.exports = function(app) {
         db.Category.findAll({
             include: [{
                 model: db.Post,
+                include: [{
+                    model: db.Post2Tags,
+                    include: [db.Tags]
+                }, {
+                    model: db.Category
+                }, {
+                    model: db.User
+                }]
             }],
             where: { id: req.params.categoryID }
         }).then(function(response) {
@@ -88,7 +112,14 @@ module.exports = function(app) {
     //THIS WORKS
     app.get('/api/posts', function(req, res) {
         db.Post.findAll({
-            include: [db.User, db.Category, db.Post2Tags],
+            include: [{
+                model: db.User
+            }, {
+                model: db.Category
+            }, {
+                model: db.Post2Tags,
+                include: [db.Tags]
+            }],
             order: 'id ASC'
         }).then(function(response) {
             res.json(response);
