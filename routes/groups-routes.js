@@ -71,6 +71,7 @@ module.exports = function(app) {
 
     app.get('/groups/:groupName', function(req, res) {
         var categories = groups.get(req.params.groupName);
+        postSet.clear();
         getAllPostsInCategory(categories,function callback() {
             console.log('UserSet',userSet.size);
             console.log('PostSet',postSet.size);
