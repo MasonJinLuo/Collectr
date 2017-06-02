@@ -8,6 +8,7 @@ $(document).ready(function() {
     var newUserDescription = $("#userDescription");
     var imageUpload = $("#imageUpload")
     var reader = new FileReader();
+    var checkedBox = [];
 
     //how to get/create a path for the user's profile picture
 
@@ -24,48 +25,56 @@ $(document).ready(function() {
 
     function handleNewUserFormSubmit(event) {
 
-	  event.preventDefault();
-	  // Don't do anything if the email field hasn't been filled out
+        event.preventDefault();
+        // Don't do anything if the email field hasn't been filled out
 
-	  if (!newEmail.val().trim() || !newPassword.val().trim()) {
-     	return alert("Please enter an email address and password to sign up.")
-      }
+        if (!newEmail.val().trim() || !newPassword.val().trim()) {
+            return alert("Please enter an email address and password to sign up.")
+        }
 
-    if (newPassword.val().trim().length < 8 || newPassword.val().trim().length > 15) {
-      return alert("Please enter a password between 8-15 characters.")
-      }
+        if (newPassword.val().trim().length < 8 || newPassword.val().trim().length > 15) {
+            return alert("Please enter a password between 8-15 characters.")
+        }
 
-    var formData = new FormData();
+        var formData = new FormData();
 
-    var photo = imageUpload.get(0).files[0];
+        var photo = imageUpload.get(0).files[0];
 
-    if (photo) {
-        formData.append("photo", photo, photo.name);
+        $("input[name='interest']:checked").each(function() {
+            checkedBox.push(parseInt($(this).val()));
+        });
+
+        var interestString = checkedBox.join(',');
+        console.log(interestString);
+
+        if (photo) {
+            formData.append("photo", photo, photo.name);
+        }
+
+        formData.append("email", newEmail.val().trim());
+        formData.append("password", newPassword.val().trim());
+        formData.append("description", newUserDescription.val().trim());
+        formData.append("interests", interestString);
+
+        createNewUser(formData);
+
+        redirectDashboard();
+
     }
-
-    formData.append("email", newEmail.val().trim());
-    formData.append("password", newPassword.val().trim());
-    formData.append("description", newUserDescription.val().trim());
-
-    createNewUser(formData);
-
-    redirectDashboard();
-
-	}
 
     function createNewUser(newUserData) {
         $.ajax({
-          url: "/api/users",
-          method: "POST",
-          data: newUserData,
-          processData: false,
-          contentType: false,
+            url: "/api/users",
+            method: "POST",
+            data: newUserData,
+            processData: false,
+            contentType: false,
         }).done(function(data) {
-          alert("Welcome to Collectr!");
-          $("#signUpForm")[0].reset();
-          $("#logInModal").modal("hide");
+            alert("Welcome to Collectr!");
+            $("#signUpForm")[0].reset();
+            $("#logInModal").modal("hide");
         }).catch(function(data) {
-            alert(data.responseJSON.message)
+            alert(data.responseJSON.message);
             $("#signUpForm")[0].reset();
             newUserImage.attr("src", "");
             $('.nav-tabs a[href="#logIn"]').tab("show");
@@ -95,8 +104,8 @@ $(document).ready(function() {
     }
 
     function redirectDashboard() {
-         $.get('/secure/user').done(function(data) {
+        $.get('/secure/user').done(function(data) {
             window.location = '/secure/user';
-         })
+        })
     }
 });

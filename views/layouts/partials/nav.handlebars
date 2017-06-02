@@ -72,7 +72,16 @@
                                     <label for="comment">About Me</label>
                                     <textarea class="form-control" rows="2" id="userDescription"></textarea>
                                 </div>
+                                <div class="form-group checkbox-grid">
+                                    <label for="interests">Interests</label><br>
+                                        {{#each category}}
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value={{this.id}}> {{this.name}} 
+                                           </span>
+                                        {{/each}}
+                                </div>
                                 <div class="form-group">
+                                    <br>
                                     <label for="profilePicture">Profile Picture (required)</label>
                                     <input type="file" id="imageUpload"><br>
                                     <img id="newUserImage" src="" height="200" alt="Image preview..." name="profpic">

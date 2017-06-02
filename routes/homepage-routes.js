@@ -35,7 +35,6 @@ module.exports = function(app) {
     //Feeds user specific information into handlebars
     //Renders content in horizontal scrolling content bars
     //THIS WORKS
-
     function getUserDetails(userID, res) {
         db.Category.findAll({
             order: 'id ASC',
@@ -147,7 +146,7 @@ module.exports = function(app) {
         db.Category.findAll({
             include: [db.Post]
         }).then(function(response) {
-            res.json(response);
+            res.render('nav', { category: response });
         })
     });
 
@@ -253,13 +252,13 @@ module.exports = function(app) {
 
     //search through for a specific word
 
-    app.get('/search1/', function(req, res){
+    app.get('/search1/', function(req, res) {
         db.post
 
     });
 
 
-    app.get('/search1/:searchTerm', function(req, res){
+    app.get('/search1/:searchTerm', function(req, res) {
         db.Tags.findAll({
             include: [{
                 model: db.Post2Tags,
@@ -268,7 +267,7 @@ module.exports = function(app) {
                 }]
             }],
             where: { name: req.params.searchTerm }
-        }).then(function(response){
+        }).then(function(response) {
             res.json(response);
         })
 
@@ -276,13 +275,13 @@ module.exports = function(app) {
 
 
 
-       app.get('/search2/:searchTerm', function(req, res){
+    app.get('/search2/:searchTerm', function(req, res) {
         db.Category.findAll({
             include: [{
                 model: db.Post
             }],
             where: { name: req.params.searchTerm }
-        }).then(function(response){
+        }).then(function(response) {
             res.json(response);
         })
 
