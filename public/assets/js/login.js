@@ -26,7 +26,6 @@ $(document).ready(function() {
 
     function loginCheck(userData){
         $.post("/api/login", userData).done(function(data) {
-              alert ("Welcome back, " + loginEmail.val().trim() + "!");
               $("#loginForm")[0].reset();
               $("#logInModal").modal("hide");
         }).catch(function() {
