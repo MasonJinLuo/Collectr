@@ -1,0 +1,188 @@
+<div id="wrapper">
+    {{> nav }}
+    {{> menu-btn }}
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+          {{> hero }}
+
+            <!-- Main page content -->
+              <!-- Category wrapped gallery -->
+              {{#each category}}
+              <div class="row category-gallery-wrapper category-wrapper-with-wrap animated fadeInUp">
+                <div class="category-tab" id={{this.id}}>
+                  <h4>{{this.name}}</h4>
+                </div>
+
+                    <div class="gallery-img-div category-div">
+                      
+                      {{#each Posts}}
+                      {{!-- Leave id declaration here --}}
+                      <div class="item-img-div" id={{this.id}}>
+                        <a href="#" class="collect-btn-link">
+                          <div class="collectr-btn" data-dismiss="modal" data-img="{{this.img_path}}" data-owner="{{this.owner_id}}" data-target="#openCollectModal" data-toggle="modal">
+                            <img src="/assets/images/collectr-logo.svg" />
+                            <span class="collectr-save">save</span>
+                          </div>
+                        </a>
+                        <a href="#">
+                          <img src={{this.img_path}} data-target="#openPostModal{{this.id}}" data-toggle="modal"/>
+                        </a>
+                      </div>
+                      {{/each}}
+                      
+                    </div>
+                </div>
+              {{/each}}
+              <!-- Category wrapped gallery -->
+            <!-- Main page content -->
+            
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->
+
+{{!-- Begin Clicked Post Modal --}}
+{{#each category}}
+  {{#each Posts}}
+      <div class="modal fade postModal" id="openPostModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="openPostModalLabel{{this.id}}" aria-hidden="true" style="z-index: 20000;">
+
+        <div class="modal-dialog" role="document">
+
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <h4 class="modal-title" id="postModalLabel">{{this.description}}</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+
+              <div class="modal-body">
+                <form>
+
+                    <div class="form-group">
+                        <img class="postImage" src='{{this.img_path}}' style='width: 100%; height: auto;'>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tags" id="tagsFor{{this.id}}">Tags</label>
+
+                        {{#each Post2Tags}}
+                            {{#with Tag}}
+                            {{!-- <a href='/tag/{{this.id}}'> --}}
+                            <div class="tagDiv">
+                              <a href="#">
+                                <span>{{this.name}}</span>
+                              </a>
+                            </div>
+                            {{/with}}
+                        {{/each}}
+                        
+                    </div>
+
+                    <div class="form-group">
+                          <label for="likeDislike" class="form-control-label">Like/Dislike</label>
+                          <button class='glyphicon glyphicon-heart' value={{this.id}} data-name={{this.upVote}} id='likeBtn'><span> {{this.upVote}}</span></button>
+                          <button class='glyphicon glyphicon-thumbs-down' value={{this.id}} data-name={{this.downVote}} id='dislikeBtn'><span>{{this.downVote}}</span></button>
+                    </div>
+
+                    <div class="form-group">
+                          <label for="collect" class="form-control-label">Collect</label>
+                          <button class='glyphicon glyphicon-pushpin' id='collectBtn' data-dismiss="modal" data-img="{{this.img_path}}" data-owner="{{this.owner_id}}" data-target="#openCollectModal" data-toggle="modal"></button>
+                    </div>
+
+                    <div class="form-group">
+                          <label for="ownerID">Owner</label>
+                          <a>
+                            {{#with User}}
+                            <p>{{this.email}}</p>
+                            {{/with}}
+                          </a>
+                    </div>
+
+                    <div class="form-group">
+                          <label for="categoryID">Category</label>
+                          <a href="/category/{{this.category_id}}">
+                            {{#with Category}}
+                              <p>{{this.name}}</p>
+                            {{/with}}
+                          </a>
+                    </div>
+
+                </form>
+              </div>
+
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+
+          </div>
+
+        </div>
+
+      </div>
+  {{/each}}
+{{/each}}
+{{!-- End Clicked Post Modal --}}
+
+{{!-- Begin 'Collect' Modal --}}
+{{#each category}}
+  {{#each Posts}}
+      <div class="modal fade" id="openCollectModal" tabindex="-1" role="dialog" aria-labelledby="openCollectModalLabel" aria-hidden="true" style="z-index: 20000;">
+
+        <div class="modal-dialog" role="document">
+
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="collectModalLabel">Collect Me!</h4>
+              </div>
+
+              <div class="modal-body">
+                <form>
+
+                    <div class="form-group">
+                      <label for="itemCollectDescription">Item Description</label>
+                      <input type="text" class="form-control" id="itemCollectDescription" placeholder="Describe Your Find...">
+                    </div>                
+
+                    <div class="form-group">
+                        <img class="collectImage" src='{{this.img_path}}' style='width: 100%; height: auto;'>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="collectItemTags">Tag Your Discovery</label>
+                      <input type="text" class="form-control" id="collectItemTags" placeholder="Ex: cute, cool, fun">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="ownerID">Owner</label>
+                        <a>
+                        {{#with User}}
+                          <p>{{this.email}}</p>
+                        {{/with}}
+                        </a>
+                    </div>
+
+                </form>
+              </div>
+
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-success" id="collectPostSubmit" data-owner={{this.owner_id}} data-img={{this.img_path}}>Collect!</button>
+              </div>
+
+          </div>
+
+        </div>
+
+      </div>
+  {{/each}}
+{{/each}}
+{{!-- End 'Collect' Modal --}}
