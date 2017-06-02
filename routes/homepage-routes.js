@@ -241,17 +241,8 @@ module.exports = function(app) {
 
     //search through for a specific word
 
-<<<<<<< HEAD
-      app.get('/search/:searchTerm', function(req, res){
-=======
-    app.get('/search1/', function(req, res) {
-        db.post
 
-    });
-
-
-    app.get('/search1/:searchTerm', function(req, res) {
->>>>>>> 2bb64e14ff4a5423c7bd1b57595cabbcdf2bfa5b
+     app.get('/search/:searchTerm', function(req, res){
         db.Tags.findAll({
             include: [{
                 model: db.Post2Tags,
@@ -268,37 +259,14 @@ module.exports = function(app) {
                 }]
             }],
             where: { name: req.params.searchTerm }
-<<<<<<< HEAD
         }).then(function(response){
             // console.log(response)
             res.render('searchDisplay', { tags: response});
             // res.json(response[0].Post2Tags[0].Post);
             // res.json(response);
-=======
-        }).then(function(response) {
-            res.json(response);
         })
 
     });
-
-
-
-    app.get('/search2/:searchTerm', function(req, res) {
-        db.Category.findAll({
-            include: [{
-                model: db.Post
-            }],
-            where: { name: req.params.searchTerm }
-        }).then(function(response) {
-            res.json(response);
->>>>>>> 2bb64e14ff4a5423c7bd1b57595cabbcdf2bfa5b
-        })
-
-    });
-
-
-
-
 
 
 }
