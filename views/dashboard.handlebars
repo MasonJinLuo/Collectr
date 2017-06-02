@@ -5,20 +5,68 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-          {{> hero }}
-
-            <!-- Main page content -->
-              <!-- Category wrapped gallery -->
-              {{#each category}}
-              <div class="row category-gallery-wrapper category-wrapper-with-wrap animated fadeInUp">
-                <div class="category-tab" id={{this.id}}>
-                  <h4>{{this.name}}</h4>
+          {{#with category.0.Posts.0.User}}
+                <!-- Main page content -->
+                <!-- User Dashboard Info-->
+                <div class="row user-dashboard">
+                  <div class="user-div user-div-dashboard">
+                    <img src={{this.image_path}} />
+                  </div>
+                  
+                  <div class="user-header-div">
+                    <h1>Hey, I'm {{this.email}}</h1>
+                    <h4>Chicago, Illinois, United States</h4>
+                    <h4>Collectr since 2017</h4>
+                    <div class="user-dashboard-interests-list">
+                      <p>
+                        Interested in:
+                      </p>
+                      <ul>
+                        <a href="#"><li>Shoes</li></a>
+                        <a href="#"><li>Hats</li></a>
+                        <a href="#"><li>Jewelry</li></a>
+                        <a href="#"><li>Stamps</li></a>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
 
-                    <div class="gallery-img-div category-div">
-                      
-                      {{#each Posts}}
-                      {{!-- Leave id declaration here --}}
+                <div class="row dashboard-gallery-header">
+                  <h2>{{this.email}}'s Collections</h2>
+                </div>
+          {{/with}}
+            <!-- User Dashboard Info-->
+
+            <!--Test Button For Adding New Posts. Can be deleted later-->
+            <button class='glyphicon glyphicon-plus' id='newPostBtn' data-target="#newPostModal" data-toggle="modal"></button>
+
+            <!-- Horizontal galleries -->
+            {{#each category}}
+              <div class="row category-gallery-wrapper animated fadeInUp">
+                <a href='/category/{{this.id}}'>
+                  <div class="category-tab" id={{this.id}}>
+                    <h4>{{this.name}}</h4>
+                  </div>
+                </a>
+
+                  <!-- Gallery Horizontal Scroll buttons -->
+                  <div class="gallery-scroll-wrapper">
+                    <a class="gallery-scroll-btn gallery-scroll-left">
+                      <div class="scroll-btn-div">
+                        <span class="glyphicon glyphicon-triangle-left" arira-hidden="true"></span>
+                      </div>
+                    </a>
+
+                    <a class="gallery-scroll-btn gallery-scroll-right">
+                      <div class="scroll-btn-div">
+                        <span class="glyphicon glyphicon-triangle-right" arira-hidden="true"></span>
+                      </div>
+                    </a>
+
+                  <!-- Gallery Horizontal Scroll buttons -->
+                    <div class="gallery-img-div">
+                    {{#each Posts}}
+                    {{!-- Leave id declaration here --}}
                       <div class="item-img-div" id={{this.id}}>
                         <a href="#" class="collect-btn-link">
                           <div class="collectr-btn" data-dismiss="modal" data-img="{{this.img_path}}" data-owner="{{this.owner_id}}" data-target="#openCollectModal" data-toggle="modal">
@@ -30,14 +78,19 @@
                           <img src={{this.img_path}} data-target="#openPostModal{{this.id}}" data-toggle="modal"/>
                         </a>
                       </div>
-                      {{/each}}
-                      
+
+                    {{/each}}
+
                     </div>
-                </div>
-              {{/each}}
-              <!-- Category wrapped gallery -->
+
+                  </div>
+
+              </div>
+
+            {{/each}}
+            <!-- Horizontal galleries -->
+
             <!-- Main page content -->
-            
         </div>
     </div>
     <!-- /#page-content-wrapper -->
@@ -127,6 +180,68 @@
   {{/each}}
 {{/each}}
 {{!-- End Clicked Post Modal --}}
+
+{{!-- Begin New Post Modal --}}
+
+    <div class="modal fade" id="newPostModal" tabindex="-1" role="dialog" aria-labelledby="newPostModalLabel">
+
+        <div class="modal-dialog" role="document">
+
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="newPostClose">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="newPostModalLabel">Add To My Collection</h4>
+
+              </div>
+
+              <div class="modal-body">
+                  
+                  <form id="newPostForm"> 
+                    
+                    <div class="form-group">
+                      <label for="itemDescription">Item Description</label>
+                      <input type="text" class="form-control" id="itemDescription" placeholder="Describe Your Item...">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="itemTags">Tag Your Treasure</label>
+                      <input type="text" class="form-control" id="itemTags" placeholder="Ex: cute, cool, fun">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="postPicture">Upload Item Image</label>
+                      <input type="file" id="itemImageUpload"><br>
+                      <img id="newPostImage" src="" height="200" alt="Image preview..." name="postpic">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="categorySelection">Select Category: </label>
+                      <select class="form-control" id="newPostCategory">
+                        <option selected="true" disabled="disabled" value='Category...'></option>
+                      {{#each category}}
+                        <option value={{this.id}}>{{this.name}}</option>
+                      {{/each}}
+                      </select>
+                    </div>
+                  </form>
+                  
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal" id="newPostModalCloseBtn">Close</button>
+                      <button type="submit" class="btn btn-success" id="newPostSubmit">Collect!</button>
+                  </div>
+
+               </div>
+
+          </div>
+
+        </div>
+
+    </div>
+
+{{!-- End New Post Modal --}}
 
 {{!-- Begin 'Collect' Modal --}}
 {{#each category}}

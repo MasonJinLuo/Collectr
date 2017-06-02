@@ -8,36 +8,33 @@
           {{> hero }}
 
             <!-- Main page content -->
-              <!-- Category wrapped gallery -->
-              {{#each category}}
-              <div class="row category-gallery-wrapper category-wrapper-with-wrap animated fadeInUp">
-                <div class="category-tab" id={{this.id}}>
-                  <h4>{{this.name}}</h4>
+            <!-- Select Categories -->
+            <div class="row categories-wrapper">
+              <a href="#">
+                <div class="select-category-div">
+                  Apparel
                 </div>
-
-                    <div class="gallery-img-div category-div">
-                      
-                      {{#each Posts}}
-                      {{!-- Leave id declaration here --}}
-                      <div class="item-img-div" id={{this.id}}>
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn" data-dismiss="modal" data-img="{{this.img_path}}" data-owner="{{this.owner_id}}" data-target="#openCollectModal" data-toggle="modal">
-                            <img src="/assets/images/collectr-logo.svg" />
-                            <span class="collectr-save">save</span>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <img src={{this.img_path}} data-target="#openPostModal{{this.id}}" data-toggle="modal"/>
-                        </a>
-                      </div>
-                      {{/each}}
-                      
-                    </div>
+              </a>
+              <a href="#">
+                <div class="select-category-div">
+                  Games and Toys
                 </div>
-              {{/each}}
-              <!-- Category wrapped gallery -->
+              </a>
+            </div>
+            <div class="row categories-wrapper">
+              <a href="#">
+                <div class="select-category-div">
+                  Jewelry
+                </div>
+              </a>
+              <a href="#">
+                <div class="select-category-div">
+                  Historical Items
+                </div>
+              </a>
+            </div>
+            <!-- Select Categories -->
             <!-- Main page content -->
-            
         </div>
     </div>
     <!-- /#page-content-wrapper -->
@@ -54,14 +51,14 @@
           <div class="modal-content">
 
               <div class="modal-header">
+                  <h4 class="modal-title" id="postModalLabel">{{this.description}}</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>
-                  <h4 class="modal-title" id="postModalLabel">{{this.description}}</h4>
               </div>
 
               <div class="modal-body">
-                <form id="clickedPostForm">
+                <form>
 
                     <div class="form-group">
                         <img class="postImage" src='{{this.img_path}}' style='width: 100%; height: auto;'>
@@ -80,7 +77,7 @@
                             </div>
                             {{/with}}
                         {{/each}}
-                        
+
                     </div>
 
                     <div class="form-group">
@@ -95,8 +92,8 @@
                     </div>
 
                     <div class="form-group">
-                          <label for="userID">User</label>
-                          <a href="/user/{{this.user_id}}">
+                          <label for="ownerID">Owner</label>
+                          <a>
                             {{#with User}}
                             <p>{{this.email}}</p>
                             {{/with}}
@@ -128,6 +125,68 @@
 {{/each}}
 {{!-- End Clicked Post Modal --}}
 
+{{!-- Begin New Post Modal --}}
+
+    <div class="modal fade" id="newPostModal" tabindex="-1" role="dialog" aria-labelledby="newPostModalLabel">
+
+        <div class="modal-dialog" role="document">
+
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="newPostClose">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="newPostModalLabel">Add To My Collection</h4>
+
+              </div>
+
+              <div class="modal-body">
+
+                  <form id="newPostForm">
+
+                    <div class="form-group">
+                      <label for="itemDescription">Item Description</label>
+                      <input type="text" class="form-control" id="itemDescription" placeholder="Describe Your Item...">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="itemTags">Tag Your Treasure</label>
+                      <input type="text" class="form-control" id="itemTags" placeholder="Ex: cute, cool, fun">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="postPicture">Upload Item Image</label>
+                      <input type="file" id="itemImageUpload"><br>
+                      <img id="newPostImage" src="" height="200" alt="Image preview..." name="postpic">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="categorySelection">Select Category: </label>
+                      <select class="form-control" id="newPostCategory">
+                        <option selected="true" disabled="disabled" value='Category...'></option>
+                      {{#each category}}
+                        <option value={{this.id}}>{{this.name}}</option>
+                      {{/each}}
+                      </select>
+                    </div>
+                  </form>
+
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal" id="newPostModalCloseBtn">Close</button>
+                      <button type="submit" class="btn btn-success" id="newPostSubmit">Collect!</button>
+                  </div>
+
+               </div>
+
+          </div>
+
+        </div>
+
+    </div>
+
+{{!-- End New Post Modal --}}
+
 {{!-- Begin 'Collect' Modal --}}
 {{#each category}}
   {{#each Posts}}
@@ -138,7 +197,7 @@
           <div class="modal-content">
 
               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" id="collectClose" aria-label="Close">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>
                   <h4 class="modal-title" id="collectModalLabel">Collect Me!</h4>
@@ -150,7 +209,7 @@
                     <div class="form-group">
                       <label for="itemCollectDescription">Item Description</label>
                       <input type="text" class="form-control" id="itemCollectDescription" placeholder="Describe Your Find...">
-                    </div>                
+                    </div>
 
                     <div class="form-group">
                         <img class="collectImage" src='{{this.img_path}}' style='width: 100%; height: auto;'>
@@ -174,7 +233,7 @@
               </div>
 
               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="collectBtnModalClose">Close</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button type="submit" class="btn btn-success" id="collectPostSubmit" data-owner={{this.owner_id}} data-img={{this.img_path}} data-category={{this.category_id}}>Collect!</button>
               </div>
 

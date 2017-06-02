@@ -47,6 +47,7 @@ module.exports = function(app) {
     //THIS WORKS
     app.get('/user/:userID', function(req, res) {
         db.Category.findAll({
+            order: 'id ASC',
             include: [{
                 model: db.Post,
                 include: [{
@@ -55,13 +56,14 @@ module.exports = function(app) {
                 }, {
                     model: db.Category
                 }, {
-                    model: db.User
-                }],
-                where: { user_id: req.params.userID }
+                    model: db.User,
+                    where: { id: req.params.userID }
+                }]
             }]
         }).then(function(response) {
-            //Future Goal: Sort by popularity and render most popular first
-            res.render('index', { category: response });
+
+            res.render('dashboard', { category: response });
+            // res.json(response);
         });
     });
 
@@ -182,7 +184,7 @@ module.exports = function(app) {
 
         }).then(function(response) {
             res.json(response);
-        })
+        });
     });
 
     app.get('/tags/:tagName', function(req, res) {
@@ -190,7 +192,7 @@ module.exports = function(app) {
             where: { name: req.params.tagName }
         }).then(function(response) {
             res.json(response);
-        })
+        });
     });
 
     app.post('/tags/:tagName', function(req, res) {
@@ -198,7 +200,7 @@ module.exports = function(app) {
             name: req.params.tagName
         }).then(function(response) {
             res.json(response);
-        })
+        });
     });
 
     //get a list of all tags and their associated post uses
@@ -219,7 +221,7 @@ module.exports = function(app) {
             tag_id: req.params.tagID
         }).then(function(response) {
             res.json(response);
-        })
+        });
     });
 
     //get all tags that have been associated with a single post, including post and tag information
@@ -231,12 +233,21 @@ module.exports = function(app) {
             order: 'post_id ASC'
         }).then(function(response) {
             res.json(response);
-        })
+        });
     });
 
     //collecting a post from another user
-    app.post('/api/collect/:id', function(req, res) {
-
+    app.post('/collect/:description/:img_path/:user_id/:owner_id/:category_id', function(req, res) {
+        var image = '/images/postImages/' + req.params.img_path;
+        db.Post.create({
+            description: req.params.description,
+            img_path: image,
+            user_id: req.params.user_id,
+            owner_id: req.params.owner_id,
+            category_id: req.params.category_id
+        }).then(function(response) {
+            res.json(response);
+        });
     });
 
 
