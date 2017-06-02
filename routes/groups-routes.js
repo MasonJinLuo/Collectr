@@ -77,5 +77,10 @@ module.exports = function(app) {
             res.render('groups', { user: Array.from(userSet), post: Array.from(postSet) });
         });
     });
+    
+    app.get('/groups', function(req, res) {
+        res.render('select-categories', { user: Array.from(userSet), post: Array.from(postSet) });
+    });
+    
 
 }
