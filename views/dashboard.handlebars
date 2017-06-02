@@ -12,11 +12,10 @@
                   <div class="user-div user-div-dashboard">
                     <img src={{this.image_path}} />
                   </div>
-                  
+
                   <div class="user-header-div">
                     <h1>Hey, I'm {{this.email}}</h1>
-                    <h4>Chicago, Illinois, United States</h4>
-                    <h4>Collectr since {{this.createdAt}}</h4>
+                    <h4>Collectr since 2017</h4>
                     <div class="user-dashboard-interests-list">
                       <p>
                         Interested in:
@@ -28,10 +27,10 @@
                         <a href="#"><li>Stamps</li></a>
                       </ul>
                     </div>
-                  </div>
-                  <div class="about-me-div">
-                    <h2>About Me</h2>
-                    <p>{{this.description}}</p>
+                    <div class="about-me-div">
+                      <h2>About Me</h2>
+                      <p>{{this.description}}</p>
+                    </div>
                   </div>
                 </div>
 
@@ -43,7 +42,6 @@
 
             <!--Test Button For Adding New Posts. Can be deleted later-->
             <button class='glyphicon glyphicon-plus' id='newPostBtn' data-target="#newPostModal" data-toggle="modal"> Post</button>
-            <button class='glyphicon glyphicon-plus' id='newPostBtn' data-target="#newPostModal" data-toggle="modal"> Category</button>
 
             <!-- Horizontal galleries -->
             {{#each category}}
@@ -103,13 +101,13 @@
 <!-- /#wrapper -->
 
 {{!-- Begin Clicked Post Modal --}}
-  
+
   {{> click-post }}
 
 {{!-- End Clicked Post Modal --}}
 
 {{!-- Begin New Post Modal --}}
-    
+
   {{> new-post }}
 
 {{!-- End New Post Modal --}}
@@ -117,5 +115,5 @@
 {{!-- Begin 'Collect' Modal --}}
 
   {{> collect-post }}
-  
+
 {{!-- End 'Collect' Modal --}}

@@ -53,6 +53,8 @@ app.use(express.static("./public"));
 
 require("./routes/homepage-routes.js")(app);
 require("./routes/user-post-routes.js")(app);
+// require("./routes/login-api-routes.js")(app);
+require("./routes/groups-routes.js")(app);
 require("./routes/login-signup-api-routes.js")(app);
 
 collectrdb.sequelize.sync().then(function() {
