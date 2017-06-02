@@ -1,0 +1,78 @@
+<div id="wrapper">
+    {{> nav }}
+    {{> menu-btn }}
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+          {{#with user}}
+                <!-- Main page content -->
+                <!-- User Dashboard Info-->
+                <div class="row user-dashboard">
+                  <div class="user-div user-div-dashboard">
+                    <img src={{this.image_path}} />
+                  </div>
+
+                  <div class="user-header-div">
+                    <h1>Hey, I'm {{this.email}}</h1>
+                    <h4>Collectr since 2017</h4>
+                    <div class="user-dashboard-interests-list">
+                      <p>
+                        Interested in:
+                      </p>
+                      <ul>
+                        {{#each Users2Categories}}
+                          {{#with Category}}
+                           <a href="/category/{{this.id}}"><li>{{this.name}}</li></a>
+                          {{/with}}
+                        {{/each}}
+                      </ul>
+                    </div>
+                    <div class="about-me-div">
+                      <h2>About Me</h2>
+                      <p>{{this.description}}</p>
+                    </div>
+                  </div>
+                </div>
+          
+            <!-- User Dashboard Info-->
+
+            <!--Test Button For Adding New Posts. Can be deleted later-->
+            <button class='glyphicon glyphicon-plus' id='newPostBtn' data-target="#newPostModal" data-toggle="modal" style="padding: 10px;"> Post</button>
+
+            <!-- Horizontal galleries -->
+            {{#each Users2Categories}}
+              {{#with Category}}
+              <div class="row category-gallery-wrapper animated fadeInUp">
+                <a href='/category/{{this.id}}'>
+                  <div class="category-tab" id={{this.id}}>
+                    <h4>{{this.name}}</h4>
+                  </div>
+                </a>
+
+                  <!-- Gallery Horizontal Scroll buttons -->
+                  <div class="gallery-scroll-wrapper">
+                    <a class="gallery-scroll-btn gallery-scroll-left">
+                      <div class="scroll-btn-div">
+                        <span class="glyphicon glyphicon-triangle-left" arira-hidden="true"></span>
+                      </div>
+                    </a>
+
+                    <a class="gallery-scroll-btn gallery-scroll-right">
+                      <div class="scroll-btn-div">
+                        <span class="glyphicon glyphicon-triangle-right" arira-hidden="true"></span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                {{/with}}
+              {{/each}}
+
+            {{/with}}
+
+            <!-- Main page content -->
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->

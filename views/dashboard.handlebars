@@ -5,6 +5,7 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
+          {{> small-hero }}
           {{#with category.0.Posts.0.User}}
                 <!-- Main page content -->
                 <!-- User Dashboard Info-->
@@ -41,7 +42,7 @@
             <!-- User Dashboard Info-->
 
             <!--Test Button For Adding New Posts. Can be deleted later-->
-            <button class='glyphicon glyphicon-plus' id='newPostBtn' data-target="#newPostModal" data-toggle="modal"> Post</button>
+            <button class='glyphicon glyphicon-plus' id='newPostBtn' data-target="#newPostModal" data-toggle="modal" style="padding: 10px;"> Post</button>
 
             <!-- Horizontal galleries -->
             {{#each category}}

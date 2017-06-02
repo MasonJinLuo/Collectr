@@ -226,6 +226,11 @@ h4 {
     padding: 10px;
 }
 
+/*Small, search only Hero*/
+.small-hero-wrapper {
+  height: 45px;
+  }
+
 
 /*Home category galleries*/
 
@@ -539,23 +544,51 @@ h4 {
 
 
 /*Select Category Page*/
-
 .categories-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
     width: 100%;
 }
 
 .select-category-div {
     height: 400px;
     width: 400px;
-    flex-grow: 1;
-    background-color: #F2F2F2;
+    background-size: cover;
+    margin: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+.select-category-div span {
+  font-size: 40px;
+  font-weight: 900;
+  color: #fff;
+}
+
+#apparel-div {
+  background-image: url(../images/apparel.jpg);
+}
+
+#toys-div {
+  background-image: url(../images/toys.jpg);
+}
+
+#historical-div {
+  background-image: url(../images/historical.jpg);
+}
+
+#music-div {
+  background-image: url(../images/music.jpg);
 }
 
 /*Clicked Post Modal Styling*/
@@ -569,6 +602,49 @@ h4 {
 
 .tagDiv > a {
     color: #fff;
+}
+
+.like-btn, .down-btn {
+  background: #F2F2F2;
+  border: none;
+  border-radius: 3px;
+  width: 60px;
+  height: 30px;
+  transition: all 0.2s ease-in-out;
+}
+
+.glyphicon-heart {
+  color: red;
+}
+
+.like-btn:hover, .down-btn:hover {
+  background-color: #999;
+}
+
+.glyphicon-heart span, .down-btn span {
+    font-family: 'Poppins', sans-serif;
+    margin: 2px;
+}
+
+.collect-modal-btn {
+  background: #00CCCC;
+  border: none;
+  border-radius: 3px;
+  width: 30px;
+  height: 30px;
+  transition: all 0.2s ease-in-out;
+  margin-left: 5px;
+}
+
+.collect-modal-btn span {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  color: #fff;
+}
+
+.user-email, .category-name {
+  display: inline-block;
+  margin-left: 5px;
 }
 
 @media(min-width:768px) {

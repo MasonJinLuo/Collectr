@@ -56,13 +56,17 @@ $(document).ready(function() {
         formData.append("description", newUserDescription.val().trim());
         formData.append("interests", interestString);
 
-        createNewUser(formData);
+        createNewUser(formData, interestString);
 
         redirectDashboard();
 
     }
 
-    function createNewUser(newUserData) {
+    function createNewUser(newUserData, interestString) {
+
+        var interestArray = interestString.split(',');
+        console.log(interestArray);
+
         $.ajax({
             url: "/api/users",
             method: "POST",
@@ -73,6 +77,14 @@ $(document).ready(function() {
             alert("Welcome to Collectr!");
             $("#signUpForm")[0].reset();
             $("#logInModal").modal("hide");
+
+            for (var i = 0; i < interestArray.length; i++){
+                $.ajax({
+                    url: '/secure/user/interests/' + interestArray[i],
+                    method: 'POST'
+                });
+            }
+
         }).catch(function(data) {
             alert(data.responseJSON.message);
             $("#signUpForm")[0].reset();

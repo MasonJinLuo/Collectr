@@ -29,6 +29,14 @@ module.exports = function(sequelize, DataTypes) {
                     foreignKey: 'category_id',
                     onDelete: "cascade"
                 });
+
+                this.hasMany(models.Users2Categories, {
+                    foreignKey: {
+                        name: 'category_id',
+                        allowNull: false
+                    }
+                });
+
             }
         }
     });
