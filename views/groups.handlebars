@@ -10,205 +10,38 @@
             <!-- Main page content -->
             <!-- Group Users Div -->
             <div class="row group-users">
+             {{#each user}}
               <a href="#">
                 <div class="user-div">
-                  <img src="http://www.billboard.com/files/styles/article_main_image/public/media/jack-dorsey-twitter-headshot-2015-billboard-650.jpg" />
+                  <img src={{this.image_path}} />
                 </div>
                 <div class="user-name-div">
-                  <span class="user-name">Name</span>
+                  <span class="user-name">{{this.email}}</span>
                 </div>
               </a>
-
-              <a href="#">
-                <div class="user-div">
-                  <img src="https://static1.squarespace.com/static/514ffe4ee4b020d11228d65c/t/5398809be4b0b2d8106b1085/1402503342745/" />
-                </div>
-                <div class="user-name-div">
-                  <span class="user-name">Name</span>
-                </div>
-              </a>
-
-              <a href="#">
-                <div class="user-div">
-                  <img src="https://s-media-cache-ak0.pinimg.com/originals/69/1c/e0/691ce0599bf2e4522ea2fd14a7259e6c.jpg" />
-                </div>
-                <div class="user-name-div">
-                  <span class="user-name">Name</span>
-                </div>
-              </a>
-
-              <a href="#">
-                <div class="user-div">
-                  <img src="https://thumbs.dreamstime.com/t/black-man-portrait-head-shoulders-close-up-handsome-late-s-no-expression-isolated-white-background-61785202.jpg" />
-                </div>
-                <div class="user-name-div">
-                  <span class="user-name">Name</span>
-                </div>
-              </a>
-
-              <a href="#">
-                <div class="user-div">
-                  <img src="http://cyxerinc.weebly.com/uploads/5/2/1/7/52175765/6195059_orig.jpg" />
-                </div>
-                <div class="user-name-div">
-                  <span class="user-name">Name</span>
-                </div>
-              </a>
+               {{/each}}
             </div>
             <!-- Group Users Div -->
 
             <!-- Category wrapped galleries -->
               <div class="row category-gallery-wrapper category-wrapper-with-wrap animated fadeInUp">
-                <div class="category-tab">
-                  <h4>Sneakers</h4>
-                </div>
                     <div class="gallery-img-div category-div">
+                     {{#each post}}
                       <div class="item-img-div">
                         <a href="#" class="collect-btn-link">
                           <div class="collectr-btn">
                             <img src="../../public/assets/images/collectr-logo.svg" />
                             <span class="collectr-save">save</span>
+                            <span>{{this.description}}</span>
                           </div>
                         </a>
                         <a href="#">
-                          <img src="http://www.shoecity.com/26540-home_default/vans-men-sk8-hi-navy-reissue-skate-shoes.jpg" />
+                          <img src={{this.img_path}} />
                         </a>
                       </div>
-
-                      <div class="item-img-div">
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn">
-                            <img src="../../public/assets/images/collectr-logo.svg" />
-                            <span class="collectr-save">save</span>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <img src="https://www.flightclub.com/media/catalog/product/cache/1/image/360x257/9df78eab33525d08d6e5fb8d27136e95/a/d/adidas-yeezy-boost-350-oxford-tan-lgtsto-oxftan-lgtsto-201172_1.jpg" />
-                        </a>
-                      </div>
-
-                      <div class="item-img-div">
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn">
-                            <img src="../../public/assets/images/collectr-logo.svg" />
-                            <span class="collectr-save">save</span>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <img src="https://newsneakernews-wpengine.netdna-ssl.com/wp-content/uploads/2016/11/adidas-tubular-defiant-star-black-grey-1.jpg" />
-                        </a>
-                      </div>
-
-                      <div class="item-img-div">
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn">
-                            <img src="../../public/assets/images/collectr-logo.svg" />
-                            <span class="collectr-save">save</span>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <img src="https://sneakernews.com/wp-content/uploads/2016/11/adidas-tubular-nova-primeknit-maroon-1.jpg" />
-                        </a>
-                      </div>
-
-                      <div class="item-img-div">
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn">
-                            <img src="../../public/assets/images/collectr-logo.svg" />
-                            <span class="collectr-save">save</span>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <img src="https://cdn.thisiswhyimbroke.com/images/back-to-the-future-nike-shoes.jpg" />
-                        </a>
-                      </div>
-
-                      <div class="item-img-div">
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn">
-                            <img src="../../public/assets/images/collectr-logo.svg" />
-                            <span class="collectr-save">save</span>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <img src="https://cdn5.kicksonfire.com/wp-content/uploads/2015/10/adidas-Yeezy-950-Boot-565x372.jpg?x77385" />
-                        </a>
-                      </div>
-
-                      <div class="item-img-div">
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn">
-                            <img src="../../public/assets/images/collectr-logo.svg" />
-                            <span class="collectr-save">save</span>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <img src="http://www.shoecity.com/26540-home_default/vans-men-sk8-hi-navy-reissue-skate-shoes.jpg" />
-                        </a>
-                      </div>
-
-                      <div class="item-img-div">
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn">
-                            <img src="../../public/assets/images/collectr-logo.svg" />
-                            <span class="collectr-save">save</span>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <img src="https://www.flightclub.com/media/catalog/product/cache/1/image/360x257/9df78eab33525d08d6e5fb8d27136e95/a/d/adidas-yeezy-boost-350-oxford-tan-lgtsto-oxftan-lgtsto-201172_1.jpg" />
-                        </a>
-                      </div>
-
-                      <div class="item-img-div">
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn">
-                            <img src="../../public/assets/images/collectr-logo.svg" />
-                            <span class="collectr-save">save</span>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <img src="https://newsneakernews-wpengine.netdna-ssl.com/wp-content/uploads/2016/11/adidas-tubular-defiant-star-black-grey-1.jpg" />
-                        </a>
-                      </div>
-
-                      <div class="item-img-div">
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn">
-                            <img src="../../public/assets/images/collectr-logo.svg" />
-                            <span class="collectr-save">save</span>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <img src="https://sneakernews.com/wp-content/uploads/2016/11/adidas-tubular-nova-primeknit-maroon-1.jpg" />
-                        </a>
-                      </div>
-
-                      <div class="item-img-div">
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn">
-                            <img src="../../public/assets/images/collectr-logo.svg" />
-                            <span class="collectr-save">save</span>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <img src="https://cdn.thisiswhyimbroke.com/images/back-to-the-future-nike-shoes.jpg" />
-                        </a>
-                      </div>
-
-                      <div class="item-img-div">
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn">
-                            <img src="../../public/assets/images/collectr-logo.svg" />
-                            <span class="collectr-save">save</span>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <img src="https://cdn5.kicksonfire.com/wp-content/uploads/2015/10/adidas-Yeezy-950-Boot-565x372.jpg?x77385" />
-                        </a>
-                      </div>
+                      {{/each}}
                     </div>
                 </div>
-
 
             <!-- Main page content -->
         </div>

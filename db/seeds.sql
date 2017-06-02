@@ -1,21 +1,23 @@
-insert into Categories (name) values ('Books');
-insert into Categories (name) values ('Coins');
-insert into Categories (name) values ('Shoes');
-insert into Categories (name) values ('Pogs');
-insert into Categories (name) values ('Cards');
-insert into Categories (name) values ('Cameras');
-insert into Categories (name) values ('CDs');
-insert into Categories (name) values ('Vinyls');
-insert into Categories (name) values ('Cars');
 insert into Categories (name) values ('Stamps');
 insert into Categories (name) values ('Maps');
-insert into Categories (name) values ('Typewriters');
-insert into Categories (name) values ('Mirrors');
-insert into Categories (name) values ('Ceramic Bowls');
-insert into Categories (name) values ('Travel Mugs');
-insert into Categories (name) values ('Shotglasses');
-insert into Categories (name) values ('Keychains');
-insert into Categories (name) values ('Record Players');
+insert into Categories (name) values ('Coins');
+insert into Categories (name) values ('Books');
+
+insert into Categories (name) values ('Cards');
+insert into Categories (name) values ('Video Games');
+insert into Categories (name) values ('Action Figures');
+insert into Categories (name) values ('Board Games');
+
+insert into Categories (name) values ('Shoes');
+insert into Categories (name) values ('Hats');
+insert into Categories (name) values ('Watches');
+insert into Categories (name) values ('Bags');
+
+insert into Categories (name) values ('Instruments');
+insert into Categories (name) values ('Recordings');
+insert into Categories (name) values ('Memorabilia');
+insert into Categories (name) values ('Audio Gear');
+
 
 insert into users (email, password, image_path, description) values ('John@gmail.com', 'johnisawesome', 'http://media.istockphoto.com/photos/happy-laughing-man-picture-id544358212?k=6&m=544358212&s=612x612&w=0&h=odURMNz2hty8LIfpVahaaUKpGU4vd-UlZx4jy-OAnJA=', 'cool me');
 
