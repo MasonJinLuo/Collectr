@@ -237,12 +237,12 @@ module.exports = function(app) {
     });
 
     //collecting a post from another user
-    app.post('/collect/:description/:img_path/:user_id/:owner_id/:category_id', function(req, res) {
+    app.post('/collect/secure/:description/:img_path/:owner_id/:category_id', function(req, res) {
         var image = '/images/postImages/' + req.params.img_path;
         db.Post.create({
             description: req.params.description,
             img_path: image,
-            user_id: req.params.user_id,
+            user_id: req.session.user.id,
             owner_id: req.params.owner_id,
             category_id: req.params.category_id
         }).then(function(response) {

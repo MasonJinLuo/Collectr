@@ -152,7 +152,7 @@ $(document).ready(function() {
         //need to grab userID from sessions storage
         var user_id = 1;
 
-        var collectUrl = '/collect/' + description + '/' + imageLocation + '/' + user_id + '/' + owner_id + '/' + category_id;
+        var collectUrl = '/collect/secure/' + description + '/' + imageLocation + '/' owner_id + '/' + category_id;
 
         $.ajax({
             url: collectUrl,
