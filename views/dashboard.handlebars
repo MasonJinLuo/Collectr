@@ -12,7 +12,7 @@
                   <div class="user-div user-div-dashboard">
                     <img src={{this.image_path}} />
                   </div>
-                  
+
                   <div class="user-header-div">
                     <h1>Hey, I'm {{this.email}}</h1>
                     <h4>Collectr since 2017</h4>
@@ -27,10 +27,10 @@
                         <a href="#"><li>Stamps</li></a>
                       </ul>
                     </div>
-                  </div>
-                  <div class="about-me-div">
-                    <h2>About Me</h2>
-                    <p>{{this.description}}</p>
+                    <div class="about-me-div">
+                      <h2>About Me</h2>
+                      <p>{{this.description}}</p>
+                    </div>
                   </div>
                 </div>
 
@@ -101,13 +101,13 @@
 <!-- /#wrapper -->
 
 {{!-- Begin Clicked Post Modal --}}
-  
+
   {{> click-post }}
 
 {{!-- End Clicked Post Modal --}}
 
 {{!-- Begin New Post Modal --}}
-    
+
   {{> new-post }}
 
 {{!-- End New Post Modal --}}
@@ -115,5 +115,5 @@
 {{!-- Begin 'Collect' Modal --}}
 
   {{> collect-post }}
-  
+
 {{!-- End 'Collect' Modal --}}

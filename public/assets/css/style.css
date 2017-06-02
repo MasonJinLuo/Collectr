@@ -397,15 +397,18 @@ h4 {
     margin-top: 0px;
 }
 
-#feature-classic-cars:before {
-    background-image: url(../images/feature-bg-cars.jpg);
+#feature-bags:before {
+    background-image: url(http://www.fellows.co.uk/blog/jewellery/files/2016/03/bags.jpg);
 }
 
 
-/*#feature-pokemon:before {
+#feature-pokemon:before {
+  background-image: url(http://wallpapercave.com/wp/ZqCwNUM.jpg);
+}
 
-  background-image: url(http://wallpaper-gallery.net/images/all-pokemon-wallpaper/all-pokemon-wallpaper-15.jpg);
-} */
+#feature-guitars:before {
+  background-image: url(https://i.ytimg.com/vi/xzZToaQn2NY/maxresdefault.jpg);
+}
 
 .blur-background:before {
     width: 100%;
@@ -499,10 +502,16 @@ h4 {
 .user-div-dashboard {
     height: 200px;
     width: 200px;
+    margin-bottom: 20px;
 }
 
 .user-header-div {
     margin-left: 20px;
+    max-width: 500px;
+}
+
+.user-header-div h1 {
+  margin-top: 0;
 }
 
 .user-dashboard-interests-list {
@@ -547,6 +556,19 @@ h4 {
     width: 400px;
     flex-grow: 1;
     background-color: #F2F2F2;
+}
+
+/*Clicked Post Modal Styling*/
+.tagDiv {
+  display: inline-block;
+  background: #00CCCC;
+  padding: 4px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.tagDiv > a {
+    color: #fff;
 }
 
 @media(min-width:768px) {
