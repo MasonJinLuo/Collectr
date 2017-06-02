@@ -12,7 +12,6 @@ var upload = multer({ dest: 'public/images/postImages' });
 module.exports = function(app) {
 
     //post new content
-<<<<<<< HEAD
     ////WORK IN PROGRESS
     //WILL NEED TO ASSOCIATE OWNER/USER/CATEGORY (BOARD) ID WHEN COLLECTING POST CONTENT
     app.post('/api/secure/posts', upload.single('photo'), function(req, res) {
