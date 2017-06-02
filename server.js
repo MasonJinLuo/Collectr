@@ -28,7 +28,7 @@ app.use(cookieSession({
 }))
 
 function checkAuth(req, res, next) {
-	if (req.url.startsWith('/api/secure') && (!req.session || !req.session.authenticated)) {
+	if (req.url.includes('/secure') && (!req.session || !req.session.authenticated)) {
 		res.redirect('/');
 		return;
 	}
@@ -52,7 +52,7 @@ app.use(express.static("./public"));
 
 require("./routes/homepage-routes.js")(app);
 require("./routes/user-post-routes.js")(app);
-require("./routes/login-api-routes.js")(app);
+require("./routes/login-signup-api-routes.js")(app);
 
 collectrdb.sequelize.sync().then(function() {
     app.listen(PORT, function() {

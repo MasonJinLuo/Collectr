@@ -4,6 +4,7 @@ var multer  = require('multer')
 var upload = multer({ dest: 'public/images/users' })
 
 module.exports = function(app) {
+
 	app.get("/api/users", function(req, res) {
 		db.User.findAll({}).then(function(dbUser) {
 			res.json(dbUser)
@@ -38,6 +39,7 @@ module.exports = function(app) {
                     req.session.authenticated = true;
                     req.session.user = dbUser;
                     res.json(dbUser);
+                    res.redirect('/dashboard') //redirect to dashboard once logged in
                 });
 		    }
 		});
@@ -54,15 +56,22 @@ module.exports = function(app) {
 	});
 
 	app.post("/api/login", function(req, res) {
+	console.log(req.body)
+	console.log(req.body.email)
+	console.log(req.body.password)
 		db.User.findOne({
 			where: {
 				email: req.body.email,
 				password: req.body.password
 			}
 		}).then(function(dbUser) {
-			req.session.authenticated = true;
-			req.session.user = dbUser;
-			res.json(dbUser)
+		    if (dbUser) {
+		        req.session.authenticated = true;
+                req.session.user = dbUser;
+                res.redirect('/dashboard') //redirect to dashboard once logged in
+		    } else {
+                res.send(401);
+		    }
 		}).catch(function(err) {
 		    res.send(401);
 		});
@@ -72,5 +81,11 @@ module.exports = function(app) {
 		delete req.session.authenticated;
 		delete req.session.user;
 		res.redirect('/');
+	});
+
+	//route for getting user data to front end (like on dashboard)
+
+	app.get("/api/secure/userProfile", function(req, res) {
+		res.json(req.session.user);
 	});
 };
