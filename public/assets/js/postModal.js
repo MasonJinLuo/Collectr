@@ -13,18 +13,23 @@ $(document).ready(function() {
     $(document).on('click', '#likeBtn', updatePostLikes);
     $(document).on('click', '#dislikeBtn', updatePostDislikes);
 
-    
+
     $(document).on('click', '#collectPostSubmit', collectPostInfo);
     $(document).on("click", "#collectClose", clearImage);
     $(document).on("click", "#collectBtnModalClose", clearImage);
-
-    
 
     function clearImage(event) {
 
         event.preventDefault();
 
-        $('#collectPostForm')[0].reset();
+        var id = 0;
+
+        var id = $(this).attr('data-id');
+
+        console.log(id);
+
+        $('#collectPostForm' + id)[0].reset();
+
         var description = "";
         var category_id = 0;
         var owner_id = 0;
@@ -49,12 +54,15 @@ $(document).ready(function() {
 
         event.preventDefault();
 
+        var postID = $(this).attr('data-id');
+
         //Collecting form and other info needed for new post creation
-        var description = $('#itemCollectDescription').val().trim();
+        var description = $('#itemCollectDescription' + postID).val().trim();
+        console.log(description);
         var category_id = $(this).attr('data-category');
         var owner_id = $(this).attr('data-owner');
         var img_path = $(this).attr('data-img');
-        var tags = $('#collectItemTags').val().trim().toLowerCase();
+        var tags = $('#collectItemTags' + postID).val().trim().toLowerCase();
 
         if (!description) {
             return alert("Please enter an item description");
@@ -140,19 +148,16 @@ $(document).ready(function() {
                 $.when.apply(this, promises2).then(function() {
 
                     //call function to create new post passing in tagsID array and all info needed for a new post
-                    createNewPost(tagIdArray, description, category_id, owner_id, imageLocation);
+                    createNewPost(postID, tagIdArray, description, category_id, owner_id, imageLocation);
                 });
 
             });
         }
     }
 
-    function createNewPost(tagIdArray, description, category_id, owner_id, imageLocation) {
+    function createNewPost(postID, tagIdArray, description, category_id, owner_id, imageLocation) {
 
-        //need to grab userID from sessions storage
-        var user_id = 1;
-
-        var collectUrl = '/collect/secure/' + description + '/' + imageLocation + '/' owner_id + '/' + category_id;
+        var collectUrl = '/secure/collect/' + description + '/' + imageLocation + '/' + owner_id + '/' + category_id;
 
         $.ajax({
             url: collectUrl,
@@ -176,13 +181,20 @@ $(document).ready(function() {
             }
 
             alert("Post Added!");
-            $('#collectPostForm')[0].reset();
+
+            $('#collectPostForm' + postID)[0].reset();
+            var pathname = window.location.pathname;
+            console.log(pathname);
             var description = "";
             var category_id = 0;
             var owner_id = 0;
             var img_path = "";
             var tags = "";
-            $('#openCollectModal').modal("hide");
+            $('.collectModal').modal("hide");
+
+            $('#openCollectModal' + postID).on('hidden.bs.modal', function() {
+                location.reload();
+            });
 
         });
 

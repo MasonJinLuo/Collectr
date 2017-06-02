@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define("User", {
         email: {
@@ -31,6 +30,11 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
         },
 
+        interests: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+        },
+
         createdAt: {
             type: DataTypes.DATE,
             field: 'createdAt',
@@ -42,8 +46,7 @@ module.exports = function(sequelize, DataTypes) {
             field: 'updatedAt',
             defaultValue: sequelize.literal('NOW()')
         },
-    }, 
-    {
+    }, {
         classMethods: {
             associate: function(models) {
 

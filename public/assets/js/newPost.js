@@ -162,6 +162,10 @@ $(document).ready(function() {
             newPostImage.attr("src", "");
             newPostModal.modal("hide");
 
+            newPostModal.on('hidden.bs.modal', function() {
+                location.reload();
+            });
+
         });
     }
 

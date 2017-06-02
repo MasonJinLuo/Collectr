@@ -15,6 +15,7 @@
                   <h4>{{this.name}}</h4>
                 </div>
                     <div class="gallery-img-div category-div">
+<<<<<<< HEAD
                         {{#each Post2Tags}}
                    
                           {{#each Post}}
@@ -31,6 +32,22 @@
                           </a>
                         </div>
                       {{/each}}
+=======
+                      
+                      {{#each Posts}}
+                      {{!-- Leave id declaration here --}}
+                      <div class="item-img-div" id={{this.id}}>
+                        <a href="#" class="collect-btn-link">
+                          <div class="collectr-btn" data-dismiss="modal" data-img="{{this.img_path}}" data-owner="{{this.owner_id}}" data-target="#openCollectModal{{this.id}}" data-toggle="modal">
+                            <img src="/assets/images/collectr-logo.svg" />
+                            <span class="collectr-save">save</span>
+                          </div>
+                        </a>
+                        <a href="#">
+                          <img src={{this.img_path}} data-target="#openPostModal{{this.id}}" data-toggle="modal"/>
+                        </a>
+                      </div>
+>>>>>>> 2bb64e14ff4a5423c7bd1b57595cabbcdf2bfa5b
                       {{/each}}
                       
                     </div>
@@ -92,7 +109,7 @@
 
                     <div class="form-group">
                           <label for="collect" class="form-control-label">Collect</label>
-                          <button class='glyphicon glyphicon-pushpin' id='collectBtn' data-dismiss="modal" data-img="{{this.img_path}}" data-owner="{{this.owner_id}}" data-target="#openCollectModal" data-toggle="modal"></button>
+                          <button class='glyphicon glyphicon-pushpin' id='collectBtn' data-dismiss="modal" data-img="{{this.img_path}}" data-owner="{{this.owner_id}}" data-target="#openCollectModal{{this.id}}" data-toggle="modal"></button>
                     </div>
 
                     <div class="form-group">
@@ -132,26 +149,34 @@
 {{!-- Begin 'Collect' Modal --}}
 {{#each tags}}
   {{#each Posts}}
-      <div class="modal fade" id="openCollectModal" tabindex="-1" role="dialog" aria-labelledby="openCollectModalLabel" aria-hidden="true" style="z-index: 20000;">
+      <div class="modal fade collectModal" id="openCollectModal{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="openCollectModalLabel{{this.id}}" aria-hidden="true" style="z-index: 20000;">
 
         <div class="modal-dialog" role="document">
 
           <div class="modal-content">
 
               <div class="modal-header">
+<<<<<<< HEAD
                   <button type="button" class="close" data-dismiss="modal" id="collectClose" aria-label="Close">
+=======
+                  <button type="button" class="close" data-dismiss="modal" id="collectClose" data-id={{this.id}} aria-label="Close">
+>>>>>>> 2bb64e14ff4a5423c7bd1b57595cabbcdf2bfa5b
                       <span aria-hidden="true">&times;</span>
                   </button>
                   <h4 class="modal-title" id="collectModalLabel">Collect Me!</h4>
               </div>
 
               <div class="modal-body">
+<<<<<<< HEAD
                 <form id="collectPostForm">
+=======
+                <form id="collectPostForm{{this.id}}">
+>>>>>>> 2bb64e14ff4a5423c7bd1b57595cabbcdf2bfa5b
 
                     <div class="form-group">
                       <label for="itemCollectDescription">Item Description</label>
-                      <input type="text" class="form-control" id="itemCollectDescription" placeholder="Describe Your Find...">
-                    </div>                
+                      <input type="text" class="form-control" id="itemCollectDescription{{this.id}}" placeholder="Describe Your Find...">
+                    </div>
 
                     <div class="form-group">
                         <img class="collectImage" src='{{this.img_path}}' style='width: 100%; height: auto;'>
@@ -159,7 +184,7 @@
 
                     <div class="form-group">
                       <label for="collectItemTags">Tag Your Discovery</label>
-                      <input type="text" class="form-control" id="collectItemTags" placeholder="Ex: cute, cool, fun">
+                      <input type="text" class="form-control" id="collectItemTags{{this.id}}" placeholder="Ex: cute, cool, fun">
                     </div>
 
                     <div class="form-group">
@@ -175,8 +200,13 @@
               </div>
 
               <div class="modal-footer">
+<<<<<<< HEAD
                   <button type="button" class="btn btn-secondary" data-dismiss="modal" id="collectBtnModalClose">Close</button>
                   <button type="submit" class="btn btn-success" id="collectPostSubmit" data-owner={{this.owner_id}} data-img={{this.img_path}} data-category={{this.category_id}}>Collect!</button>
+=======
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="collectBtnModalClose" data-id={{this.id}}>Close</button>
+                  <button type="submit" class="btn btn-success" id="collectPostSubmit" data-owner={{this.owner_id}} data-img={{this.img_path}} data-category={{this.category_id}} data-id={{this.id}}>Collect!</button>
+>>>>>>> 2bb64e14ff4a5423c7bd1b57595cabbcdf2bfa5b
               </div>
 
           </div>

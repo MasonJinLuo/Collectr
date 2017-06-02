@@ -3,22 +3,22 @@
   <a href="/">
     <span id="sidebar-logo">Collectr</span>
   </a>
-  <a href="#">
-    <span id="sidebar-user" class="glyphicon glyphicon-user" data-toggle="modal" data-target="#logInModal" id="logIn-button"></span>
-  </a>
+  <!--<a href="#">-->
+    <!--<span id="sidebar-user" class="glyphicon glyphicon-user" data-toggle="modal" data-target="#logInModal" id="logIn-button"></span>-->
+  <!--</a>-->
 
     <ul class="sidebar-nav">
         <li>
-            <a href="/user/1">Your Collections</a>
+            <a href="/secure/user">Your Collections</a>
         </li>
         <li>
             <a href="#">Groups</a>
         </li>
         <li>
-            <a href="#">Login or Sign Up</a>
+            <a href="#" data-toggle="modal" data-target="#logInModal" id="login">Login or Sign Up</a>
         </li>
         <li>
-            <a href="#">Logout</a>
+            <a href="#" id="logout">Logout</a>
         </li>
     </ul>
 </div>
@@ -72,7 +72,59 @@
                                     <label for="comment">About Me</label>
                                     <textarea class="form-control" rows="2" id="userDescription"></textarea>
                                 </div>
+                                <div class="form-group checkbox-grid">
+                                    <label for="interests">Interests</label><br>
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='1'> Stamps
+                                           </span>
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='2'> Maps
+                                           </span>  
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='3'> Coins
+                                           </span>   
+                                            <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='4'> Books
+                                           </span> 
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='5'> Cards
+                                           </span> 
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='6'> Video Games
+                                           </span> 
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='7'> Action Figures
+                                           </span> 
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='8'> Board Games
+                                           </span> 
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='9'> Shoes
+                                           </span> 
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='10'> Hats
+                                           </span> 
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='11'> Watches
+                                           </span> 
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='12'> Bags
+                                           </span> 
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='13'> Instruments
+                                           </span> 
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='14'> Recordings
+                                           </span> 
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='15'> Memorabilia
+                                           </span> 
+                                           <span class='checkbox'> 
+                                                <input type="checkbox" name="interest" value='16'> Audio Gear
+                                           </span>                                                                         
+                                </div>
                                 <div class="form-group">
+                                    <br>
                                     <label for="profilePicture">Profile Picture (required)</label>
                                     <input type="file" id="imageUpload"><br>
                                     <img id="newUserImage" src="" height="200" alt="Image preview..." name="profpic">
