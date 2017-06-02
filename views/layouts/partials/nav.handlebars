@@ -9,13 +9,13 @@
 
     <ul class="sidebar-nav">
         <li>
-            <a href="#">Your Collections</a>
+            <a href="/user/1">Your Collections</a>
         </li>
         <li>
             <a href="#">Groups</a>
         </li>
         <li>
-            <a href="#">Sign up/Login</a>
+            <a href="#">Login or Sign Up</a>
         </li>
         <li>
             <a href="#" id="logout">Logout</a>
@@ -57,7 +57,9 @@
                             </form>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="signUp">
+
                             <form id="signUpForm">
+
                                 <div class="form-group">
                                     <label for="signUpEmail">Username (required)</label>
                                     <input type="email" class="form-control" id="signUpEmail" placeholder="Email">
@@ -75,10 +77,11 @@
                                     <input type="file" id="imageUpload"><br>
                                     <img id="newUserImage" src="" height="200" alt="Image preview..." name="profpic">
                                 </div>
-                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal" id="userModalCloseBtn">Close</button>
-                                <button type="submit" class="btn" id="signUpSubmit">Submit</button>
-                             </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" id="userModalCloseBtn">Close</button>
+                                    <button type="submit" class="btn" id="signUpSubmit">Submit</button>
+                                </div>
+
                             </form>
                         </div>            
                     </div>
