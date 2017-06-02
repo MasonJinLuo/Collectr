@@ -80,8 +80,8 @@ module.exports = function(app) {
             }],
             where: { id: req.params.categoryID }
         }).then(function(response) {
-            res.json(response);
-            // res.render('category', { category: response });
+            // res.json(response);
+            res.render('category', { category: response });
         });
     });
 
@@ -264,17 +264,24 @@ module.exports = function(app) {
     app.get('/search1/:searchTerm', function(req, res) {
 >>>>>>> 2bb64e14ff4a5423c7bd1b57595cabbcdf2bfa5b
         db.Tags.findAll({
-            order: 'id ASC',
             include: [{
                 model: db.Post2Tags,
                 include: [{
-                    model: db.Post
+                    model: db.Post,
+                    include: [{
+                        model: db.Post2Tags,
+                        include: [db.Tags]
+                    }, {
+                        model: db.Category
+                    }, {
+                        model: db.User
+                }]
                 }]
             }],
             where: { name: req.params.searchTerm }
 <<<<<<< HEAD
         }).then(function(response){
-            // console.log(response[0.Post2Tags])
+            // console.log(response)
             res.render('searchDisplay', { tags: response});
             // res.json(response[0].Post2Tags[0].Post);
             // res.json(response);
