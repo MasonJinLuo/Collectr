@@ -6,6 +6,9 @@ $(document).ready(function() {
 
     $(document).on("click", "#loginSubmit", handleLoginSubmit);
 
+    $(document).on("click", "#logout", handleLogout);
+
+
     function handleLoginSubmit(event){
      event.preventDefault();
 
@@ -23,9 +26,19 @@ $(document).ready(function() {
               alert ("Welcome back, " + loginEmail.val().trim() + "!");
               $("#loginForm")[0].reset();
               $("#logInModal").modal("hide");
-          }).catch(function() {
+        }).catch(function() {
               alert("username/password combination is incorrect or does not exist");
               $("#loginForm")[0].reset();
-          })
-        };
+        })
+    };
+
+    function handleLogout() {
+        $.get("/api/secure/logout").done(function(data) {
+              alert ("Logout Successful!");
+        }).catch(function() {
+              alert("Logout Unsuccessful");
+        })
+    }
+
     });
+
