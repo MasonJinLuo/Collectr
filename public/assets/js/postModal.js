@@ -13,7 +13,6 @@ $(document).ready(function() {
     $(document).on('click', '#likeBtn', updatePostLikes);
     $(document).on('click', '#dislikeBtn', updatePostDislikes);
 
-
     $(document).on('click', '#collectPostSubmit', collectPostInfo);
     
     $(document).on("click", "#collectClose", clearImage);

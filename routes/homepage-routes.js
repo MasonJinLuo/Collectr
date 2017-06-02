@@ -52,9 +52,23 @@ module.exports = function(app) {
             }]
         }).then(function(response) {
 
-            res.render('dashboard', { category: response });
-            // res.json(response);
+            if (response.length > 0) {
+
+                res.render('dashboard', { category: response });
+
+            } else {
+
+                db.User.findOne({
+                    where: { id: userID }
+                }).then(function(response) {
+                    console.log(response);
+                    res.render('welcome', { user: response });
+                });
+
+            }
+
         });
+
     }
 
     app.get('/user/:userID', function(req, res) {
@@ -96,7 +110,7 @@ module.exports = function(app) {
             // res.render('category', { category: response });
         });
     });
-    
+
     //get all posts, including user and category information
     //THIS WORKS
     app.get('/api/posts', function(req, res) {
