@@ -1,0 +1,47 @@
+<div id="wrapper">
+    {{> nav }}
+    {{> menu-btn }}
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+          {{#with user}}
+                <!-- Main page content -->
+                <!-- User Dashboard Info-->
+                <div class="row user-dashboard">
+                  <div class="user-div user-div-dashboard">
+                    <img src={{this.image_path}} />
+                  </div>
+
+                  <div class="user-header-div">
+                    <h1>Hey, I'm {{this.email}}</h1>
+                    <h4>Collectr since 2017</h4>
+                    <div class="user-dashboard-interests-list">
+                      <p>
+                        Interested in:
+                      </p>
+                      <ul>
+                        <a href="#"><li>{{this.interests}}</li></a>
+                        <a href="#"><li>Hats</li></a>
+                        <a href="#"><li>Jewelry</li></a>
+                        <a href="#"><li>Stamps</li></a>
+                      </ul>
+                    </div>
+                    <div class="about-me-div">
+                      <h2>About Me</h2>
+                      <p>{{this.description}}</p>
+                    </div>
+                  </div>
+                </div>
+          {{/with}}
+            <!-- User Dashboard Info-->
+
+            <!--Test Button For Adding New Posts. Can be deleted later-->
+            <button class='glyphicon glyphicon-plus' id='newPostBtn' data-target="#newPostModal" data-toggle="modal" style="padding: 10px;"> Post</button>
+
+            <!-- Main page content -->
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->
