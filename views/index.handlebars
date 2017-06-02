@@ -10,7 +10,7 @@
             <!-- Main page content -->
 
             <!-- Horizontal galleries -->
-            {{#first category 3}}
+            {{#with category.[0]}}
               <div class="row category-gallery-wrapper animated fadeInUp">
                 <a href='/category/{{this.id}}'>
                   <div class="category-tab" id={{this.id}}>
@@ -56,7 +56,7 @@
 
               </div>
 
-            {{/first}}
+            {{/with}}
             <!-- Horizontal galleries -->
 
               <!-- Wide feature div-->
