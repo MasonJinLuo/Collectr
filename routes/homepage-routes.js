@@ -241,44 +241,32 @@ module.exports = function(app) {
 
     //search through for a specific word
 
-    app.get('/search1/', function(req, res) {
-        db.post
 
-    });
-
-
-    app.get('/search1/:searchTerm', function(req, res) {
+     app.get('/search/:searchTerm', function(req, res){
         db.Tags.findAll({
             include: [{
                 model: db.Post2Tags,
                 include: [{
-                    model: db.Post
+                    model: db.Post,
+                    include: [{
+                        model: db.Post2Tags,
+                        include: [db.Tags]
+                    }, {
+                        model: db.Category
+                    }, {
+                        model: db.User
+                }]
                 }]
             }],
             where: { name: req.params.searchTerm }
-        }).then(function(response) {
-            res.json(response);
+        }).then(function(response){
+            // console.log(response)
+            res.render('searchDisplay', { tags: response});
+            // res.json(response[0].Post2Tags[0].Post);
+            // res.json(response);
         })
 
     });
-
-
-
-    app.get('/search2/:searchTerm', function(req, res) {
-        db.Category.findAll({
-            include: [{
-                model: db.Post
-            }],
-            where: { name: req.params.searchTerm }
-        }).then(function(response) {
-            res.json(response);
-        })
-
-    });
-
-
-
-
 
 
 }
