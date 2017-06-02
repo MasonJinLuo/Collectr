@@ -58,14 +58,23 @@ module.exports = function(app) {
             } else {
 
                 db.User.findOne({
-                    where: { id: userID }
+                    where: { id: userID },
+                    include: [{
+                        model: db.Users2Categories,
+                        include: [{
+                            model: db.Category
+                        }]
+                    }]
                 }).then(function(response) {
-                    console.log(response);
+
+                    // console.log(response.Users2Categories[0].Category);
                     res.render('welcome', { user: response });
+                    // res.json(response);
+
                 });
 
             }
-            
+
         });
 
     }
@@ -265,7 +274,7 @@ module.exports = function(app) {
     //search through for a specific word
 
 
-     app.get('/search/:searchTerm', function(req, res){
+    app.get('/search/:searchTerm', function(req, res) {
         db.Tags.findAll({
             include: [{
                 model: db.Post2Tags,
@@ -278,13 +287,13 @@ module.exports = function(app) {
                         model: db.Category
                     }, {
                         model: db.User
-                }]
+                    }]
                 }]
             }],
             where: { name: req.params.searchTerm }
-        }).then(function(response){
+        }).then(function(response) {
             // console.log(response)
-            res.render('searchDisplay', { tags: response});
+            res.render('searchDisplay', { tags: response });
             // res.json(response[0].Post2Tags[0].Post);
             // res.json(response);
         })
