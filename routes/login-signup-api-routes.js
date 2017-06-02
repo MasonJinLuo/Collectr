@@ -39,7 +39,6 @@ module.exports = function(app) {
                     req.session.authenticated = true;
                     req.session.user = dbUser;
                     res.json(dbUser);
-//                    res.redirect('/dashboard') //redirect to dashboard once logged in
                 });
 		    }
 		});
@@ -66,7 +65,6 @@ module.exports = function(app) {
 		        req.session.authenticated = true;
                 req.session.user = dbUser;
                 res.json(dbUser);
-//              res.redirect('/dashboard') //redirect to dashboard once logged in
 		    } else {
                 res.sendStatus(401);
 		    }
@@ -78,12 +76,6 @@ module.exports = function(app) {
 	app.get("/api/secure/logout", function(req, res) {
 		delete req.session.authenticated;
 		delete req.session.user;
-		res.redirect('/');
-	});
-
-	//route for getting user data to front end (like on dashboard)
-
-	app.get("/api/secure/userProfile", function(req, res) {
-		res.json(req.session.user);
+		res.sendStatus(200);
 	});
 };

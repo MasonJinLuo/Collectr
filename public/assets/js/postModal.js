@@ -18,7 +18,6 @@ $(document).ready(function() {
     $(document).on("click", "#collectClose", clearImage);
     $(document).on("click", "#collectBtnModalClose", clearImage);
 
-
     function clearImage(event) {
 
         event.preventDefault();
@@ -30,6 +29,7 @@ $(document).ready(function() {
         console.log(id);
 
         $('#collectPostForm' + id)[0].reset();
+
         var description = "";
         var category_id = 0;
         var owner_id = 0;
@@ -157,7 +157,7 @@ $(document).ready(function() {
 
     function createNewPost(postID, tagIdArray, description, category_id, owner_id, imageLocation) {
 
-        var collectUrl = '/collect/secure/' + description + '/' + imageLocation + '/' + owner_id + '/' + category_id;
+        var collectUrl = '/secure/collect/' + description + '/' + imageLocation + '/' + user_id + '/' + owner_id + '/' + category_id;
 
         $.ajax({
             url: collectUrl,
@@ -181,6 +181,7 @@ $(document).ready(function() {
             }
 
             alert("Post Added!");
+
             $('#collectPostForm' + postID)[0].reset();
             var pathname = window.location.pathname;
             console.log(pathname);

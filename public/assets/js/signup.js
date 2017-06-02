@@ -49,6 +49,8 @@ $(document).ready(function() {
 
     createNewUser(formData);
 
+    redirectDashboard();
+
 	}
 
     function createNewUser(newUserData) {
@@ -90,5 +92,11 @@ $(document).ready(function() {
         } else {
             preview.src = "";
         }
+    }
+
+    function redirectDashboard() {
+         $.get('/secure/user').done(function(data) {
+            window.location = '/secure/user';
+         })
     }
 });
