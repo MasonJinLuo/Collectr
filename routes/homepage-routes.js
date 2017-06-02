@@ -247,7 +247,7 @@ module.exports = function(app) {
 
     //collecting a post from another user
     //IMAGE NOT SAVING TO POST IMAGES FOLDER - USE MULTER
-    app.post('/secure/collect/:description/:img_path/:user_id/:owner_id/:category_id', function(req, res) {
+    app.post('/secure/collect/:description/:img_path/:owner_id/:category_id', function(req, res) {
         var image = '/images/postImages/' + req.params.img_path;
         db.Post.create({
             description: req.params.description,
