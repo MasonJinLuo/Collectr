@@ -45,7 +45,7 @@ module.exports = function(app) {
     //Feeds user specific information into handlebars
     //Renders content in horizontal scrolling content bars
     //THIS WORKS
-    app.get('/user/:userID', function(req, res) {
+    app.get('/user/secure/', function(req, res) {
         db.Category.findAll({
             order: 'id ASC',
             include: [{
@@ -57,7 +57,7 @@ module.exports = function(app) {
                     model: db.Category
                 }, {
                     model: db.User,
-                    where: { id: req.params.userID }
+                    where: { id: req.session.user.id }
                 }]
             }]
         }).then(function(response) {

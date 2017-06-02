@@ -19,13 +19,12 @@ $(document).ready(function() {
     $(document).on("click", "#collectBtnModalClose", clearImage);
 
 
-
     function clearImage(event) {
 
         event.preventDefault();
 
         var id = 0;
-        
+
         var id = $(this).attr('data-id');
 
         console.log(id);
@@ -158,9 +157,6 @@ $(document).ready(function() {
 
     function createNewPost(postID, tagIdArray, description, category_id, owner_id, imageLocation) {
 
-        //need to grab userID from sessions storage
-        var user_id = 1;
-
         var collectUrl = '/collect/secure/' + description + '/' + imageLocation + '/' + owner_id + '/' + category_id;
 
         $.ajax({
@@ -186,12 +182,18 @@ $(document).ready(function() {
 
             alert("Post Added!");
             $('#collectPostForm' + postID)[0].reset();
+            var pathname = window.location.pathname;
+            console.log(pathname);
             var description = "";
             var category_id = 0;
             var owner_id = 0;
             var img_path = "";
             var tags = "";
             $('.collectModal').modal("hide");
+
+            $('#openCollectModal' + postID).on('hidden.bs.modal', function() {
+                location.reload();
+            });
 
         });
 
