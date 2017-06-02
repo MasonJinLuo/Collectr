@@ -18,7 +18,8 @@ module.exports = function(app) {
 
         var post = Object.assign({}, req.body, {
             img_path: req.file.path.replace('public/', '/'),
-            user_id: req.session.user.id
+            user_id: req.session.user.id,
+            owner_id: req.session.user.id
         });
 
         db.Post.create(post).then(function(response) {

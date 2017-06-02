@@ -7,18 +7,24 @@
 $(document).ready(function() {
 
     $(document).on('click', '.item-img-div', postModal);
+    $(document).on('click', '.category-tab', categoryPage);
+    $(document).on("click", "#collectBtn", pinClick);
+
     $(document).on('click', '#likeBtn', updatePostLikes);
     $(document).on('click', '#dislikeBtn', updatePostDislikes);
-    $(document).on('click', '.category-tab', categoryPage);
-    $(document).on('click', '#collectPostSubmit', collectPostInfo);
 
+    
+    $(document).on('click', '#collectPostSubmit', collectPostInfo);
     $(document).on("click", "#collectClose", clearImage);
     $(document).on("click", "#collectBtnModalClose", clearImage);
 
-    $(document).on("click", "#collectBtn", pinClick);
+    
 
-    function clearImage() {
-        $('#collectPostForm').reset();
+    function clearImage(event) {
+
+        event.preventDefault();
+
+        $('#collectPostForm')[0].reset();
         var description = "";
         var category_id = 0;
         var owner_id = 0;
@@ -26,7 +32,10 @@ $(document).ready(function() {
         var tags = "";
     }
 
-    function pinClick(){
+    function pinClick(event) {
+
+        event.preventDefault();
+
         var owner = $(this).attr('data-owner');
         var image = $(this).attr('data-img');
         var id = $(this).attr('data-id');
@@ -167,7 +176,7 @@ $(document).ready(function() {
             }
 
             alert("Post Added!");
-            $('#collectPostForm').reset();
+            $('#collectPostForm')[0].reset();
             var description = "";
             var category_id = 0;
             var owner_id = 0;
@@ -186,8 +195,9 @@ $(document).ready(function() {
 
     }
 
-    function updatePostLikes() {
+    function updatePostLikes(event) {
 
+        event.preventDefault();
         var postID = $(this).attr('value');
         var currentLikes = parseInt($(this).attr('data-name'));
 
@@ -205,8 +215,9 @@ $(document).ready(function() {
 
     }
 
-    function updatePostDislikes() {
+    function updatePostDislikes(event) {
 
+        event.preventDefault();
         var postID = $(this).attr('value');
         var currentDislikes = parseInt($(this).attr('data-name'));
 
