@@ -18,7 +18,6 @@ insert into Categories (name) values ('Recordings');
 insert into Categories (name) values ('Memorabilia');
 insert into Categories (name) values ('Audio Gear');
 
-insert into users (email, password, image_path, description) values ('John@gmail.com', 'johnisawesome', 'http://media.istockphoto.com/photos/happy-laughing-man-picture-id544358212?k=6&m=544358212&s=612x612&w=0&h=odURMNz2hty8LIfpVahaaUKpGU4vd-UlZx4jy-OAnJA=', 'cool me');
 insert into users (email, password, image_path, description, interests) values ('GearHeadForLife', 'password', '/images/users/male1.jpg', 'Hey, I\'m Marcus. Born and raised in Los Angelos California, dreaming of the day I can move to New York City. I have a massive collection of maps and I love anything historical. Hit me up!!', '2,7,14');
 insert into users (email, password, image_path, description, interests) values ('Jeff_Is_Da_Man', 'password', '/images/users/male2.jpg', 'I have a passion for music and the finer things in life. My favorites are Frank Sinatra, Sammy David Jr, and John Legend. I love to listen to old tunes and be carried away by nostalgia', '6,10,13,14,15');
 insert into users (email, password, image_path, description, interests) values ('MusicBookFan_79', 'password', '/images/users/male3.jpg', 'My user name pretty much says it all. I enjoy fresh beats and great reads. I\'ve been living a blessed life so far, and I\'m looking to find some people with similar collection interests!', '1,3,4');

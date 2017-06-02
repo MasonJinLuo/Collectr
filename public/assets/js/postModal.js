@@ -15,6 +15,7 @@ $(document).ready(function() {
 
 
     $(document).on('click', '#collectPostSubmit', collectPostInfo);
+    
     $(document).on("click", "#collectClose", clearImage);
     $(document).on("click", "#collectBtnModalClose", clearImage);
 
