@@ -9,11 +9,8 @@
 
             <!-- Main page content -->
 
-            <!--Test Button For Adding New Posts. Can be deleted later-->
-{{!--             <button class='glyphicon glyphicon-plus' id='newPostBtn' data-target="#newPostModal" data-toggle="modal"></button> --}}
-
             <!-- Horizontal galleries -->
-            {{#each category}}
+            {{#first category 3}}
               <div class="row category-gallery-wrapper animated fadeInUp">
                 <a href='/category/{{this.id}}'>
                   <div class="category-tab" id={{this.id}}>
@@ -59,7 +56,7 @@
 
               </div>
 
-            {{/each}}
+            {{/first}}
             <!-- Horizontal galleries -->
 
               <!-- Wide feature div-->
