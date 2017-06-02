@@ -24,16 +24,6 @@ module.exports = function(app) {
             }]
         }).then(function(response) {
 
-            //Only put categories with content on the homepage
-            // var categoryHasPosts = [];
-            // for (var i = 0; i < response.length; i++) {
-            //     console.log(response[i].name + ': ' + response[i].Posts.length);
-
-            //     if (response[i].Posts.length > 0) {
-            //         categoryHasPosts.push(response[i]);
-            //     }
-            // }
-
             //Future Goal: Sort by popularity and render most popular first
             res.render('index', { category: response });
             // res.json(response);
@@ -45,7 +35,7 @@ module.exports = function(app) {
     //Feeds user specific information into handlebars
     //Renders content in horizontal scrolling content bars
     //THIS WORKS
-    app.get('/user/:userID', function(req, res) {
+    function getUserDetails(userID, res) {
         db.Category.findAll({
             order: 'id ASC',
             include: [{
@@ -57,7 +47,7 @@ module.exports = function(app) {
                     model: db.Category
                 }, {
                     model: db.User,
-                    where: { id: req.params.userID }
+                    where: { id: userID }
                 }]
             }]
         }).then(function(response) {
@@ -65,6 +55,14 @@ module.exports = function(app) {
             res.render('dashboard', { category: response });
             // res.json(response);
         });
+    }
+
+    app.get('/user/:userID', function(req, res) {
+        getUserDetails(req.params.userID, res);
+    });
+
+    app.get('/secure/user', function(req, res) {
+        getUserDetails(req.session.user.id, res);
     });
 
     app.get('/category/:categoryID', function(req, res) {
@@ -137,7 +135,7 @@ module.exports = function(app) {
         db.Category.findAll({
             include: [db.Post]
         }).then(function(response) {
-            res.json(response);
+            res.render('nav', { category: response });
         })
     });
 
@@ -226,17 +224,61 @@ module.exports = function(app) {
     });
 
     //collecting a post from another user
-    app.post('/collect/:description/:img_path/:user_id/:owner_id/:category_id', function(req, res) {
+    //IMAGE NOT SAVING TO POST IMAGES FOLDER - USE MULTER
+    app.post('/secure/collect/:description/:img_path/:owner_id/:category_id', function(req, res) {
         var image = '/images/postImages/' + req.params.img_path;
         db.Post.create({
             description: req.params.description,
             img_path: image,
-            user_id: req.params.user_id,
+            user_id: req.session.user.id,
             owner_id: req.params.owner_id,
             category_id: req.params.category_id
         }).then(function(response) {
             res.json(response);
         });
     });
+
+
+    //search through for a specific word
+
+    app.get('/search1/', function(req, res) {
+        db.post
+
+    });
+
+
+    app.get('/search1/:searchTerm', function(req, res) {
+        db.Tags.findAll({
+            include: [{
+                model: db.Post2Tags,
+                include: [{
+                    model: db.Post
+                }]
+            }],
+            where: { name: req.params.searchTerm }
+        }).then(function(response) {
+            res.json(response);
+        })
+
+    });
+
+
+
+    app.get('/search2/:searchTerm', function(req, res) {
+        db.Category.findAll({
+            include: [{
+                model: db.Post
+            }],
+            where: { name: req.params.searchTerm }
+        }).then(function(response) {
+            res.json(response);
+        })
+
+    });
+
+
+
+
+
 
 }

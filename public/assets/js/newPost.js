@@ -57,8 +57,6 @@ $(document).ready(function() {
             formData.append('photo', photo, photo.name);
             formData.append('description', description.val().trim());
             formData.append('category_id', category.val());
-            formData.append('owner_id', 1);
-            formData.append('user_id', 1);
 
             var tagIdArray = [];
             var oldTagNameArray = [];
@@ -136,7 +134,7 @@ $(document).ready(function() {
     function createNewPost(newPostData, tagIdArray) {
         $.ajax({
 
-            url: "/api/posts",
+            url: "/api/secure/posts",
             method: "POST",
             data: newPostData,
             processData: false,
@@ -163,6 +161,10 @@ $(document).ready(function() {
             newPostForm[0].reset();
             newPostImage.attr("src", "");
             newPostModal.modal("hide");
+
+            newPostModal.on('hidden.bs.modal', function() {
+                location.reload();
+            });
 
         });
     }

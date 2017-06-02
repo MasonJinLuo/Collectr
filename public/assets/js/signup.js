@@ -8,6 +8,7 @@ $(document).ready(function() {
     var newUserDescription = $("#userDescription");
     var imageUpload = $("#imageUpload")
     var reader = new FileReader();
+    var checkedBox = [];
 
     //how to get/create a path for the user's profile picture
 
@@ -18,11 +19,12 @@ $(document).ready(function() {
     $(document).on("click", "#userModalCloseBtn", clearImage);
 
     function clearImage() {
-        $("#SignUpForm")[0].reset();
+        $("#signUpForm")[0].reset();
         newUserImage.attr("src", "");
     }
 
     function handleNewUserFormSubmit(event) {
+
         event.preventDefault();
         // Don't do anything if the email field hasn't been filled out
 
@@ -34,32 +36,30 @@ $(document).ready(function() {
             return alert("Please enter a password between 8-15 characters.")
         }
 
+        var formData = new FormData();
+
         var photo = imageUpload.get(0).files[0];
-        formData = new FormData();
 
-        formData.append('photo', photo, photo.name);
-        formData.append('email', newEmail.val().trim());
-        formData.append('password', newPassword.val().trim());
-        formData.append('description', newUserDescription.val().trim());
+        $("input[name='interest']:checked").each(function() {
+            checkedBox.push(parseInt($(this).val()));
+        });
 
-        validateNewUser();
+        var interestString = checkedBox.join(',');
+        console.log(interestString);
+
+        if (photo) {
+            formData.append("photo", photo, photo.name);
+        }
+
+        formData.append("email", newEmail.val().trim());
+        formData.append("password", newPassword.val().trim());
+        formData.append("description", newUserDescription.val().trim());
+        formData.append("interests", interestString);
 
         createNewUser(formData);
-    }
 
-    function validateNewUser() {
-        var queryURL = "/api/users/" + formData.get("email")
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).done(function(response) {
-            if (formData.get("email") === response.email) {
-                alert("An account with this email address already exists. Please login.")
-                $("#SignUpForm")[0].reset();
-                newUserImage.attr("src", "");
-                $('.nav-tabs a[href="#logIn"]').tab("show");
-            }
-        })
+        redirectDashboard();
+
     }
 
     function createNewUser(newUserData) {
@@ -71,9 +71,13 @@ $(document).ready(function() {
             contentType: false,
         }).done(function(data) {
             alert("Welcome to Collectr!");
-            $("#SignUpForm")[0].reset();
-            newUserImage.attr("src", "");
+            $("#signUpForm")[0].reset();
             $("#logInModal").modal("hide");
+        }).catch(function(data) {
+            alert(data.responseJSON.message);
+            $("#signUpForm")[0].reset();
+            newUserImage.attr("src", "");
+            $('.nav-tabs a[href="#logIn"]').tab("show");
         });
     }
 
@@ -97,5 +101,11 @@ $(document).ready(function() {
         } else {
             preview.src = "";
         }
+    }
+
+    function redirectDashboard() {
+        $.get('/secure/user').done(function(data) {
+            window.location = '/secure/user';
+        })
     }
 });
