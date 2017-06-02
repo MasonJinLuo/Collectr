@@ -19,6 +19,9 @@ $(document).ready(function() {
         email: loginEmail.val().trim(),
         password: loginPassword.val().trim()
       });
+
+    redirectDashboard();
+
     }
 
     function loginCheck(userData){
@@ -34,11 +37,17 @@ $(document).ready(function() {
 
     function handleLogout() {
         $.get("/api/secure/logout").done(function(data) {
-              alert ("Logout Successful!");
+              window.location = '/';
         }).catch(function() {
-              alert("Logout Unsuccessful");
+              alert("Logout Unsuccessful. Please try again.");
         })
     }
 
-    });
+    function redirectDashboard() {
+         $.get('/secure/user').done(function(data) {
+            window.location = '/secure/user';
+         })
+    }
+
+});
 

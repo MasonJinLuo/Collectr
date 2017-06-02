@@ -18,7 +18,7 @@ $(document).ready(function() {
     $(document).on("click", "#collectBtn", pinClick);
 
     function clearImage() {
-        $('#collectPostForm').reset();
+        $('#collectPostForm')[0].reset();
         var description = "";
         var category_id = 0;
         var owner_id = 0;
@@ -143,7 +143,7 @@ $(document).ready(function() {
         //need to grab userID from sessions storage
         var user_id = 1;
 
-        var collectUrl = '/collect/' + description + '/' + imageLocation + '/' + user_id + '/' + owner_id + '/' + category_id;
+        var collectUrl = '/secure/collect/' + description + '/' + imageLocation + '/' + user_id + '/' + owner_id + '/' + category_id;
 
         $.ajax({
             url: collectUrl,
@@ -167,7 +167,7 @@ $(document).ready(function() {
             }
 
             alert("Post Added!");
-            $('#collectPostForm').reset();
+            $('#collectPostForm')[0].reset();
             var description = "";
             var category_id = 0;
             var owner_id = 0;

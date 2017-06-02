@@ -136,7 +136,7 @@ $(document).ready(function() {
     function createNewPost(newPostData, tagIdArray) {
         $.ajax({
 
-            url: "/api/posts",
+            url: "/api/secure/posts",
             method: "POST",
             data: newPostData,
             processData: false,

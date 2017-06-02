@@ -45,7 +45,7 @@ module.exports = function(app) {
     //Feeds user specific information into handlebars
     //Renders content in horizontal scrolling content bars
     //THIS WORKS
-    app.get('/user/:userID', function(req, res) {
+    function getUserDetails(userID, res) {
         db.Category.findAll({
             order: 'id ASC',
             include: [{
@@ -57,7 +57,7 @@ module.exports = function(app) {
                     model: db.Category
                 }, {
                     model: db.User,
-                    where: { id: req.params.userID }
+                    where: { id: userID }
                 }]
             }]
         }).then(function(response) {
@@ -65,6 +65,14 @@ module.exports = function(app) {
             res.render('dashboard', { category: response });
             // res.json(response);
         });
+    }
+
+    app.get('/user/:userID', function(req, res) {
+        getUserDetails(req.params.userID, res);
+    });
+
+    app.get('/secure/user', function(req, res) {
+        getUserDetails(req.session.user.id, res);
     });
 
     app.get('/category/:categoryID', function(req, res) {
@@ -237,12 +245,13 @@ module.exports = function(app) {
     });
 
     //collecting a post from another user
-    app.post('/collect/:description/:img_path/:user_id/:owner_id/:category_id', function(req, res) {
+    //IMAGE NOT SAVING TO POST IMAGES FOLDER - USE MULTER
+    app.post('/secure/collect/:description/:img_path/:user_id/:owner_id/:category_id', function(req, res) {
         var image = '/images/postImages/' + req.params.img_path;
         db.Post.create({
             description: req.params.description,
             img_path: image,
-            user_id: req.params.user_id,
+            user_id: req.session.user.id,
             owner_id: req.params.owner_id,
             category_id: req.params.category_id
         }).then(function(response) {
