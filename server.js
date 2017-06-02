@@ -5,6 +5,7 @@ var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var path = require("path");
 var helpers = require('handlebars-helpers')();
+var cookieSession = require('cookie-session');
 
 // Sets up the Express App
 // =============================================================
@@ -20,6 +21,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
+//Sets up Express session management
+app.use(cookieSession({
+    name: 'session',
+    keys: ['collectors-secret'],
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
+
+function checkAuth(req, res, next) {
+	if (req.url.includes('/secure') && (!req.session || !req.session.authenticated)) {
+		res.redirect('/');
+		return;
+	}
+
+	next();
+}
+
+app.use(checkAuth);
+
 //Sets up handlebars as view engine
 app.engine("handlebars", exphbs({
     defaultLayout: 'main',
@@ -34,7 +53,7 @@ app.use(express.static("./public"));
 
 require("./routes/homepage-routes.js")(app);
 require("./routes/user-post-routes.js")(app);
-require("./routes/login-api-routes.js")(app);
+require("./routes/login-signup-api-routes.js")(app);
 
 collectrdb.sequelize.sync().then(function() {
     app.listen(PORT, function() {

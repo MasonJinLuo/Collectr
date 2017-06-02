@@ -18,62 +18,55 @@ $(document).ready(function() {
     $(document).on("click", "#userModalCloseBtn", clearImage);
 
     function clearImage() {
-        $("#SignUpForm")[0].reset();
+        $("#signUpForm")[0].reset();
         newUserImage.attr("src", "");
     }
 
     function handleNewUserFormSubmit(event) {
-        event.preventDefault();
-        // Don't do anything if the email field hasn't been filled out
 
-        if (!newEmail.val().trim() || !newPassword.val().trim()) {
-            return alert("Please enter an email address and password to sign up.")
-        }
+	  event.preventDefault();
+	  // Don't do anything if the email field hasn't been filled out
 
-        if (newPassword.val().trim().length < 8 || newPassword.val().trim().length > 15) {
-            return alert("Please enter a password between 8-15 characters.")
-        }
+	  if (!newEmail.val().trim() || !newPassword.val().trim()) {
+     	return alert("Please enter an email address and password to sign up.")
+      }
 
-        var photo = imageUpload.get(0).files[0];
-        formData = new FormData();
+    if (newPassword.val().trim().length < 8 || newPassword.val().trim().length > 15) {
+      return alert("Please enter a password between 8-15 characters.")
+      }
 
-        formData.append('photo', photo, photo.name);
-        formData.append('email', newEmail.val().trim());
-        formData.append('password', newPassword.val().trim());
-        formData.append('description', newUserDescription.val().trim());
+    var formData = new FormData();
 
-        validateNewUser();
+    var photo = imageUpload.get(0).files[0];
 
-        createNewUser(formData);
+    if (photo) {
+        formData.append("photo", photo, photo.name);
     }
 
-    function validateNewUser() {
-        var queryURL = "/api/users/" + formData.get("email")
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).done(function(response) {
-            if (formData.get("email") === response.email) {
-                alert("An account with this email address already exists. Please login.")
-                $("#SignUpForm")[0].reset();
-                newUserImage.attr("src", "");
-                $('.nav-tabs a[href="#logIn"]').tab("show");
-            }
-        })
-    }
+    formData.append("email", newEmail.val().trim());
+    formData.append("password", newPassword.val().trim());
+    formData.append("description", newUserDescription.val().trim());
+
+    createNewUser(formData);
+
+	}
 
     function createNewUser(newUserData) {
         $.ajax({
-            url: "/api/users",
-            method: "POST",
-            data: newUserData,
-            processData: false,
-            contentType: false,
+          url: "/api/users",
+          method: "POST",
+          data: newUserData,
+          processData: false,
+          contentType: false,
         }).done(function(data) {
-            alert("Welcome to Collectr!");
-            $("#SignUpForm")[0].reset();
+          alert("Welcome to Collectr!");
+          $("#signUpForm")[0].reset();
+          $("#logInModal").modal("hide");
+        }).catch(function(data) {
+            alert(data.responseJSON.message)
+            $("#signUpForm")[0].reset();
             newUserImage.attr("src", "");
-            $("#logInModal").modal("hide");
+            $('.nav-tabs a[href="#logIn"]').tab("show");
         });
     }
 

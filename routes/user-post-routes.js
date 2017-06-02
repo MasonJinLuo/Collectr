@@ -14,10 +14,11 @@ module.exports = function(app) {
     //post new content
     ////WORK IN PROGRESS
     //WILL NEED TO ASSOCIATE OWNER/USER/CATEGORY (BOARD) ID WHEN COLLECTING POST CONTENT
-    app.post('/api/posts', upload.single('photo'), function(req, res) {
+    app.post('/api/secure/posts', upload.single('photo'), function(req, res) {
 
         var post = Object.assign({}, req.body, {
-            img_path: req.file.path.replace('public/', '/')
+            img_path: req.file.path.replace('public/', '/'),
+            user_id: req.session.user.id
         });
 
         db.Post.create(post).then(function(response) {
