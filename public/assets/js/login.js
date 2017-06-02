@@ -1,47 +1,32 @@
-// author mason
+// Author: Mason & Linette
+
 $(document).ready(function() {
-var loginEmail = $("#loginEmail");
-var loginPassword = $("#loginPassword");
+    var loginEmail = $("#loginEmail");
+    var loginPassword = $("#loginPassword");
 
-$(document).on("click", "#loginSubmit", handleLoginSubmit);
+    $(document).on("click", "#loginSubmit", handleLoginSubmit);
 
+    function handleLoginSubmit(event){
+     event.preventDefault();
 
-function handleLoginSubmit (event){
- event.preventDefault();
-
-if (!loginEmail.val().trim() || !loginPassword.val().trim()) {
-      return alert("Please enter an email address and password to sign up.")
-      }
-
-    var formData = new FormData();
-        formData.append('email', loginEmail.val().trim());
-        formData.append('password', loginPassword.val().trim());
-      
-  loginCheck();
-}
-
-
-function loginCheck (){
-
-$.ajax({
-  url: "/api/users",
-  method: "GET"
-}).done(function(response) {
-  console.log(response)
-  for( var i=0; i < response.length; i++){
-     console.log(response[i].email);
-     console.log(response[i].password);
-    if ((loginEmail.val().trim() === response[i].email) && (loginPassword.val().trim() === response[i].password)){
-      console.log("logged on");
-        $("#loginForm")[0].reset();
-      $("#logInModal").modal("hide");
-      return;
-    }else{
-      console.log("username/password combination is incorrect or does not exist")
+    if (!loginEmail.val().trim() || !loginPassword.val().trim()) {
+          return alert("Please enter an email address and password to log in.")
     }
-  }
-});
-}
 
+      loginCheck({
+        email: loginEmail.val().trim(),
+        password: loginPassword.val().trim()
+      });
+    }
 
-});
+    function loginCheck(userData){
+        $.post("/api/login", userData).done(function(data) {
+              alert ("Welcome back, " + loginEmail.val().trim() + "!");
+              $("#logInForm")[0].reset();
+              $("#logInModal").modal("hide");
+          }).catch(function() {
+              alert("username/password combination is incorrect or does not exist");
+              $("#logInForm")[0].reset();
+          })
+        };
+    });

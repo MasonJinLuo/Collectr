@@ -52,23 +52,23 @@
                         <div role="tabpanel" class="tab-pane active" id="logIn">
                             <form id="loginForm">
                                 <div class="form-group">
-                                    <label for="loginEmail">Email Address</label>
-                                    <input type="email" class="form-control" id="loginEmail" placeholder="Email">
+                                    <label for="loginEmail">Username</label>
+                                    <input type="email" class="form-control" id="loginEmail" placeholder="Email" name="email">
                                 </div>
                                 <div class="form-group">
                                     <label for="loginPassword">Password</label>
-                                    <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                                    <input type="password" class="form-control" id="loginPassword" placeholder="Password" name="password">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn" id="loginSubmit">Submit</button>
                                 </div>
                             </form>
-                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn" id="loginSubmit">Submit</button>
-                            </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="signUp">
-                            <form id="SignUpForm"> 
+                            <form id="signUpForm">
                                 <div class="form-group">
-                                    <label for="signUpEmail">Email Address (required)</label>
+                                    <label for="signUpEmail">Username (required)</label>
                                     <input type="email" class="form-control" id="signUpEmail" placeholder="Email">
                                 </div>
                                 <div class="form-group">
@@ -77,18 +77,18 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="comment">About Me</label>
-                                        <textarea class="form-control" rows="2" id="userDescription"></textarea>
+                                    <textarea class="form-control" rows="2" id="userDescription"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="profilePicture">Profile Picture (required)</label>
                                     <input type="file" id="imageUpload"><br>
                                     <img id="newUserImage" src="" height="200" alt="Image preview..." name="profpic">
                                 </div>
-                            </form>
                              <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal" id="userModalCloseBtn">Close</button>
                                 <button type="submit" class="btn" id="signUpSubmit">Submit</button>
                              </div>
+                            </form>
                         </div>            
                     </div>         
                 </div>
