@@ -5,7 +5,7 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-          {{> hero }}
+          {{> small-hero }}
 
             <!-- Main page content -->
               <!-- Category wrapped gallery -->
@@ -16,7 +16,7 @@
                 </div>
 
                     <div class="gallery-img-div category-div">
-                      
+
                       {{#each Posts}}
                       {{!-- Leave id declaration here --}}
                       <div class="item-img-div" id={{this.id}}>
@@ -31,13 +31,13 @@
                         </a>
                       </div>
                       {{/each}}
-                      
+
                     </div>
                 </div>
               {{/each}}
               <!-- Category wrapped gallery -->
             <!-- Main page content -->
-            
+
         </div>
     </div>
     <!-- /#page-content-wrapper -->

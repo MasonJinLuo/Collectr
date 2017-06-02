@@ -226,6 +226,11 @@ h4 {
     padding: 10px;
 }
 
+/*Small, search only Hero*/
+.small-hero-wrapper {
+  height: 45px;
+  }
+
 
 /*Home category galleries*/
 
