@@ -5,7 +5,6 @@ var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var path = require("path");
 var helpers = require('handlebars-helpers')();
-// var array = helpers.array();
 
 // Sets up the Express App
 // =============================================================
