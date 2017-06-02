@@ -39,7 +39,7 @@ module.exports = function(app) {
                     req.session.authenticated = true;
                     req.session.user = dbUser;
                     res.json(dbUser);
-                    res.redirect('/dashboard') //redirect to dashboard once logged in
+//                    res.redirect('/dashboard') //redirect to dashboard once logged in
                 });
 		    }
 		});
@@ -56,9 +56,6 @@ module.exports = function(app) {
 	});
 
 	app.post("/api/login", function(req, res) {
-	console.log(req.body)
-	console.log(req.body.email)
-	console.log(req.body.password)
 		db.User.findOne({
 			where: {
 				email: req.body.email,
@@ -68,12 +65,13 @@ module.exports = function(app) {
 		    if (dbUser) {
 		        req.session.authenticated = true;
                 req.session.user = dbUser;
-                res.redirect('/dashboard') //redirect to dashboard once logged in
+                res.json(dbUser);
+//              res.redirect('/dashboard') //redirect to dashboard once logged in
 		    } else {
-                res.send(401);
+                res.sendStatus(401);
 		    }
 		}).catch(function(err) {
-		    res.send(401);
+		    res.sendStatus(401);
 		});
 	});
 

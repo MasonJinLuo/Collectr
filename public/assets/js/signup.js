@@ -18,7 +18,7 @@ $(document).ready(function() {
     $(document).on("click", "#userModalCloseBtn", clearImage);
 
     function clearImage() {
-        $("#SignUpForm")[0].reset();
+        $("#signUpForm")[0].reset();
         newUserImage.attr("src", "");
     }
 
