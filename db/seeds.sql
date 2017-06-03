@@ -34,12 +34,43 @@ insert into users2categories (category_id, user_id) values (15, 2);
 
 
 insert into users (email, password, image_path, description, interests) values ('MusicBookFan_79', 'password', '/images/users/male3.jpg', 'My user name pretty much says it all. I enjoy fresh beats and great reads. I\'ve been living a blessed life so far, and I\'m looking to find some people with similar collection interests!', '1,3,4');
+
+insert into users2categories (category_id, user_id) values (1, 3);
+insert into users2categories (category_id, user_id) values (3, 3);	
+insert into users2categories (category_id, user_id) values (4, 3);	
+
+
 insert into users (email, password, image_path, description, interests) values ('Wookie1977', 'password', '/images/users/male4.jpg', 'Ready are you? What know you of ready? For eight hundred years have I trained Jedi. My own counsel will I keep on who is to be trained. A Jedi must have the deepest commitment, the most serious mind. This one, a long time have I watched. All his life has he looked away… to the future, to the horizon', '5,6,14');
 
+insert into users2categories (category_id, user_id) values (5, 4);
+insert into users2categories (category_id, user_id) values (6, 4);	
+insert into users2categories (category_id, user_id) values (14, 4);
+
+
 insert into users (email, password, image_path, description, interests) values ('AllAboutThatBass', 'password', '/images/users/female1.jpg', 'I\'m a Minnesota girl who loves spending time with her friends and family. I have three fur babies (Huskies!) who accompany my husband and I on every camping trip. I\'m a nerd at heart and I enjoy all things Marvel!', '5,6,8');
+
+insert into users2categories (category_id, user_id) values (5, 5);
+insert into users2categories (category_id, user_id) values (6, 5);	
+insert into users2categories (category_id, user_id) values (8, 5);
+
 insert into users (email, password, image_path, description, interests) values ('Tiny_Dancer_2', 'password', '/images/users/female2.jpg', 'Major history buff Veronica here. I very much enjoy Eurpoean history and all things related to the Tang Dynasty', '1,2,3');
+
+insert into users2categories (category_id, user_id) values (1, 6);
+insert into users2categories (category_id, user_id) values (2, 6);	
+insert into users2categories (category_id, user_id) values (3, 6);
+
 insert into users (email, password, image_path, description, interests) values ('GreatGatsby', 'password', '/images/users/female3.jpg', 'Hello all, I\'m Camile. I am a personal shopper at Nordstrom and I enjoy getting to spend my time surrounded by high fashion and cool people. In my free time I am lead guitarist for my neighborhood band \'Groots Galaxy\'', '9,10,11,12');
+
+insert into users2categories (category_id, user_id) values (9, 7);
+insert into users2categories (category_id, user_id) values (10, 7);	
+insert into users2categories (category_id, user_id) values (11, 7);
+insert into users2categories (category_id, user_id) values (12, 7);
+
 insert into users (email, password, image_path, description, interests) values ('NyanCatTsum', 'password', '/images/users/female4.jpg', 'Total music nerd here! I have a big personality and I love smiling (Smiling\'s my favorite). Let\'s be friends!!!!', '15,5,4');
+
+insert into users2categories (category_id, user_id) values (15, 8);	
+insert into users2categories (category_id, user_id) values (5, 8);
+insert into users2categories (category_id, user_id) values (4, 8);
 
 
 insert into posts (img_path, description, upVote, downVote, owner_id, user_id, category_id) values ('/images/postImages/stamp1.png', 'Argentina Stamp!', 34, 1, 1, 1, 1);
