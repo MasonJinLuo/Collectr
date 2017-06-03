@@ -23,7 +23,7 @@ module.exports = function(app) {
 
 	app.post("/api/users", upload.single('photo'), function(req, res) {
         var user = Object.assign({}, req.body, {
-            image_path: req.file ? req.file.path : null
+            image_path: req.file ? req.file.path.replace('public/', '/') : null
         });
 
         db.User.findOne({
