@@ -19,7 +19,20 @@ insert into Categories (name) values ('Memorabilia');
 insert into Categories (name) values ('Audio Gear');
 
 insert into users (email, password, image_path, description, interests) values ('GearHeadForLife', 'password', '/images/users/male1.jpg', 'Hey, I\'m Marcus. Born and raised in Los Angelos California, dreaming of the day I can move to New York City. I have a massive collection of maps and I love anything historical. Hit me up!!', '2,7,14');
+
+insert into users2categories (category_id, user_id) values (2, 1);
+insert into users2categories (category_id, user_id) values (7, 1);	
+insert into users2categories (category_id, user_id) values (14, 1);	
+
 insert into users (email, password, image_path, description, interests) values ('Jeff_Is_Da_Man', 'password', '/images/users/male2.jpg', 'I have a passion for music and the finer things in life. My favorites are Frank Sinatra, Sammy David Jr, and John Legend. I love to listen to old tunes and be carried away by nostalgia', '6,10,13,14,15');
+
+insert into users2categories (category_id, user_id) values (6, 2);
+insert into users2categories (category_id, user_id) values (10, 2);	
+insert into users2categories (category_id, user_id) values (13, 2);	
+insert into users2categories (category_id, user_id) values (14, 2);	
+insert into users2categories (category_id, user_id) values (15, 2);
+
+
 insert into users (email, password, image_path, description, interests) values ('MusicBookFan_79', 'password', '/images/users/male3.jpg', 'My user name pretty much says it all. I enjoy fresh beats and great reads. I\'ve been living a blessed life so far, and I\'m looking to find some people with similar collection interests!', '1,3,4');
 insert into users (email, password, image_path, description, interests) values ('Wookie1977', 'password', '/images/users/male4.jpg', 'Ready are you? What know you of ready? For eight hundred years have I trained Jedi. My own counsel will I keep on who is to be trained. A Jedi must have the deepest commitment, the most serious mind. This one, a long time have I watched. All his life has he looked away… to the future, to the horizon', '5,6,14');
 
