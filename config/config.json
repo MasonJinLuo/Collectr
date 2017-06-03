@@ -3,18 +3,18 @@
     "username": "root",
     "password": "",
     "database": "collectrdb",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "password": "",
+    "database": "collectrdb",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
-    "use_env_variable":"JawsDB_URL",
+    "use_env_variable":"JAWSDB_URL",
     "dialect": "mysql"
   }
 }
