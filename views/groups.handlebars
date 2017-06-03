@@ -27,16 +27,15 @@
               <div class="row category-gallery-wrapper category-wrapper-with-wrap animated fadeInUp">
                     <div class="gallery-img-div category-div">
                      {{#each post}}
-                      <div class="item-img-div">
-                        <a href="#" class="collect-btn-link">
-                          <div class="collectr-btn">
+                      <div class="item-img-div" id={{this.id}}>
+                        <a class="collect-btn-link">
+                          <div class="collectr-btn" data-dismiss="modal" data-img="{{this.img_path}}" data-owner="{{this.owner_id}}" data-target="#openCollectModal{{this.id}}" data-toggle="modal">
                             <img src="/assets/images/collectr-logo.svg" />
                             <span class="collectr-save">save</span>
-                            <span>{{this.description}}</span>
                           </div>
                         </a>
-                        <a href="#">
-                          <img src={{this.img_path}} />
+                        <a>
+                          <img src={{this.img_path}} data-target="#openPostModal{{this.id}}" data-toggle="modal"/>
                         </a>
                       </div>
                       {{/each}}

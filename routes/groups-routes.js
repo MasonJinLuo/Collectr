@@ -1,4 +1,8 @@
-//Stacy
+/*
+    @author: anupsawant
+    @desc: routes for groups feature
+    @date: 2nd june 2017
+*/
 
 var db = require('../models');
 
