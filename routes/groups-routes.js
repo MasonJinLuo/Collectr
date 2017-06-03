@@ -73,7 +73,13 @@ module.exports = function(app) {
     app.get('/groups/:groupName', function(req, res) {
         var categories = groups.get(req.params.groupName);
         getAllPostsInCategory(categories,function callback() {
-            res.render('groups', { user: Array.from(userSet), post: Array.from(postSet) });
+            console.log('UserSet',userSet.size);
+            console.log('PostSet',postSet.size);
+            res.render('groups', {
+                user: Array.from(userSet),
+                post: Array.from(postSet),
+                currentUser: req.session && req.session.user
+            });
         });
         postSet.clear();
         userSet.clear();
@@ -82,7 +88,11 @@ module.exports = function(app) {
     });
     
     app.get('/groups', function(req, res) {
-        res.render('select-categories', { user: Array.from(userSet), post: Array.from(postSet) });
+        res.render('select-categories', {
+            user: Array.from(userSet),
+            post: Array.from(postSet),
+            currentUser: req.session && req.session.user
+        });
     });
     
 

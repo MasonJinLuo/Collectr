@@ -23,9 +23,12 @@ module.exports = function(app) {
                 }]
             }]
         }).then(function(response) {
-
-            res.render('index', { category: response });
-
+            //Future Goal: Sort by popularity and render most popular first
+            res.render('index', {
+                category: response,
+                currentUser: req.session && req.session.user
+            });
+            // res.json(response);
         });
     });
 
@@ -33,7 +36,7 @@ module.exports = function(app) {
     //Feeds user specific information into handlebars
     //Renders content in horizontal scrolling content bars
     //THIS WORKS
-    function getUserDetails(userID, res) {
+    function getUserDetails(userID, req, res) {
         db.Category.findAll({
             order: 'id ASC',
             include: [{
@@ -55,7 +58,10 @@ module.exports = function(app) {
         }).then(function(response) {
             if (response.length > 0) {
 
-                res.render('dashboard', { category: response });
+                res.render('dashboard', {
+                    category: response,
+                    currentUser: req.session && req.session.user
+                });
 
             } else {
 
@@ -69,22 +75,24 @@ module.exports = function(app) {
                     }]
                 }).then(function(response) {
 
-                    res.render('welcome', { user: response });
+                    res.render('welcome', {
+                        user: response,
+                        currentUser: req.session && req.session.user
+                    });
 
                 });
 
             }
-
         });
 
     }
 
     app.get('/user/:userID', function(req, res) {
-        getUserDetails(req.params.userID, res);
+        getUserDetails(req.params.userID, req, res);
     });
 
     app.get('/secure/user', function(req, res) {
-        getUserDetails(req.session.user.id, res);
+        getUserDetails(req.session.user.id, req, res);
     });
 
     app.get('/category/:categoryID', function(req, res) {
@@ -103,7 +111,10 @@ module.exports = function(app) {
             where: { id: req.params.categoryID }
         }).then(function(response) {
             // res.json(response);
-            res.render('category', { category: response });
+            res.render('category', {
+                category: response,
+                currentUser: req.session && req.session.user
+            });
         });
     });
 
@@ -157,9 +168,13 @@ module.exports = function(app) {
         db.Category.findAll({
             include: [db.Post]
         }).then(function(response) {
-            res.render('nav', { category: response });
-        })
-    });
+            res.render('nav', {
+                category: response,
+                currentUser: req.session && req.session.user
+            });
+          });
+        });
+//    });
 
 
     //get all posts by all USERS
@@ -293,7 +308,10 @@ module.exports = function(app) {
             where: { name: req.params.searchTerm }
         }).then(function(response) {
             // console.log(response)
-            res.render('searchDisplay', { tags: response });
+            res.render('searchDisplay', {
+                tags: response,
+                currentUser: req.session && req.session.user
+            });
             // res.json(response[0].Post2Tags[0].Post);
             // res.json(response);
         })

@@ -8,7 +8,6 @@ $(document).ready(function() {
 
     $(document).on("click", "#logout", handleLogout);
 
-
     function handleLoginSubmit(event){
      event.preventDefault();
 

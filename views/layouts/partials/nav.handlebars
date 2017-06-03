@@ -8,21 +8,25 @@
   <!--</a>-->
 
     <ul class="sidebar-nav">
-      <li>
-          <a href="/">Home</a>
-      </li>
         <li>
-            <a href="/secure/user">Your Collections</a>
+            <a href="/">Home</a>
         </li>
         <li>
             <a href="/groups">Groups</a>
         </li>
+
+        {{#if currentUser}}
         <li>
-            <a href="#" data-toggle="modal" data-target="#logInModal" id="login">Login or Sign Up</a>
+            <a href="/secure/user">Your Collections</a>
         </li>
         <li>
             <a href="#" id="logout">Logout</a>
         </li>
+        {{else}}
+        <li>
+            <a href="#" data-toggle="modal" data-target="#logInModal" id="login">Login or Sign Up</a>
+        </li>
+        {{/if}}
     </ul>
 </div>
 <!-- /#sidebar-wrapper -->
