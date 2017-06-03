@@ -824,13 +824,19 @@
 <!-- /#wrapper -->
 
 {{!-- Begin Clicked Post Modal --}}
-
+{{#each category}}
+  {{#each Posts}}
   {{> click-post }}
+    {{/each}}
+{{/each}}
 
 {{!-- End Clicked Post Modal --}}
 
 {{!-- Begin 'Collect' Modal --}}
-
+{{#each category}}
+  {{#each Posts}}
   {{> collect-post }}
+  {{/each}}
+{{/each}}
 
 {{!-- End 'Collect' Modal --}}
