@@ -57,9 +57,6 @@ $(document).ready(function() {
         formData.append("interests", interestString);
 
         createNewUser(formData, interestString);
-
-        redirectDashboard();
-
     }
 
     function createNewUser(newUserData, interestString) {
@@ -74,7 +71,6 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
         }).done(function(data) {
-            alert("Welcome to Collectr!");
             $("#signUpForm")[0].reset();
             $("#logInModal").modal("hide");
 
@@ -84,6 +80,8 @@ $(document).ready(function() {
                     method: 'POST'
                 });
             }
+
+            redirectDashboard();
 
         }).catch(function(data) {
             alert(data.responseJSON.message);
@@ -116,8 +114,6 @@ $(document).ready(function() {
     }
 
     function redirectDashboard() {
-        $.get('/secure/user').done(function(data) {
-            window.location = '/secure/user';
-        })
+        window.location = '/secure/user';
     }
 });
