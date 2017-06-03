@@ -180,7 +180,7 @@ $(document).ready(function() {
                 });
             }
 
-            alert("Post Added!");
+//            alert("Post Added!");
 
             $('#collectPostForm' + postID)[0].reset();
             var pathname = window.location.pathname;

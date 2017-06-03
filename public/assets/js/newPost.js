@@ -157,7 +157,7 @@ $(document).ready(function() {
                 });
             }
 
-            alert("Post Added!");
+//            alert("Post Added!");
             newPostForm[0].reset();
             newPostImage.attr("src", "");
             newPostModal.modal("hide");
