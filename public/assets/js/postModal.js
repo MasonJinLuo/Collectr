@@ -210,8 +210,10 @@ $(document).ready(function() {
     function updatePostLikes(event) {
 
         event.preventDefault();
-        var postID = $(this).attr('value');
-        var currentLikes = parseInt($(this).attr('data-name'));
+
+        var button = $(this);
+        var postID = button.attr('value');
+        var currentLikes = parseInt(button.attr('data-name'));
 
         var updatedLikes = currentLikes + 1;
         var pathname = window.location.pathname;
@@ -222,6 +224,8 @@ $(document).ready(function() {
             method: 'PUT',
             url: updateUrl
         }).then(function(response) {
+            button.find('span')[0].innerHTML = updatedLikes;
+            button.attr('data-name', updatedLikes);
             console.log('Updated likes for post ' + postID);
         });
 
@@ -230,8 +234,9 @@ $(document).ready(function() {
     function updatePostDislikes(event) {
 
         event.preventDefault();
-        var postID = $(this).attr('value');
-        var currentDislikes = parseInt($(this).attr('data-name'));
+        var button = $(this);
+        var postID = button.attr('value');
+        var currentDislikes = parseInt(button.attr('data-name'));
 
         var updatedDislikes = currentDislikes + 1;
         var pathname = window.location.pathname;
@@ -242,6 +247,8 @@ $(document).ready(function() {
             method: 'PUT',
             url: updateUrl
         }).then(function(response) {
+            button.find('span')[0].innerHTML = updatedDislikes
+            button.attr('data-name', updatedDislikes)
             console.log('Updated dislikes for post ' + postID);
         });
 
