@@ -18,6 +18,8 @@ $(document).ready(function() {
       $(this).find('.collectr-btn').css({'opacity' : 0})
     });
 
+
+
   // $('.gallery-img-div').hover(
   //   function() {
   //     if($(this).scrollWidth === $(this).clientWidth) {
