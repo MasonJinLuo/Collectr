@@ -1,7 +1,7 @@
 var db = require("../models");
 var fs = require("fs");
 var multer  = require('multer')
-var upload = multer({ dest: '../images/users' })
+var upload = multer({ dest: 'public/images/users' })
 
 module.exports = function(app) {
 
