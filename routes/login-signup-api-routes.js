@@ -1,7 +1,7 @@
 var db = require("../models");
 var fs = require("fs");
 var multer  = require('multer')
-var upload = multer({ dest: 'public/images/users' })
+var upload = multer({ dest: '../images/users' })
 
 module.exports = function(app) {
 
@@ -23,7 +23,7 @@ module.exports = function(app) {
 
 	app.post("/api/users", upload.single('photo'), function(req, res) {
         var user = Object.assign({}, req.body, {
-            image_path: req.file ? req.file.path.replace('public/', '/') : null
+            image_path: req.file ? req.file.path : null
         });
 
         db.User.findOne({
