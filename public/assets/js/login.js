@@ -4,10 +4,11 @@ $(document).ready(function() {
     var loginEmail = $("#loginEmail");
     var loginPassword = $("#loginPassword");
 
+    displayLoginBtn();
+
     $(document).on("click", "#loginSubmit", handleLoginSubmit);
 
     $(document).on("click", "#logout", handleLogout);
-
 
     function handleLoginSubmit(event){
      event.preventDefault();
@@ -47,6 +48,18 @@ $(document).ready(function() {
             window.location = '/secure/user';
          })
     }
+
+    function displayLoginBtn() {
+        $.get("/api/blah").done(function(data) {
+            console.log(data)
+            if (data) {
+                $("#login-out").html('<a href="#" id="logout">Logout</a>')
+            } else {
+                $("#login-out").html('<a href="#" data-toggle="modal" data-target="#logInModal" id="login">Login or Sign Up</a>')
+            }
+        });
+    }
+
 
 });
 

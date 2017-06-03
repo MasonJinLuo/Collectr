@@ -78,4 +78,8 @@ module.exports = function(app) {
 		delete req.session.user;
 		res.sendStatus(200);
 	});
+
+	app.get("/api/blah", function(req, res) {
+    		res.json(req.session.user);
+    });
 };
