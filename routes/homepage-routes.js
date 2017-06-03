@@ -24,9 +24,7 @@ module.exports = function(app) {
             }]
         }).then(function(response) {
 
-            //Future Goal: Sort by popularity and render most popular first
             res.render('index', { category: response });
-            // res.json(response);
 
         });
     });
@@ -47,7 +45,11 @@ module.exports = function(app) {
                     model: db.Category
                 }, {
                     model: db.User,
-                    where: { id: userID }
+                    where: { id: userID },
+                    include: [{
+                        model: db.Users2Categories,
+                        include: db.Category
+                    }]
                 }]
             }]
         }).then(function(response) {
@@ -67,9 +69,7 @@ module.exports = function(app) {
                     }]
                 }).then(function(response) {
 
-                    // console.log(response.Users2Categories[0].Category);
                     res.render('welcome', { user: response });
-                    // res.json(response);
 
                 });
 

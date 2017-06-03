@@ -78,7 +78,7 @@ $(document).ready(function() {
             $("#signUpForm")[0].reset();
             $("#logInModal").modal("hide");
 
-            for (var i = 0; i < interestArray.length; i++){
+            for (var i = 0; i < interestArray.length; i++) {
                 $.ajax({
                     url: '/secure/user/interests/' + interestArray[i],
                     method: 'POST'
