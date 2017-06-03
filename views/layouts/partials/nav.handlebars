@@ -8,22 +8,24 @@
   <!--</a>-->
 
     <ul class="sidebar-nav">
+        {{#if currentUser}}
         <li>
             <a href="/secure/user">Your Collections</a>
         </li>
+        {{/if}}
         <li>
             <a href="/groups">Groups</a>
         </li>
-        <li>
-            <span id="login-out"></span>
-        </li>
 
-        <!--<li>-->
-            <!--<a href="#" data-toggle="modal" data-target="#logInModal" id="login">Login or Sign Up</a>-->
-        <!--</li>-->
-        <!--<li>-->
-            <!--<a href="#" id="logout">Logout</a>-->
-        <!--</li>-->
+        {{#if currentUser}}
+        <li>
+            <a href="#" id="logout">Logout</a>
+        </li>
+        {{else}}
+        <li>
+            <a href="#" data-toggle="modal" data-target="#logInModal" id="login">Login or Sign Up</a>
+        </li>
+        {{/if}}
     </ul>
 </div>
 <!-- /#sidebar-wrapper -->

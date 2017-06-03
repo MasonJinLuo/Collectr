@@ -74,12 +74,19 @@ module.exports = function(app) {
         getAllPostsInCategory(categories,function callback() {
             console.log('UserSet',userSet.size);
             console.log('PostSet',postSet.size);
-            res.render('groups', { user: Array.from(userSet), post: Array.from(postSet) });
+            res.render('groups', {
+                user: Array.from(userSet),
+                post: Array.from(postSet),
+                currentUser: req.session && req.session.user
+            });
         });
     });
     
     app.get('/groups', function(req, res) {
-        res.render('select-categories', { user: Array.from(userSet), post: Array.from(postSet) });
+        res.render('select-categories', {
+            user: Array.from(userSet), post: Array.from(postSet),
+            currentUser: req.session && req.session.user
+        });
     });
     
 
