@@ -3,10 +3,10 @@
 Collectr is a fun and easy way to organize, browse, and share your most prized possesions, all in one place. Think of it as the Pinterest for collectors.
 
 ## Screenshots
-[![Collectr Home Page](public/assets/images/Screenshot1.jpg)]
+[![Collectr Home Page](Collectr/public/assets/images/Screenshot1.JPG)]
 The app presents a clean experience that makes browsing and adding posts easy.
 
-[![Collectr Social](public/assets/images/Screenshot2.jpg)]
+[![Collectr Social](Collectr/public/assets/images/Screenshot2.JPG)]
 With social features and profiles, sharing and discovering is just as simple.
 
 ## Technologies used
