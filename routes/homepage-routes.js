@@ -173,8 +173,8 @@ module.exports = function(app) {
                 currentUser: req.session && req.session.user
             });
           });
-        })
-    });
+        });
+//    });
 
 
     //get all posts by all USERS
