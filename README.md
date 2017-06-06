@@ -50,7 +50,6 @@ CREATE DATABASE collectrdb;
 * Sublime Text 3
 
 ## Walk throughs of code
-For Project presentation, you can include snippets of code you found buggy, interesting, or are overall proud of here.  Try to limit the quantity and size to quick readable bits.
 
 Using the cookie-session npm package, we are able to track the user's activity once they are logged in. Any time the user makes any posts or collects a post from another user we are able to affiliate the user's information with the posts and update the database with the new post.
 
