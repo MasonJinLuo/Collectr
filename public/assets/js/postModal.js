@@ -137,6 +137,7 @@ $(document).ready(function() {
                     }).then(function(data) {
 
                         tagIdArray.push(data.id);
+                        console.log(data.id);
 
                     });
                     promises2.push(promise2);
