@@ -12,6 +12,7 @@ $(document).ready(function() {
     var category = $('#newPostCategory');
     var postUrl = $("#post-url");
     var img_path;
+    var category_id;
 
     var newPostForm = $("#newPostForm");
     var newPostModal = $("#newPostModal");
