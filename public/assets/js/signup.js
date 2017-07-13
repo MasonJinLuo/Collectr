@@ -83,20 +83,24 @@ $(document).ready(function() {
             $("#signUpForm")[0].reset();
             $("#logInModal").modal("hide");
 
+            var promises = [];
             for (var i = 0; i < interestArray.length; i++) {
-                $.ajax({
+                var promise = $.ajax({
                     url: '/secure/user/interests/' + interestArray[i],
                     method: 'POST'
                 });
+                promises.push(promise);
             }
+            $.when.apply(this, promises).then(function() {
+                
+                redirectDashboard();
 
-            redirectDashboard();
-
-        }).catch(function(data) {
-            // alert(data.responseJSON.message);
-            $("#signUpForm")[0].reset();
-            newUserImage.attr("src", "");
-            $('.nav-tabs a[href="#logIn"]').tab("show");
+            }).catch(function(data) {
+                // alert(data.responseJSON.message);
+                $("#signUpForm")[0].reset();
+                newUserImage.attr("src", "");
+                $('.nav-tabs a[href="#logIn"]').tab("show");
+            });
         });
     }
 

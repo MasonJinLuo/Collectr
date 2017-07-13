@@ -108,38 +108,42 @@ $(document).ready(function() {
                     }
                 }
 
+                var promises3 = [];
+
                 //adding values of new tag array to tags table
                 for (var i = 0; i < newTagNameArray.length; i++) {
                     var newTagName = newTagNameArray[i];
-                    $.ajax({
+                    var promise3 = $.ajax({
                         url: "/tags/" + newTagName,
                         method: "POST"
                     });
+                    promises3.push(promise3);
                 }
+                $.when.apply(this, promises3).then(function() {
+                    var promises2 = [];
 
-                var promises2 = [];
+                    //get tag id values in an array for all of the tags
+                    //will need tag ids to query and post Post2Tags model and associate the new post to these tags
+                    for (var i = 0; i < tagArray.length; i++) {
 
-                //get tag id values in an array for all of the tags
-                //will need tag ids to query and post Post2Tags model and associate the new post to these tags
-                for (var i = 0; i < tagArray.length; i++) {
+                        var tagName = tagArray[i];
+                        var promise2 = $.ajax({
+                            url: "/tags/" + tagName,
+                            method: 'GET'
+                        }).then(function(data) {
 
-                    var tagName = tagArray[i];
-                    var promise2 = $.ajax({
-                        url: "/tags/" + tagName,
-                        method: 'GET'
-                    }).then(function(data) {
+                            tagIdArray.push(data.id);
 
-                        tagIdArray.push(data.id);
+                        });
+                        promises2.push(promise2);
+                    }
+                    $.when.apply(this, promises2).then(function() {
 
+                        //call function to create new post passing in post formdata and array of tag ids
+                        createNewPost(description, category_id, img_path, tagIdArray);
                     });
-                    promises2.push(promise2);
-                }
-                $.when.apply(this, promises2).then(function() {
 
-                    //call function to create new post passing in post formdata and array of tag ids
-                    createNewPost(description, category_id, img_path, tagIdArray);
                 });
-
             });
 
         }
