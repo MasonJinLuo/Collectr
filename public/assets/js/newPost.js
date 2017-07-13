@@ -70,7 +70,7 @@ $(document).ready(function() {
             description = description.val().trim();
             category_id = category.val();
             img_path = postUrl.val();
-            console.log(img_path);
+            // console.log(img_path);
 
             var tagIdArray = [];
             var oldTagNameArray = [];
@@ -100,8 +100,8 @@ $(document).ready(function() {
                 //comparing original tag array to preexisting tag array
                 //push new tags to a new array
                 for (var i = 0; i < tagArray.length; i++) {
-                    console.log(tagArray[i]);
-                    console.log(oldTagNameArray.indexOf(tagArray[i]));
+                    // console.log(tagArray[i]);
+                    // console.log(oldTagNameArray.indexOf(tagArray[i]));
                     if (oldTagNameArray.indexOf(tagArray[i]) == -1) {
                         newTagNameArray.push(tagArray[i]);
 
@@ -160,8 +160,8 @@ $(document).ready(function() {
 
             var newPostId = data.id;
 
-            console.log(newPostId);
-            console.log(tagIdArray);
+            // console.log(newPostId);
+            // console.log(tagIdArray);
 
             //will use post id and each tag id query/post post2tags
             for (var i = 0; i < tagIdArray.length; i++) {
