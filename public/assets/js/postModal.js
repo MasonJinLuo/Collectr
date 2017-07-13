@@ -70,11 +70,7 @@ $(document).ready(function() {
             return alert("Please enter item tags");
         } else {
 
-            //the way I am passing the image path in an ajax call I only want the name of the image itself and not the whole path
-            var imageArray = img_path.split('/');
-            var imageArrayLength = imageArray.length;
-
-            var imageLocation = imageArray[imageArrayLength - 1];
+            var newURL = img_path.split("/").join("**");
 
             //taking tags comma-delimited string and making a tags array
 
@@ -148,7 +144,7 @@ $(document).ready(function() {
                 $.when.apply(this, promises2).then(function() {
 
                     //call function to create new post passing in tagsID array and all info needed for a new post
-                    createNewPost(postID, tagIdArray, description, category_id, owner_id, imageLocation);
+                    createNewPost(postID, tagIdArray, description, category_id, owner_id, newURL);
                 });
 
             });

@@ -10,17 +10,25 @@ $(document).ready(function() {
     var tags = $("#itemTags");
     var newPostImage = $("#newPostImage");
     var category = $('#newPostCategory');
+    var postUrl = $("#post-url");
+    var img_path;
 
     var newPostForm = $("#newPostForm");
     var newPostModal = $("#newPostModal");
     var itemImageUpload = $("#itemImageUpload");
 
-    //not functioning variables yet. Need sessions info to get current user
-    var user;
-    var owner = user;
-
-
     var reader = new FileReader();
+
+    (() => {
+        document.getElementById("itemImageUpload").onchange = () => {
+            const files = document.getElementById('itemImageUpload').files;
+            const file = files[0];
+            if (file == null) {
+                return alert('No file selected.');
+            }
+            getSignedRequest(file);
+        };
+    })();
 
     $(document).on("click", "#newPostSubmit", handleNewPostFormSubmit);
 
@@ -45,18 +53,23 @@ $(document).ready(function() {
             return alert("Please select a category");
         } else {
 
-            var photo = itemImageUpload.get(0).files[0];
+            // var photo = itemImageUpload.get(0).files[0];
             var tagArray = (tags.val().trim().toLowerCase()).split(',');
 
             for (var i = 0; i < tagArray.length; i++) {
                 tagArray[i] = tagArray[i].trim();
             }
 
-            formData = new FormData();
+            var formData = new FormData();
 
-            formData.append('photo', photo, photo.name);
+            formData.append('img_path', postUrl.val());
             formData.append('description', description.val().trim());
             formData.append('category_id', category.val());
+
+            description = description.val().trim();
+            category_id = category.val();
+            img_path = postUrl.val();
+            console.log(img_path);
 
             var tagIdArray = [];
             var oldTagNameArray = [];
@@ -123,7 +136,7 @@ $(document).ready(function() {
                 $.when.apply(this, promises2).then(function() {
 
                     //call function to create new post passing in post formdata and array of tag ids
-                    createNewPost(formData, tagIdArray);
+                    createNewPost(description, category_id, img_path, tagIdArray);
                 });
 
             });
@@ -131,12 +144,14 @@ $(document).ready(function() {
         }
     }
 
-    function createNewPost(newPostData, tagIdArray) {
+    function createNewPost(description, category_id, img_path, tagIdArray) {
+        var newUrl = img_path.split("/").join('**');
+
         $.ajax({
 
-            url: "/api/secure/posts",
+            url: "/api/secure/posts/" + description + "/" + category_id + "/" + newUrl + "/",
             method: "POST",
-            data: newPostData,
+            // data: newPostData,
             processData: false,
             contentType: false,
 
@@ -157,7 +172,7 @@ $(document).ready(function() {
                 });
             }
 
-//            alert("Post Added!");
+            //            alert("Post Added!");
             newPostForm[0].reset();
             newPostImage.attr("src", "");
             newPostModal.modal("hide");
@@ -171,24 +186,56 @@ $(document).ready(function() {
 
     //New User Upload Profile Picture
 
-    itemImageUpload.change(function() {
-        previewFile()
-    });
+    // itemImageUpload.change(function() {
+    //     previewFile()
+    // });
 
-    function previewFile() {
-        var preview = document.querySelector("#newPostImage");
-        var file = document.querySelector("#itemImageUpload").files[0];
-        var reader = new FileReader();
+    // function previewFile() {
+    //     var preview = document.querySelector("#newPostImage");
+    //     var file = document.querySelector("#itemImageUpload").files[0];
+    //     var reader = new FileReader();
 
-        reader.onloadend = function() {
-            preview.src = reader.result;
-        }
+    //     reader.onloadend = function() {
+    //         preview.src = reader.result;
+    //     }
 
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            preview.src = "";
-        }
+    //     if (file) {
+    //         reader.readAsDataURL(file);
+    //     } else {
+    //         preview.src = "";
+    //     }
+    // }
+
+    function getSignedRequest(file) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `/sign-s3?file-name=${encodeURIComponent(file.name)}&file-type=${file.type}`);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    uploadFile(file, response.signedRequest, response.url);
+                } else {
+                    alert('Could not get signed URL.');
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function uploadFile(file, signedRequest, url) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', signedRequest);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    document.getElementById('newPostImage').src = url;
+                    document.getElementById('post-url').value = url;
+                } else {
+                    alert('Could not upload file.');
+                }
+            }
+        };
+        xhr.send(file);
     }
 
 });

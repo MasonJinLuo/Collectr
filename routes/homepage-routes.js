@@ -172,9 +172,9 @@ module.exports = function(app) {
                 category: response,
                 currentUser: req.session && req.session.user
             });
-          });
         });
-//    });
+    });
+    //    });
 
 
     //get all posts by all USERS
@@ -263,7 +263,7 @@ module.exports = function(app) {
     //collecting a post from another user
     //IMAGE NOT SAVING TO POST IMAGES FOLDER - USE MULTER
     app.post('/secure/collect/:description/:img_path/:owner_id/:category_id', function(req, res) {
-        var image = '/images/postImages/' + req.params.img_path;
+        var image = (req.params.img_path).split("**").join("/");
         db.Post.create({
             description: req.params.description,
             img_path: image,

@@ -8,21 +8,29 @@ var db = require('../models');
 var fs = require("fs");
 var multer = require('multer');
 var upload = multer({ dest: 'public/images/postImages' });
+const aws = require('aws-sdk');
+const S3_BUCKET = process.env.S3_BUCKET;
 
 module.exports = function(app) {
 
     //post new content
     ////WORK IN PROGRESS
     //WILL NEED TO ASSOCIATE OWNER/USER/CATEGORY (BOARD) ID WHEN COLLECTING POST CONTENT
-    app.post('/api/secure/posts', upload.single('photo'), function(req, res) {
+    app.post('/api/secure/posts/:desc/:category/:image', function(req, res) {
+        var imageUrl = (req.params.image).split("**").join("/");
+        // var post = Object.assign({}, req.body, {
+        //     img_path: req.file.path.replace('public/', '/'),
+        //     user_id: req.session.user.id,
+        //     owner_id: req.session.user.id
+        // });
 
-        var post = Object.assign({}, req.body, {
-            img_path: req.file.path.replace('public/', '/'),
+        db.Post.create({
+            img_path: imageUrl,
+            description: req.params.desc,
             user_id: req.session.user.id,
-            owner_id: req.session.user.id
-        });
-
-        db.Post.create(post).then(function(response) {
+            owner_id: req.session.user.id,
+            category_id: req.params.category
+        }).then(function(response) {
             res.json(response);
         });
     });

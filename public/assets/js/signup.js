@@ -6,11 +6,21 @@ $(document).ready(function() {
     var newPassword = $("#signUpPassword");
     var newUserImage = $("#newUserImage");
     var newUserDescription = $("#userDescription");
-    var imageUpload = $("#imageUpload")
+    var imageUpload = $("#imageUpload");
+    var avatarUrl = $("#avatar-url");
     var reader = new FileReader();
     var checkedBox = [];
 
-    //how to get/create a path for the user's profile picture
+    (() => {
+        document.getElementById("imageUpload").onchange = () => {
+            const files = document.getElementById('imageUpload').files;
+            const file = files[0];
+            if (file == null) {
+                return alert('No file selected.');
+            }
+            getSignedRequest(file);
+        };
+    })();
 
     $(document).on("click", "#signUpSubmit", handleNewUserFormSubmit);
 
@@ -36,41 +46,40 @@ $(document).ready(function() {
             return alert("Please enter a password between 8-15 characters.")
         }
 
-        var formData = new FormData();
-
-        var photo = imageUpload.get(0).files[0];
+        var dataObject = new FormData();
 
         $("input[name='interest']:checked").each(function() {
             checkedBox.push(parseInt($(this).val()));
         });
 
         var interestString = checkedBox.join(',');
-        console.log(interestString);
+        newEmail = newEmail.val().trim();
+        newPassword = newPassword.val().trim();
+        avatarUrl = avatarUrl.val();
+        newUserDescription = newUserDescription.val().trim();
 
-        if (photo) {
-            formData.append("photo", photo, photo.name);
-        }
+        dataObject.append("email", newEmail);
+        dataObject.append("password", newPassword);
+        dataObject.append("image_path", avatarUrl);
+        dataObject.append("description", newUserDescription);
+        dataObject.append("interests", interestString);
 
-        formData.append("email", newEmail.val().trim());
-        formData.append("password", newPassword.val().trim());
-        formData.append("description", newUserDescription.val().trim());
-        formData.append("interests", interestString);
+        // console.log(avatarUrl.val());
 
-        createNewUser(formData, interestString);
+        createNewUser(newEmail, newPassword, avatarUrl, newUserDescription, interestString);
     }
 
-    function createNewUser(newUserData, interestString) {
-
-        var interestArray = interestString.split(',');
-        console.log(interestArray);
+    function createNewUser(newEmail, newPassword, avatarUrl, newUserDescription, interestString) {
+        var newUrl = avatarUrl.split('/').join('**');
 
         $.ajax({
-            url: "/api/users",
+            url: "/api/users" + "/" + newEmail + "/" + newPassword + "/" + newUrl + "/" + newUserDescription + "/" + interestString + "/",
             method: "POST",
-            data: newUserData,
+            // data: JSON.stringify(newUserData),
             processData: false,
             contentType: false,
         }).done(function(data) {
+            var interestArray = interestString.split(',');
             $("#signUpForm")[0].reset();
             $("#logInModal").modal("hide");
 
@@ -84,36 +93,46 @@ $(document).ready(function() {
             redirectDashboard();
 
         }).catch(function(data) {
-            alert(data.responseJSON.message);
+            // alert(data.responseJSON.message);
             $("#signUpForm")[0].reset();
             newUserImage.attr("src", "");
             $('.nav-tabs a[href="#logIn"]').tab("show");
         });
     }
 
-    //New User Upload Profile Picture
-
-    imageUpload.change(function() {
-        previewFile()
-    });
-
-    function previewFile() {
-        var preview = document.querySelector("#newUserImage");
-        var file = document.querySelector("#imageUpload").files[0];
-        var reader = new FileReader();
-
-        reader.onloadend = function() {
-            preview.src = reader.result;
-        }
-
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            preview.src = "";
-        }
-    }
-
     function redirectDashboard() {
         window.location = '/secure/user';
+    }
+
+    function getSignedRequest(file) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `/sign-s3?file-name=${encodeURIComponent(file.name)}&file-type=${file.type}`);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    uploadFile(file, response.signedRequest, response.url);
+                } else {
+                    alert('Could not get signed URL.');
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function uploadFile(file, signedRequest, url) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', signedRequest);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    document.getElementById('newUserImage').src = url;
+                    document.getElementById('avatar-url').value = url;
+                } else {
+                    alert('Could not upload file.');
+                }
+            }
+        };
+        xhr.send(file);
     }
 });
