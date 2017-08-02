@@ -10,8 +10,8 @@ The app presents a clean experience that makes browsing and adding posts easy.
 With social features and profiles, sharing and discovering is just as simple.
 
 ## Technologies used
-- node.js
-- Express
+- Node.js
+- Express.js
 - Handblebars
 - Bootstrap
 - Animate.cs
@@ -20,7 +20,7 @@ With social features and profiles, sharing and discovering is just as simple.
 - MVC Codebase
 - User login and authentication
 - Session Management (cookie-session npm package)
-- Image upload and storage (multer npm package)
+- Image upload and storage (Amazon Simple Storage Service (S3))
 
 ## Getting Started
 
@@ -79,24 +79,6 @@ function checkAuth(req, res, next) {
 
 app.use(checkAuth);
 
-```
-With the multer npm package, we are able to save an uploaded image to a destination folder of our choice. The path of the folder was then saved into the database so that we could reference and pull the image as needed.
-
-```
-//Dependencies
-var multer  = require('multer')
-var upload = multer({ dest: 'public/images/users' })
-
-...
-
-//Post Route for Image
-	app.post("/api/users", upload.single('photo'), function(req, res) {
-        var user = Object.assign({}, req.body, {
-            image_path: req.file ? req.file.path.replace('public/', '/') : null
-        });
-
-...
-
 //Preview uploaded image after user selects a file
 
     imageUpload.change(function() {
@@ -138,5 +120,5 @@ var upload = multer({ dest: 'public/images/users' })
 
 ## Acknowledgments
 
-* Infinite thanks to the instructors and TAs at Northwestern's Coding Bootcamp!
+* Infinite thanks to the instructors and TAs at Northwestern's Coding Certificate Program!
 * Shout outs to all the other dedicated groups and students in the class!
