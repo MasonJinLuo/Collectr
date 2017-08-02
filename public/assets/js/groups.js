@@ -1,18 +1,9 @@
-// apparel ['shoes','hats','']
-// body-modification ['']
-// toys ['']
-// music ['']
-// history ['']
+$(document).ready(function() {
 
+    $(document).on('click', '.select-category-div', categorySelect);
 
-/*
-    @author: anupsawant
-    @date: may 30th 2017
-    @desc: functions to group the posts
-*/
+    function categorySelect(){
+    	// alert($(this).attr('value'));
+    }
 
-
-
-
-
-
+});

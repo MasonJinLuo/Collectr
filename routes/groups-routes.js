@@ -71,13 +71,21 @@ function getAllPostsInCategory(categories,callback) {
 module.exports = function(app) {
 
     app.get('/groups/:groupName', function(req, res) {
+
         var categories = groups.get(req.params.groupName);
+        var groupName = req.params.groupName;
+
+        var firstLetter = groupName.slice(0, 1).toUpperCase();
+        var withoutFirstLetter = groupName.slice(1);
+        var groupName = firstLetter + withoutFirstLetter;
+
         getAllPostsInCategory(categories,function callback() {
             console.log('UserSet',userSet.size);
             console.log('PostSet',postSet.size);
             res.render('groups', {
                 user: Array.from(userSet),
                 post: Array.from(postSet),
+                group: groupName,
                 currentUser: req.session && req.session.user
             });
         });
