@@ -26,7 +26,7 @@ With social features and profiles, sharing and discovering is just as simple.
 
 Clone the repo and follow the below commands to get a local host started.
 
-Alternatively, you can visit [https://frozen-ravine-55904.herokuapp.com/](https://frozen-ravine-55904.herokuapp.com/) to access the app deployed to Heroku.
+Alternatively, you can visit [https://collectr-collections.herokuapp.com/](https://collectr-collections.herokuapp.com/) to access the app deployed to Heroku.
 
 ### Prerequisities
 
@@ -62,7 +62,7 @@ var cookieSession = require('cookie-session');
 //Sets up Express session management
 app.use(cookieSession({
     name: 'session',
-    keys: ['**********'], 
+    keys: ['**********'],
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }))
 
