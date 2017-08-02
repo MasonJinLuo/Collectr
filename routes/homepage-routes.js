@@ -287,8 +287,6 @@ module.exports = function(app) {
 
 
     //search through for a specific word
-
-
     app.get('/search/:searchTerm', function(req, res) {
         db.Tags.findAll({
             include: [{
@@ -317,6 +315,5 @@ module.exports = function(app) {
         })
 
     });
-
 
 }
